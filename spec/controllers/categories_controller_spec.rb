@@ -170,7 +170,6 @@ describe CategoriesController do
       @group = @category.group
       @cats = @group.categories
       allow(Group).to receive_message_chain(:find).and_return @group
-      allow(@group).to receive_message_chain(:categories).and_return @cats
 
       put :update, :group_id => @group.id, :id => @category.id, :category => {'name' => 'eengleesh'}
 
@@ -191,7 +190,7 @@ describe CategoriesController do
       it "calls update with the passed params on the requested category" do
         @category = categories(:inclusive0)
         @group = @category.group
-        expect(@group).to receive_message_chain(:categories).and_return Category
+        expect(@group).to receive(:categories).and_return Category
         allow(Category).to receive_message_chain(:find).with(@category.id.to_s).and_return(@category)
         allow(Group).to receive_message_chain(:find).and_return @group
 

@@ -14,7 +14,7 @@ class StoredValue < ActiveRecord::Base
   validates :storable, :presence => true, :existence => true
   validate :key_is_allowed_for_storable
 
-  scope :with_key, lambda { |name| where(:key => name) }
+  scope :with_key, -> (name) { where(:key => name) }
 
   def key_is_allowed_for_storable
     if storable && !storable.storable_keys.include?(key.to_s)

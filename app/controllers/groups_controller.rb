@@ -32,7 +32,7 @@ class GroupsController < ApplicationController
     end
     # Check for each group when the last change on lings has been done,
     # and attach to it
-    render :json => @groups.to_json(:except => [:created_at, :updated_at, :display_style]).html_safe
+    render :json => @groups.to_json(:except => [:created_at, :updated_at, :display_style], :root => true).html_safe
   end
 
   def show

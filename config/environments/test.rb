@@ -42,4 +42,7 @@ LinguisticExplorer::Application.configure do
   # restore it to true to run tests!
   # It's it insanely expensive in memory terms this guy!!!!
   # ActiveRecordQueryTrace.enabled = false
+
+  # Required setting for running in production
+  config.eager_load = false;
 end

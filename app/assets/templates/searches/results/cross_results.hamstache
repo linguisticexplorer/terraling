@@ -25,6 +25,6 @@
       {{/pair}}
       {{#count}}
       %td
-        %a{:href => '#', :id=> "lings_cross_{{count.index}}"} {{count.text}}
+        %a{:href => '#', :id=> "lings_cross_{{count.index}}"} {{count.text}} 
       {{/count}}
     {{/rows}}

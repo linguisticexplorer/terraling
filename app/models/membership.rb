@@ -26,6 +26,7 @@ class Membership < ActiveRecord::Base
   # validates_uniqueness_of :member_id, :scope => :group_id
   validates :member_id, :uniqueness => {:scope => :group_id }
   validates_inclusion_of :level, :in => ACCESS_LEVELS
+  # validates :level, acceptance: { accept: ["admin", "member"] }
 
   belongs_to :member, :class_name => "User", :foreign_key => :member_id
 

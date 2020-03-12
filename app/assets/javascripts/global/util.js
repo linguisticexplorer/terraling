@@ -70,6 +70,7 @@
           new_obj = new_obj[array.shift()];
         }
 
+        console.log(array);
         return (!array.length && !!new_obj);
       }
       return false;
