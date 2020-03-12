@@ -12,7 +12,6 @@
   searches.preview.table = {init: initTable };
 
   function initTable(data, templateFn, pageMaker){
-
     var resultsJson = data;
     var makeNewPage = pageMaker;
     var getTemplate = templateFn;

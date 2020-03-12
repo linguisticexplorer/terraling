@@ -28,14 +28,14 @@ class LingsProperty < ActiveRecord::Base
   include Concerns::Selects
   include Concerns::Wheres
 
-  scope :ling_ids, select("#{self.table_name}.ling_id")
-  scope :prop_ids, select("#{self.table_name}.property_id")
-  scope :property_value, select("#{self.table_name}.property_value")
+  scope :ling_ids, -> { select("#{self.table_name}.ling_id") }
+  scope :prop_ids, -> { select("#{self.table_name}.property_id") }
+  scope :property_value, -> { select("#{self.table_name}.property_value") }
 
-  scope :with_id, lambda { |id_or_ids| where("#{self.table_name}.id" => id_or_ids) }
-  scope :with_ling_id, lambda { |id_or_ids| where("#{self.table_name}.ling_id" => id_or_ids) }
+  scope :with_id, -> (id_or_ids) { where("#{self.table_name}.id IN (:ids)", { ids: id_or_ids }) }
+  scope :with_ling_id, -> (id_or_ids) { where("#{self.table_name}.ling_id IN (:ids)", { ids: id_or_ids }) }
 
-  scope :property_relatives, lambda { |prop_id| join(:lings).where("#{self.table_name}.property_id") }
+  scope :property_relatives, -> (prop_id) { join(:lings).where("#{self.table_name}.property_id") }
 
   def self.group_by_statement
     LingsProperty.column_names.map { |c| "lings_properties.#{c}"}.join(", ")

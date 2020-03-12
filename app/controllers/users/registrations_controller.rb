@@ -4,6 +4,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     build_resource sign_up_params
     resource.email = email
     resource.access_level = User::USER
+    puts email
 
     result = resource.save
 

@@ -32,7 +32,7 @@ module SearchResults
 
       result = LingsProperty.select_ids.
         with_id(val_ids).
-        where(:property_id => prop_ids(Depth::CHILD)).
+        where(property_id: prop_ids(Depth::CHILD)).
         includes(:ling).
         merge Ling.parent_ids.with_parent_id(parent_ling_ids)
 
@@ -49,7 +49,7 @@ module SearchResults
       result = LingsProperty.select_ids.
         with_id(val_ids).
         with_ling_id(parent_ling_ids).
-        where(:property_id => prop_ids(Depth::PARENT))
+        where(property_id: prop_ids(Depth::PARENT))
 
       return result
     end

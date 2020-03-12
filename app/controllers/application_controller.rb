@@ -33,6 +33,20 @@ class ApplicationController < ActionController::Base
     # Group.first # changed to default to first group
   end
 
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
+  protected
+
+  def configure_permitted_parameters
+    registration_params = [:email, :password, :password_confirmation, :name]
+
+    if params[:action] == 'create'
+      devise_parameter_sanitizer.for(:sign_up) do
+        |u| u.permit(registration_params)
+      end
+    end
+  end
+
   def collection_authorize!(action, collection, *args)
     collection.each do |item|
       is_authorized? action, item, *args
@@ -54,6 +68,10 @@ class ApplicationController < ActionController::Base
 
   def show_error_message(exception)
     redirect_to root_url, :alert => exception.message
+  end
+
+  def default_serializer_options
+    {root: true}
   end
   
 end

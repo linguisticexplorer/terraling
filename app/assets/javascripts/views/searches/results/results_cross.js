@@ -119,6 +119,8 @@
     }
 
     function crossMapping(table, entry, index){
+      console.log("Results cross ");
+      console.log(entry);
       var func_dict = {
         'count'            : getCrossLings,
         'cross_property'   : getProperty('parent'),

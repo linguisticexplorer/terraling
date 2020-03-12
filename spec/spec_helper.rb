@@ -12,6 +12,7 @@
   require 'rspec/rails'
   require 'rspec/collection_matchers'
   require 'database_cleaner'
+  require 'factory_girl'
   # Removed
   # require 'validates_existence/rspec_macros'
 
@@ -23,6 +24,8 @@
 
   RSpec.configure do |config|
     include CSVHelper
+
+    config.include FactoryGirl::Syntax::Methods
 
     # == Mock Framework
     #

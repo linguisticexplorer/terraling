@@ -2,7 +2,7 @@ module Concerns
   module Selects
     def self.included(base)
       base.class_exec do
-        scope :ids, select("#{self.table_name}.id")
+        scope :ids, -> { select("#{self.table_name}.id") }
       end
     end
   end

@@ -21,7 +21,7 @@
 
     function compareHeaders(){
       function mapLingName(el){
-        return el.ling.name;
+        return el.name;
       }
       var headers = resultsJson.header;
       var lings = resultsJson.rows[0].lings;
@@ -104,7 +104,7 @@
     function getLingIds(){
       // iterate through the rows and get all the lings in it
       return $.map(resultsJson.rows[0].lings, function (el){
-        return el.ling.id;
+        return el.id;
       });
     }
 
@@ -138,8 +138,8 @@
 
       var lingNames = {};
       $.each(json.rows[0].lings, function (i, el){
-        if(!lingNames[el.ling.id]){
-          lingNames[el.ling.id] = {name: el.ling.name, row1: "Properties in common: "+commons, row2: "Properties not in common: "+(json.rows.length - commons)};
+        if(!lingNames[el.id]){
+          lingNames[el.id] = {name: el.name, row1: "Properties in common: "+commons, row2: "Properties not in common: "+(json.rows.length - commons)};
         }
       });
 

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Scaffolding
-gem 'rails', '~> 3.2.17'
+gem 'rails', '>= 4.0.13'
 # # Use passenger as the web server
 gem 'passenger', "~>4.0.50"
 # # It forces to use a specific version of Rake
@@ -9,6 +9,8 @@ gem "rake", "= 10.1.0"
 gem "nokogiri", ">= 1.5.6"
 # # Nice CLI progress bar for ruby
 gem "progressbar", "~>0.21.0"
+
+gem "protected_attributes"
 
 # # Database
 gem 'mysql2', '~>0.3.17'
@@ -28,11 +30,11 @@ gem 'cancancan', "~>1.10.1"
 gem 'rolify',    "~>4.1.1"
 
 # # Model validation
-gem 'validation_reflection', "~> 1.0.0", :git => 'git://github.com/electronicbites/validation_reflection.git'
+# gem 'validation_reflection', "~> 1.0.0", :git => 'git://github.com/electronicbites/validation_reflection.git'
 gem "validates_existence", "~> 0.8.0"
 
 # # Presentation Related gems
-gem 'json', "~>1.8.1"
+gem 'json'
 # # Use HAML instead of ERB
 gem 'haml-rails', "~>0.4"
 # # new styles
@@ -44,12 +46,12 @@ gem "alphabetical_paginate", :git => "git://github.com/dej611/alphabetical_pagin
 # # iconv for utf-8 to latin1 conversion
 gem 'iconv', "~>1.0.4"
 # # Bootstrap gem
-gem "autoprefixer-rails", "~>3.0.1"
+gem "autoprefixer-rails", "~>6.2.3"
 gem 'bootstrap-sass', "~> 3.2.0"
 # # Some more icons
 gem 'font-awesome-sass', "~> 4.2.0"
 # # sass support: it should be out of the assets group!
-gem 'sass-rails', '~>3.2'
+gem 'sass-rails', '~>5.0.0'
 # # Use Twitter Typeahead
 gem 'twitter-typeahead-rails', "~>0.10.5"
 
@@ -71,11 +73,8 @@ gem 'bootbox-rails', '~>0.4'
 # Advances Editor for Property descriptions
 gem 'tinymce-rails', '~>4.0.19'
 
-# Use it to precompile assets
-group :assets do
-  # No need for coffeescript here, JS it's enough
-  gem "uglifier", "~>2.5.3"
-end
+# No need for coffeescript here, JS it's enough
+gem "uglifier", "~>2.5.3"
 
 group :deploy do
   # # Deploy with Capistrano
@@ -121,10 +120,10 @@ group :test, :development do
   # Disable for the moment
   # gem "spork-rails"
 
-  gem 'rspec-rails', '~> 3.0'
-  gem 'rspec-collection_matchers', '~> 1.1'
-  gem 'rspec-activemodel-mocks', '~> 1.0'
-  gem 'shoulda-matchers', "~>2.7.0"
+  gem 'rspec-rails', '~> 3.2.0'
+  gem 'rspec-collection_matchers', '~> 1.1.2'
+  gem 'rspec-activemodel-mocks', '~> 1.0.2'
+  gem 'shoulda-matchers', "~>2.8.0"
   # gem 'rspec_rails3_validation_expectations', '0.0.2', :git => 'https://github.com/bosh/rspec_rails3_validation_expectations.git'
 
   gem "cucumber", "~> 1.1.0"

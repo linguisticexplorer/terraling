@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'shoulda/matchers'
 
 def sign_in_as_admin
   @user = FactoryGirl.create(:user, :access_level => 'admin')

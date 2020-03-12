@@ -10,7 +10,7 @@ LinguisticExplorer::Application.configure do
   config.action_controller.perform_caching = true
 
   # Specifies the header that your server uses for sending files
-  config.action_dispatch.x_sendfile_header = "X-Sendfile"
+  # config.action_dispatch.x_sendfile_header = "X-Sendfile"
 
   # For nginx:
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect'
@@ -19,7 +19,8 @@ LinguisticExplorer::Application.configure do
   # just comment this out and Rails will serve the files
 
   # See everything in the log (default is :info)
-  # config.log_level = :debug
+  config.log_level = :debug
+  ActiveRecord::Base.logger = Logger.new(STDOUT)
 
   # Use a different logger for distributed setups
   # config.logger = SyslogLogger.new
@@ -29,10 +30,12 @@ LinguisticExplorer::Application.configure do
 
   # Disable Rails's static asset server
   # In production, Apache or nginx will already do this
-  config.serve_static_assets = false
+  # Changed this for local prod environment
+  config.serve_static_assets = true
 
   # Compress JavaScripts and CSS
   config.assets.compress = true
+  config.assets.js_compressor = :uglifier
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
   config.assets.compile = false
@@ -73,6 +76,9 @@ LinguisticExplorer::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+
+  # Required setting for running in production
+  config.eager_load = true;
 
   Settings.configure do |s|
   end

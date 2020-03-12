@@ -18,8 +18,8 @@ module SearchResults
 
       if pairs.any? && value_pairs_search_enabled?
          LingsProperty.select_ids.
-           where( :property_value => pairs).
-           where( :id => vals.pluck(:id))
+           where( property_value: pairs).
+           where( id: vals.map(&:id).uniq )
          # Using the Squeel format
          # LingsProperty.select_ids.where{ (:property_value == my{pairs} ) & (:id == my{vals} )}
       else

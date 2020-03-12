@@ -11,15 +11,15 @@ module GroupStats
   end
 
   def ling_props_in_group
-    @lings_prop_total ||= self.lings_properties.count(:id)
+    @lings_prop_total ||= self.lings_properties.where(group_id: id).count
   end
 
   def examples_in_group
-    @ex_total ||= self.examples.count(:id)
+    @ex_total ||= self.examples.where(group_id: id).count
   end
 
   def members_in_group
-    @mem_total ||= self.memberships.count(:id)
+    @mem_total ||= self.memberships.where(group_id: id).count
   end
 
   def lings_with_property_quota(depth)
@@ -35,6 +35,8 @@ module GroupStats
       count.size
   end
 
-
+  def ling_average_property_number
+    self.lings_properties.count(:property_id)
+  end
 
 end

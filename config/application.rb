@@ -65,6 +65,9 @@ module LinguisticExplorer
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
 
+    # Secure all model attributes from assignment
+    config.active_record.whitelist_attributes = true 
+
     require "settings"
 
     Settings.configure do |s|
