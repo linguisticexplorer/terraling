@@ -41,11 +41,11 @@ class ExamplesController < GroupDataController
     @example = current_group.examples.find(params[:id])
     @ling = params[:ling_id] ? current_group.lings.find(params[:ling_id]) : @example.ling 
 
-    prop_id = params[:prop_id] ||  @example.examples_lings_properties.first.lings_property.property_id
-    lp_id = params[:lp_id] || @example.examples_lings_properties.first.lings_property_id
+    prop_id = params[:prop_id] ||  (@example.examples_lings_properties.first.lings_property.property_id if @example.examples_lings_properties.first.presence)
+    lp_id = params[:lp_id] || (@example.examples_lings_properties.first.lings_property_id if @example.examples_lings_properties.first.presence)
     
-    @property = current_group.properties.find(prop_id)# if params[:prop_id]
-    @lp = current_group.lings_properties.find(lp_id) #if params[:lp_id]
+    @property = current_group.properties.find(prop_id) if prop_id
+    @lp = current_group.lings_properties.find(lp_id) if lp_id
     @creators = User.all.map { |user| [ user.name.capitalize ,user.id ] }
 
     is_authorized? :update, @example, true
@@ -106,7 +106,7 @@ class ExamplesController < GroupDataController
         #@example.update_attributes({:creator_id => current_user.id})
 	@example.creator_id = creator_id #params['example']['creator_id'] if params['example'] and params['example']['creator_id'
         @example.save!
-        params[:stored_values].each{ |k,v| logger.info("#{k} = #{v}") }
+        params[:stored_values].each{ |k,v| logger.info("#{k} = #{v}") } if params[:stored_values]
         params[:stored_values].each{ |k,v| @example.store_value!(k,v) } if params[:stored_values]
         format.html {redirect_to([current_group, @example],
           :notice => (current_group.example_name + ' was successfully updated.'))}
