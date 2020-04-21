@@ -20,7 +20,7 @@ describe GroupsController do
       it "@groups should contain accessible groups" do
         allow(@controller).to receive_message_chain(:user_signed_in?).and_return(false)
         @group = FactoryGirl.create(:group)
-        expect(Group).to receive(:public).and_return( [@group] )
+        expect(Group).to receive(:is_public).and_return( [@group] )
         get :index
         expect(assigns(:groups)).to include @group
       end

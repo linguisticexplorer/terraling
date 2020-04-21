@@ -20,7 +20,7 @@ class GroupsController < ApplicationController
     @groups = if user_signed_in?
       Group.accessible_by(current_ability).uniq.paginate(:page => params[:page], :order => "name")
     else
-      Group.public.paginate(:page => params[:page], :order => "name")
+      Group.is_public.paginate(:page => params[:page], :order => "name")
     end
   end
 
@@ -28,7 +28,7 @@ class GroupsController < ApplicationController
     @groups = if user_signed_in?
       Group.accessible_by(current_ability).uniq
     else
-      Group.public
+      Group.is_public
     end
     # Check for each group when the last change on lings has been done,
     # and attach to it
@@ -84,7 +84,7 @@ class GroupsController < ApplicationController
     @groups = if user_signed_in?
       Group.accessible_by(current_ability).uniq.paginate(:page => params[:page], :order => "name")
     else
-      Group.public.paginate(:page => params[:page], :order => "name")
+      Group.is_public.paginate(:page => params[:page], :order => "name")
     end
   end
 
