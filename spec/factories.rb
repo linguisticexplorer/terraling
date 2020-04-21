@@ -19,9 +19,9 @@ end
 
 FactoryGirl.define do
   factory :ling do |f|
-  f.name "English"
-  f.depth 0
-  f.association :group, :factory => :group
+    f.name "English"
+    f.depth 0
+    # association :group, :factory => :group
   end
 end
 
@@ -57,16 +57,15 @@ end
 
 FactoryGirl.define do
   factory :example do |f|
-  f.name "SampleExample"
-# NOTE: You must pass the following two yourself because the ling must belong to the same group as the created example
-#  f.association :group, :factory => :group
-#  f.association :ling, :factory => :ling
+    f.name "SampleExample"
+    # NOTE: You must pass the following two yourself because the ling must belong to the same group as the created example
+    # association :group, :factory => :group
+    # association :ling, :factory => :ling
   end
 end
 
 FactoryGirl.define do
   factory :examples_lings_property do |f|
-
   end
 end
 

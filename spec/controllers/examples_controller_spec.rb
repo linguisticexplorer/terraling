@@ -52,12 +52,15 @@ describe ExamplesController do
   describe "new" do
     it "should authorize :create on @example" do
       @group = FactoryGirl.create(:group)
-      @example = Example.new
+      @ling = FactoryGirl.create(:ling, :group => @group)
+      @example = FactoryGirl.create(:example, :group => @group, :ling => @ling)
 
-      expect(@ability).to receive(:can?).ordered.with(:create, @example).and_return(true)
+      # expect(@ability).to receive(:can?).ordered.with(:create, @example).and_return(true)
+      expect(@ability).to be_able_to(:create, @example)
 
       allow(Example).to receive_message_chain(:new).and_return(@example)
       allow(Group).to receive_message_chain(:find).and_return(@group)
+      
       get :new, :group_id => @group.id
     end
 
@@ -75,7 +78,7 @@ describe ExamplesController do
       @example = examples(:onceuponatime)
       @group = @example.group
 
-      expect(@ability).to receive(:can?).ordered.with(:update, @example).and_return(true)
+      expect(@ability).to be_able_to(:update, @example)
 
       allow(Example).to receive_message_chain(:find).and_return @example
       allow(Group).to receive_message_chain(:find).and_return Group
@@ -124,9 +127,10 @@ describe ExamplesController do
 
     it "should authorize :create on the example with params" do
       @group = FactoryGirl.create(:group)
-      @example = FactoryGirl.create(:example, :group => @group)
+      @ling = FactoryGirl.create(:ling, :group => @group)
+      @example = FactoryGirl.create(:example, :group => @group, :ling => @ling)
 
-      expect(@ability).to receive(:can?).ordered.with(:create, @example).and_return(true)
+      expect(@ability).to be_able_to(:create, @example)
 
       allow(Example).to receive_message_chain(:new).and_return(@example)
       allow(Group).to receive_message_chain(:find).and_return(@group)
@@ -194,9 +198,10 @@ describe ExamplesController do
   describe "update" do
     it "should authorize :update on the passed example" do
       @group = FactoryGirl.create(:group)
-      @example = FactoryGirl.create(:example, :group => @group)
+      @ling = FactoryGirl.create(:ling, :group => @group)
+      @example = FactoryGirl.create(:example, :group => @group, :ling => @ling)
 
-      expect(@ability).to receive(:can?).ordered.with(:update, @example).and_return(true)
+      expect(@ability).to be_able_to(:update, @example)
 
       allow(Example).to receive_message_chain(:find).and_return(@example)
       allow(Group).to receive_message_chain(:find).and_return(@group)
@@ -266,7 +271,7 @@ describe ExamplesController do
       @example = examples(:onceuponatime)
       @group = @example.group
 
-      expect(@ability).to receive(:can?).ordered.with(:destroy, @example).and_return(true)
+      expect(@ability).to be_able_to(:destroy, @example)
 
       allow(Group).to receive_message_chain(:find).and_return(@group)
       do_destroy_on_example(@example)
