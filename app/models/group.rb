@@ -33,8 +33,8 @@ class Group < ActiveRecord::Base
   has_many :stored_values,             :dependent => :destroy
   has_many :searches,                  :dependent => :destroy
 
-  scope :public,  where( :privacy => PUBLIC )
-  scope :private, where( :privacy => PRIVATE )
+  scope :is_public, -> { where( privacy: PUBLIC ) }
+  scope :is_private, -> { where( privacy: PRIVATE ) }
   scope :viewable_by, -> (user) { where( privacy: PUBLIC ) || where( user.member_of?(self) ) || where( user.group_admin_of?(self) ) }
 
   def ling_name_for_depth(depth)
