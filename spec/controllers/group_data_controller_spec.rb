@@ -16,8 +16,8 @@ describe ExtendingController do
     LinguisticExplorer::Application.routes.draw do
       root :to => 'home#index'
       devise_for :user
-      match 'extending/index' => 'extending#index'
-      match 'extending/data_test/#id' => 'extending#data_test'
+      match 'extending/index' => 'extending#index', :via => [:get, :post]
+      match 'extending/data_test/#id' => 'extending#data_test', :via => [:get, :post]
     end
     sign_out :user
   end
