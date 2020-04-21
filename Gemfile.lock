@@ -360,7 +360,8 @@ GEM
     uglifier (2.5.3)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    validates_existence (0.8.0)
+    validates_existence (0.9.2)
+      activerecord
     warden (1.2.3)
       rack (>= 1.0)
     websocket (1.2.3)
@@ -435,7 +436,7 @@ DEPENDENCIES
   tinymce-rails (~> 4.0.19)
   twitter-typeahead-rails (~> 0.10.5)
   uglifier (~> 2.5.3)
-  validates_existence (~> 0.8.0)
+  validates_existence (~> 0.9.2)
   will_paginate (~> 3.0.7)
   will_paginate-bootstrap (~> 1.0.1)
 

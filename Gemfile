@@ -31,7 +31,7 @@ gem 'rolify',    "~>4.1.1"
 
 # # Model validation
 # gem 'validation_reflection', "~> 1.0.0", :git => 'git://github.com/electronicbites/validation_reflection.git'
-gem "validates_existence", "~> 0.8.0"
+gem "validates_existence", "~> 0.9.2"
 
 # # Presentation Related gems
 gem 'json'
