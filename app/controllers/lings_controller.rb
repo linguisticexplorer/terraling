@@ -50,7 +50,7 @@ class LingsController < GroupDataController
     @ordered_values.each do |value|
       next if value.property.nil?
       elps = current_group.examples_lings_properties.find_all_by_lings_property_id(value.id)
-      ling_obj = { "property_name" => value.property.name, "examples" => [] }
+      ling_obj = { "property_name" => value.property.nil? ? "" : value.property.name, "examples" => [] }
       if elps.any?
         elps.each do |elp|
           example = Example.find(elp.example.id)

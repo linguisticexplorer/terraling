@@ -13,7 +13,8 @@
   require 'rspec/collection_matchers'
   require 'database_cleaner'
   require 'factory_girl'
-  require "cancan/matchers"
+  require 'cancan/matchers'
+  require 'rspec/active_model/mocks'
   # Removed
   # require 'validates_existence/rspec_macros'
 

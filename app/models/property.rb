@@ -8,7 +8,7 @@ class Property < ActiveRecord::Base
     CSV_ATTRIBUTES
   end
 
-  attr_accessible :name, :category_id
+  attr_accessible :name, :category_id, :description, :group_id
 
   # validates_presence_of :name, :category
   # validates_uniqueness_of :name, :scope => :group_id
