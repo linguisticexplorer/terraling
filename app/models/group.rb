@@ -17,6 +17,8 @@ class Group < ActiveRecord::Base
     CSV_ATTRIBUTES
   end
 
+  attr_accessible :name, :group
+
   validates_presence_of     :name
   validates_uniqueness_of   :name
   validates_numericality_of :depth_maximum, :<= => MAXIMUM_ASSIGNABLE_DEPTH

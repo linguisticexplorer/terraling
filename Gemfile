@@ -26,7 +26,7 @@ gem 'mysql2', '~>0.3.17'
 # # for Users and authentication
 gem 'devise',    "~>3.3.0"
 gem 'humanizer', "~>2.6.0"
-gem 'cancancan', "~>1.10.1"
+gem 'cancancan', "~>1.14.0"
 gem 'rolify',    "~>4.1.1"
 
 # # Model validation

@@ -58,7 +58,7 @@ GEM
     builder (3.1.4)
     byebug (9.0.6)
     callsite (0.0.11)
-    cancancan (1.10.1)
+    cancancan (1.14.0)
     cane (2.6.2)
       parallel
     capistrano (2.15.4)
@@ -383,7 +383,7 @@ DEPENDENCIES
   bootbox-rails (~> 0.4)
   bootstrap-sass (~> 3.2.0)
   brakeman (~> 2.6.2)
-  cancancan (~> 1.10.1)
+  cancancan (~> 1.14.0)
   capistrano (~> 2.15.4)
   capistrano-ext (~> 1.2.1)
   capybara (~> 2.7.1)
