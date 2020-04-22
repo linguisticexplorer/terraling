@@ -69,7 +69,7 @@ describe LingsController do
       @ling = lings(:english)
       expect(@ling.group).to eq @group
 
-      allow(Group).to receive_message_chain(:find).and_return(Group)
+      allow(Group).to receive_message_chain(:find).and_return(@group)
       expect(Group).to receive(:lings).and_return @group.lings
       get :show, :id => @ling.id, :group_id => @group.id
 

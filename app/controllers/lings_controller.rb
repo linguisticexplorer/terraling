@@ -1,5 +1,5 @@
 class LingsController < GroupDataController
-  helper :groups
+  # helper :groups
 
   respond_to :html, :js
   
@@ -48,6 +48,7 @@ class LingsController < GroupDataController
 
     examples = []
     @ordered_values.each do |value|
+      next if value.property.nil?
       elps = current_group.examples_lings_properties.find_all_by_lings_property_id(value.id)
       ling_obj = { "property_name" => value.property.name, "examples" => [] }
       if elps.any?

@@ -17,7 +17,7 @@ class Group < ActiveRecord::Base
     CSV_ATTRIBUTES
   end
 
-  attr_accessible :name, :group
+  attr_accessible :name, :group, :examples_lings_properties
 
   validates_presence_of     :name
   validates_uniqueness_of   :name
