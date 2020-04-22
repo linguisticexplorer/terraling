@@ -4,6 +4,9 @@ describe StoredValue do
   class StorableMock
     def storable_keys; ["foo", "bar"] end
     def self.reflect_on_all_associations(arg); [] end
+    def marked_for_destruction? 
+      false 
+    end
   end
 
   describe "one-liners" do

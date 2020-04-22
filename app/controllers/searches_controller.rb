@@ -101,7 +101,7 @@ class SearchesController < GroupDataController
     is_authorized? :search, @search
 
     @query = @search.query
-    @search_lings = { "search" => { "lings" => @query["lings"] } }
+    @search_lings = { "search" => { "lings" => @query["lings"] } } if !@query.nil?
 
     respond_with(@search) do |format|
       format.html  { render :template => 'searches/preview' }

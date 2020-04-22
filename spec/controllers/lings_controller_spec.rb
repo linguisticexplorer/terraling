@@ -70,7 +70,7 @@ describe LingsController do
       expect(@ling.group).to eq @group
 
       allow(Group).to receive_message_chain(:find).and_return(@group)
-      expect(Group).to receive(:lings).and_return @group.lings
+      expect(@group).to receive(:lings).and_return @group.lings
       get :show, :id => @ling.id, :group_id => @group.id
 
       expect(assigns(:ling)).to eq @ling

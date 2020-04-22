@@ -12,7 +12,7 @@ describe HomeController do
   it "assigns public groups to @groups if not signed in" do
     allow(@controller).to receive_message_chain(:user_signed_in?).and_return(false)
     @group = groups(:inclusive)
-    expect(Group).to receive(:public).and_return ( [ @group ] )
+    expect(Group).to receive(:is_public).and_return ( [ @group ] )
     get :index
     expect(assigns(:groups)).to include @group
   end
