@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_group
-    # Group.first # changed to default to first group
+    Group.first
   end
 
   before_action :configure_permitted_parameters, if: :devise_controller?
