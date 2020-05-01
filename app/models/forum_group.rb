@@ -7,7 +7,7 @@ class ForumGroup < ActiveRecord::Base
   attr_accessible :title, :state, :position, :forum_group_id
   
   # Scopes
-  default_scope :order => 'position ASC'
+  default_scope { order(position: :asc) }
   
   # Validations
   validates :title,       :presence => true

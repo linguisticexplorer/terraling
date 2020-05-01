@@ -40,7 +40,7 @@ class LingsController < GroupDataController
 
     is_authorized? :read, @ling
 
-    @values = @ling.lings_properties.order(:property_id).paginate(:page => params[:page])
+    @values = @ling.lings_properties.order(:property_id).page(params[:page])
     @ordered_values = @ling.lings_properties.sort_by {|v| (v.property.nil?) ? "" :  v.property.name }
 
     @values_count = @ling.lings_properties.count(:id)
@@ -49,7 +49,7 @@ class LingsController < GroupDataController
     examples = []
     @ordered_values.each do |value|
       next if value.property.nil?
-      elps = current_group.examples_lings_properties.find_all_by_lings_property_id(value.id)
+      elps = current_group.examples_lings_properties.where(:lings_property_id => value.id).to_a #find_all_by_lings_property_id(value.id)
       ling_obj = { "property_name" => value.property.nil? ? "" : value.property.name, "examples" => [] }
       if elps.any?
         elps.each do |elp|
@@ -309,7 +309,7 @@ class LingsController < GroupDataController
       redirect_to([current_group, @ling],
                   :notice => (current_group.ling_name_for_depth(@depth) + ' was successfully created.'))
     else
-      @parents = @depth ? Ling.find_all_by_depth(@depth - 1) : []
+      @parents = @depth ? Ling.where(:depth => (@depth - 1)).to_a : [] #find_all_by_depth(@depth - 1) : []
       render :action => "new"
     end
   end
@@ -325,7 +325,7 @@ class LingsController < GroupDataController
       redirect_to(group_ling_url(current_group, @ling),
                   :notice => (current_group.ling_name_for_depth(@depth) + ' was successfully updated.') )
     else
-      @parents = @depth ? Ling.find_all_by_depth(@depth - 1) : []
+      @parents = @depth ? Ling.where(:depth => (@depth - 1)).to_a : [] #find_all_by_depth(@depth - 1) : []
       render :action => "edit"
     end
   end

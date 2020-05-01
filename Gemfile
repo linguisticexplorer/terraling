@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
 
 # Scaffolding
-gem 'rails', '>= 4.0.13'
+gem 'rails', '>= 4.1.16'
 # # Use passenger as the web server
 gem 'passenger', "~>4.0.50"
 # # It forces to use a specific version of Rake
-gem "rake", "= 10.1.0"
+gem "rake", "= 11.3.0"
 gem "nokogiri", ">= 1.5.6"
 # # Nice CLI progress bar for ruby
 gem "progressbar", "~>0.21.0"
@@ -13,7 +13,7 @@ gem "progressbar", "~>0.21.0"
 gem "protected_attributes"
 
 # # Database
-gem 'mysql2', '~>0.3.17'
+gem 'mysql2', '~>0.4.4'
 # # Having problem with new migrations?
 # # * Disable slim_scrooge here
 # # * Deploy on server with "cap deploy:migrations"
@@ -24,10 +24,10 @@ gem 'mysql2', '~>0.3.17'
 # #gem 'slim_scrooge'
 
 # # for Users and authentication
-gem 'devise',    "~>3.3.0"
-gem 'humanizer', "~>2.6.0"
-gem 'cancancan', "~>1.14.0"
-gem 'rolify',    "~>4.1.1"
+gem 'devise',    "~>4.2.0"
+gem 'humanizer', "~>2.6.3"
+gem 'cancancan', "~>1.15.0"
+gem 'rolify',    "~>5.1.0"
 
 # # Model validation
 # gem 'validation_reflection', "~> 1.0.0", :git => 'git://github.com/electronicbites/validation_reflection.git'
@@ -46,7 +46,7 @@ gem "alphabetical_paginate", :git => "git://github.com/dej611/alphabetical_pagin
 # # iconv for utf-8 to latin1 conversion
 gem 'iconv', "~>1.0.4"
 # # Bootstrap gem
-gem "autoprefixer-rails", "~>6.2.3"
+gem "autoprefixer-rails", "~>6.4.0"
 gem 'bootstrap-sass', "~> 3.2.0"
 # # Some more icons
 gem 'font-awesome-sass', "~> 4.2.0"
@@ -120,10 +120,10 @@ group :test, :development do
   # Disable for the moment
   # gem "spork-rails"
 
-  gem 'rspec-rails', '~> 3.2.0'
-  gem 'rspec-collection_matchers', '~> 1.1.2'
-  gem 'rspec-activemodel-mocks', '~> 1.0.2'
-  gem 'shoulda-matchers', "~>2.8.0"
+  gem 'rspec-rails', '~> 3.5.0'
+  gem 'rspec-collection_matchers', '~> 1.1.3'
+  gem 'rspec-activemodel-mocks', '~> 1.0.3'
+  gem 'shoulda-matchers', "~>3.1.1"
   # gem 'rspec_rails3_validation_expectations', '0.0.2', :git => 'https://github.com/bosh/rspec_rails3_validation_expectations.git'
 
   gem "cucumber", "~> 1.1.0"
@@ -132,7 +132,7 @@ group :test, :development do
   gem 'cucumber-rails', :require => false
   gem 'capybara', "~>2.7.1"
   gem 'launchy', "~>2.4.2"
-  gem "database_cleaner", "~> 0.7.0"
+  gem "database_cleaner", "~> 1.2.0"
   gem 'factory_girl_rails', "~> 1.1"
 
   # # Query Tracer: useful to debug

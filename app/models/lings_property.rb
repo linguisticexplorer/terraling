@@ -7,7 +7,7 @@ class LingsProperty < ActiveRecord::Base
     CSV_ATTRIBUTES
   end
 
-  attr_accessible :property, :ling, :value, :group, :ling_id, :property_id
+  attr_accessible :property, :ling, :value, :group, :ling_id, :property_id, :group_id
 
   # validates_presence_of :value, :property, :ling
   # validates_existence_of :ling, :property
@@ -44,7 +44,7 @@ class LingsProperty < ActiveRecord::Base
   end
 
   def self.select_ids
-    ids.ling_ids.prop_ids.property_value
+    all_ids.ling_ids.prop_ids.property_value
   end
 
   def ling_name

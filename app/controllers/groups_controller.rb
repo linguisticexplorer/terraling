@@ -18,9 +18,9 @@ class GroupsController < ApplicationController
     end
 
     @groups = if user_signed_in?
-      Group.accessible_by(current_ability).uniq.paginate(:page => params[:page], :order => "name")
+      Group.order("name").page(params[:page]).accessible_by(current_ability).uniq
     else
-      Group.is_public.paginate(:page => params[:page], :order => "name")
+      Group.order("name").page(params[:page]).is_public
     end
   end
 
@@ -82,9 +82,9 @@ class GroupsController < ApplicationController
 
   def user
     @groups = if user_signed_in?
-      Group.accessible_by(current_ability).uniq.paginate(:page => params[:page], :order => "name")
+      Group.accessible_by(current_ability).uniq.order("name").page(params[:page])
     else
-      Group.is_public.paginate(:page => params[:page], :order => "name")
+      Group.is_public.order("name").page(params[:page])
     end
   end
 

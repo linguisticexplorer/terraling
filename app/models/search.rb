@@ -18,7 +18,7 @@ class Search < ActiveRecord::Base
   validate :creator_not_over_search_limit
 
   serialize :query, JSON
-  serialize :result_groups, JSON
+  serialize :result_groups
 
   json_accessor :query, :result_groups
 
@@ -28,7 +28,7 @@ class Search < ActiveRecord::Base
 
   class << self
     def reached_max_limit?(creator, group)
-      scoped.by(creator).in_group(group).count >= MAX_SEARCH_LIMIT
+      all.by(creator).in_group(group).count >= MAX_SEARCH_LIMIT
     end
   end
 
