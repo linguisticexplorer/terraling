@@ -145,7 +145,7 @@
           %tr
             %td.align-center= link_to value.property.name, [current_group, value.property]
             %td.align-center= value.value
-            - elps = current_group.examples_lings_properties.find_all_by_lings_property_id(value.id)
+            - elps = current_group.examples_lings_properties.where(:lings_property_id => value.id).to_a #find_all_by_lings_property_id(value.id)
             -if elps.any?
               %td.align-left
                 - elps.each_with_index do |elp, i|

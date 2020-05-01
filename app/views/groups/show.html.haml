@@ -37,7 +37,8 @@
           - @group.depths.each do |depth|
             %div{ :class => "col-md-4 #{@group.depths.size > 1 ? '' : 'col-md-offset-2'}"}
               - # percentage = 100 * @group.lings_with_property_quota(depth) / @group.props_in_group
-              - percentage = 100 * @group.ling_average_property_number / (@group.props_in_group * @group.lings_in_group(depth))
+              - factor = ((@group.props_in_group == 0 ? 1 : @group.props_in_group) * (@group.lings_in_group(depth) == 0 ? 1 : @group.lings_in_group(depth)))
+              - percentage = 100 * @group.ling_average_property_number / factor
               - percentage = percentage > 100 ? 100 : percentage
               - # Something wrong with properties, same property counts twice here
               - # Percentage should never be higher than 100, but it is
@@ -51,7 +52,7 @@
                   %h1= @group.lings_in_group(depth)
                   %h3= @group.ling_name_for_depth(depth).pluralize
           .col-md-4
-            - percentage = 100 * @group.props_with_lings_quota / @group.props_in_group
+            - percentage = 100 * @group.props_with_lings_quota / (@group.props_in_group == 0 ? 1 : @group.props_in_group)
             %div{:class => "thumbnail dashboard-box #{number_to_text_class(percentage)}-bg" }
               #property_settings.pull-right
                 - if can_see? :create, Property.new{|p| p.group = current_group}

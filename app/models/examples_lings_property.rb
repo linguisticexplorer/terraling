@@ -7,6 +7,8 @@ class ExamplesLingsProperty < ActiveRecord::Base
     CSV_ATTRIBUTES
   end
 
+  attr_accessible :group_id, :lings_property_id, :example_id
+
   # validates_presence_of :example, :lings_property
   # validates_existence_of :example, :lings_property
   validates :example, :lings_property, :presence => true, :existence => true

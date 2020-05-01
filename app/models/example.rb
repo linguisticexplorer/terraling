@@ -16,7 +16,7 @@ class Example < ActiveRecord::Base
   validates :ling, :existence => { :allow_nil => true }
   validate :group_association_match
 
-  default_scope includes(:stored_values)
+  default_scope { includes(:stored_values) }
   scope :in_group, lambda { |group| where(:group_id => group.id) }
 
   def grouped_name

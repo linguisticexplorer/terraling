@@ -26,7 +26,7 @@ class Property < ActiveRecord::Base
   include Concerns::Orders
 
   # override
-  scope :at_depth, lambda { |depth| scoped & Category.at_depth(depth) }
+  scope :at_depth, lambda { |depth| all & Category.at_depth(depth) }
 
   def depth
     category.depth

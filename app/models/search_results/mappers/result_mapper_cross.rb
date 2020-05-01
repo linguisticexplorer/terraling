@@ -22,7 +22,7 @@ module SearchResults
 
         # p "SECOND: #{first_prop.inspect} + #{vals_by_prop_ids.inspect} = #{prop_values.inspect}"
 
-        combinations = first_prop.product(*rest_props)
+        combinations = first_prop.nil? ? [] : first_prop.product(*rest_props)
 
         combinations.each do |c|
           c.map! do |prop_value|

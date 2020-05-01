@@ -44,7 +44,7 @@
     # If you're not using ActiveRecord, or you'd prefer not to run each of your
     # examples within a transaction, remove the following line or assign false
     # instead of true.
-    config.use_transactional_fixtures = true
+    config.use_transactional_fixtures = false
     
     # This make rspec 3x works as in 2.x where it assumes that class types from locations
     config.infer_spec_type_from_file_location!

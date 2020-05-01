@@ -1,5 +1,7 @@
 module SearchResults
 
+  require 'pry'
+
   class IntersectionFilter < Filter
 
     def initialize(filter, query)
@@ -33,7 +35,7 @@ module SearchResults
       result = LingsProperty.select_ids.
         with_id(val_ids).
         where(property_id: prop_ids(Depth::CHILD)).
-        includes(:ling).
+        joins(:ling).
         merge Ling.parent_ids.with_parent_id(parent_ling_ids)
 
       return result

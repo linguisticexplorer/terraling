@@ -3,7 +3,7 @@ class CategoriesController < GroupDataController
   respond_to :html, :js
   
   def index
-    @categories = current_group.categories.paginate(:page => params[:page], :order => "name")
+    @categories = current_group.categories.order("name").page(params[:page])
     
     collection_authorize! :read, @categories
     

@@ -30,7 +30,8 @@ LinguisticExplorer::Application.configure do
 
   # Disable Rails's static asset server
   # In production, Apache or nginx will already do this
-  config.serve_static_assets = false || ENV["LOCAL_DEV"]
+  # Changed this for local prod environment
+  config.serve_static_files = true
 
   # Compress JavaScripts and CSS
   config.assets.compress = true

@@ -3,7 +3,7 @@ class ExamplesController < GroupDataController
   respond_to :html, :js
 
   def index
-    @examples = current_group.examples.includes(:group, :ling).paginate(:page => params[:page], :order => "name")
+    @examples = current_group.examples.includes(:group, :ling).order("name").page(params[:page])
 
     respond_with(@examples) do |format|
       format.html

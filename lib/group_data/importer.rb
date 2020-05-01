@@ -157,7 +157,7 @@ module GroupData
 
     def user_import_from_csv_row row
       if !row["id"].nil? || row["id"].present?
-        user = User.find_or_initialize_by_email(row["email"])
+        user = User.find_or_initialize_by(:email => row["email"])
         if user.new_record?
           user.password_confirmation = row["password"]
           # Needed for CAPTCHA
@@ -172,7 +172,7 @@ module GroupData
     end
 
     def group_import_from_csv_row row
-      group = Group.find_or_initialize_by_name(row["name"])
+      group = Group.find_or_initialize_by(:name => row["name"])
       save_model_with_attributes(group, row)
 
       # cache group id
@@ -183,7 +183,7 @@ module GroupData
       if !row["id"].nil? || row["id"].present?
         group       = groups[row["group_id"]]
         member_id   = user_ids[row["member_id"]]
-        membership  = group.memberships.find_or_initialize_by_member_id(member_id) do |m|
+        membership  = group.memberships.find_or_initialize_by(:member_id => member_id) do |m|
           m.creator = User.find(user_ids[row["creator_id"]]) if row["creator_id"].present?
         end
         save_model_with_attributes(membership, row)
@@ -193,7 +193,7 @@ module GroupData
     def ling_import_from_csv_row row
       if !row["id"].nil? || row["id"].present?
         group     = groups[row["group_id"]]
-        ling      = group.lings.find_or_initialize_by_name(row["name"]) do |m|
+        ling      = group.lings.find_or_initialize_by(:name => row["name"]) do |m|
           m.creator = User.find(user_ids[row["creator_id"]]) if row["creator_id"].present?
         end
         save_model_with_attributes(ling, row)
@@ -232,7 +232,7 @@ module GroupData
     def category_import_from_csv_row row
       if !row["id"].nil? || row["id"].present?
         group     = groups[row["group_id"]]
-        category  = group.categories.find_or_initialize_by_name(row["name"]) do |m|
+        category  = group.categories.find_or_initialize_by(:name => row["name"]) do |m|
           m.creator = User.find(user_ids[row["creator_id"]]) if row["creator_id"].present?
         end
         save_model_with_attributes category, row
@@ -246,7 +246,7 @@ module GroupData
       if !row["id"].nil? || row["id"].present?
         group    = groups[row["group_id"]]
         category = group.categories.find(category_ids[row["category_id"]])
-        property = group.properties.find_or_initialize_by_name(row["name"]) do |p|
+        property = group.properties.find_or_initialize_by(:name => row["name"]) do |p|
           p.category = category
           p.creator = User.find(user_ids[row["creator_id"]]) if row["creator_id"].present?
         end
@@ -263,7 +263,7 @@ module GroupData
       if !row["id"].nil? || row["id"].present?
         group    = groups[row["group_id"]]
 
-        example  = group.examples.find_or_initialize_by_name_and_ling_id(row["name"], ling_ids[row["ling_id"]]) do |e|
+        example  = group.examples.find_or_initialize_by(:name => row["name"], :ling_id => ling_ids[row["ling_id"]]) do |e|
           e.creator = User.find(user_ids[row["creator_id"]]) if row["creator_id"].present?
         end
         save_model_with_attributes example, row
@@ -280,7 +280,7 @@ module GroupData
         value       = row["value"]
         property_id = property_ids[row["property_id"]]
 
-        lp = group.lings_properties.find_or_initialize_by_group_id_and_value_and_ling_id_and_property_id(group.id, value, ling_id, property_id) do |lp|
+        lp = group.lings_properties.find_or_initialize_by(:group_id => group.id, :value => value, :ling_id => ling_id, :property_id => property_id) do |lp|
           lp.creator = User.find(user_ids[row["creator_id"]]) if row["creator_id"].present?
         end
 
@@ -297,7 +297,7 @@ module GroupData
         example_id        = example_ids[row["example_id"]]
         lings_property_id = lings_property_ids[row["lings_property_id"]]
 
-        elp = group.examples_lings_properties.find_or_initialize_by_group_id_and_example_id_and_lings_property_id(group.id, example_id, lings_property_id) do |elp|
+        elp = group.examples_lings_properties.find_or_initialize_by(:group_id => group.id, :example_id => example_id, :lings_property_id => lings_property_id) do |elp|
           elp.creator = User.find(user_ids[row["creator_id"]]) if row["creator_id"].present?
         end
 
@@ -316,7 +316,7 @@ module GroupData
 
         # group.stored_values.where(conditions).select(:id).first || group.stored_values.create(conditions)
         # group.stored_values.where(conditions).first_or_create(conditions)
-        stored = group.stored_values.find_or_initialize_by_group_id_and_storable_id_and_storable_type_and_key_and_value(group.id, storable_id, storable_type, row["key"], value)
+        stored = group.stored_values.find_or_initialize_by(:group_id => group.id, :storable_id => storable_id, :storable_type => storable_type, :key => row["key"], :value => value)
         StoredValue.skip_callback(:create)
         stored.save!(:validate => false)
         StoredValue.set_callback(:create)
