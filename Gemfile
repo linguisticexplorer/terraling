@@ -24,7 +24,7 @@ gem 'mysql2', '~>0.4.4'
 # #gem 'slim_scrooge'
 
 # # for Users and authentication
-gem 'devise',    "~>4.2.0"
+gem 'devise',    "~>4.4.0"
 gem 'humanizer', "~>2.6.3"
 gem 'cancancan', "~>1.15.0"
 gem 'rolify',    "~>5.1.0"
@@ -98,7 +98,7 @@ gem 'net-scp', "~>1.2.1"
 
 
 # # Debugger and webapp profiling
-gem "newrelic_rpm", "~>3.9.4"
+gem "newrelic_rpm", "~>4.0.0"
 
 # Pure Ruby library to use R language from Ruby code
 # it needs that R interpreter is installed and R_HOME is configured
