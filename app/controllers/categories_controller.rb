@@ -69,7 +69,7 @@ class CategoriesController < GroupDataController
     
     is_authorized? :update, @category
 
-    @depth = @category.depth
+    params[:category][:depth] = params[:category][:depth].to_i
 
     if @category.update_attributes(params[:category])
       redirect_to([current_group, @category],
