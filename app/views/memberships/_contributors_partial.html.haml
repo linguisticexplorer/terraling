@@ -9,6 +9,7 @@
     - if can_see_header? [:manage], @contributors
       %th.col-sm-2 Actions
   - @contributors.each_with_index do |contributor, index|
+    - next if contributor.member.nil?
     %tr
       %td= link_to contributor.member.name, [current_group, contributor]
       %td
