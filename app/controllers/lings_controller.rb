@@ -74,6 +74,7 @@ class LingsController < GroupDataController
     respond_to do |format|
       format.html
       format.js
+      format.any(:json) { send_data(JSON.generate(@ling_obj).encode('utf-8'), :type => "application/json; charset=utf-8;", :filename => "#{@ling.name}.json") }
     end
   end
 
