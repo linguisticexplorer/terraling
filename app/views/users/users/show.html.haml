@@ -22,7 +22,8 @@
             .form-group
               %label.strong.col-md-4.control-label{for: "access_level"} Access Level
               .col-md-4
-                = select("access_level", "level", options_for_select(["#{@user.access_level}","Admin"]), {},{ :class => 'form-control col-md-12'})
+                - other_access_level = @user.access_level == "admin" ? "user" : "admin"
+                = select("access_level", "level", options_for_select(["#{@user.access_level}",other_access_level]), {},{ :class => 'form-control col-md-12'})
           .component
             / Button Drop Down
             .form-group
