@@ -41,12 +41,37 @@ class LingsController < GroupDataController
     is_authorized? :read, @ling
 
     @values = @ling.lings_properties.order(:property_id).paginate(:page => params[:page])
-    @ordered_values = @ling.lings_properties.sort_by {|v| (v.property.nil?) ? "" :  v.property.name }.paginate(:page => params[:page])
+    @ordered_values = @ling.lings_properties.sort_by {|v| (v.property.nil?) ? "" :  v.property.name }
 
     @values_count = @ling.lings_properties.count(:id)
     load_infos(@ling)
 
-    respond_with(@values) do |format|
+    examples = []
+    @ordered_values.each do |value|
+      elps = current_group.examples_lings_properties.find_all_by_lings_property_id(value.id)
+      ling_obj = { "property_name" => value.property.name, "examples" => [] }
+      if elps.any?
+        elps.each do |elp|
+          example = Example.find(elp.example.id)
+          obj = {}
+          obj["name"] = example.name if example.name
+          example.group.example_storable_keys.each do |key|
+            obj[key] = example.stored_value(key)
+          end
+          obj["creator"] = example.creator.name if example.creator
+          ling_obj["examples"] << obj
+        end
+      end
+      examples << ling_obj
+    end
+    @ling_obj = {
+      "ling_name" => @ling.name,
+      "ling_properties" => examples
+    }
+
+    @ordered_values = @ordered_values.paginate(:page => params[:page])
+
+    respond_to do |format|
       format.html
       format.js
     end
@@ -66,6 +91,8 @@ class LingsController < GroupDataController
     prop_ids = @properties.map(&:id)
     @preexisting_values = @ling.lings_properties.includes(:property).select {|lp| prop_ids.include? lp.property_id }
     @exists = true
+    
+    @creators = User.all.map { |user| [ user.name.capitalize ,user.id ] }
 
     if params[:prop_id]
       session[:prop_id] ||= params[:prop_id] if params[:prop_id]

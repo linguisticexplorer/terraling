@@ -40,8 +40,13 @@ class ExamplesController < GroupDataController
   def edit
     @example = current_group.examples.find(params[:id])
     @ling = params[:ling_id] ? current_group.lings.find(params[:ling_id]) : @example.ling 
-    @property = current_group.properties.find(params[:prop_id]) if params[:prop_id]
-    @lp = current_group.lings_properties.find(params[:lp_id]) if params[:lp_id]
+
+    prop_id = params[:prop_id] ||  @example.examples_lings_properties.first.lings_property.property_id
+    lp_id = params[:lp_id] || @example.examples_lings_properties.first.lings_property_id
+    
+    @property = current_group.properties.find(prop_id)# if params[:prop_id]
+    @lp = current_group.lings_properties.find(lp_id) #if params[:lp_id]
+    @creators = User.all.map { |user| [ user.name.capitalize ,user.id ] }
 
     is_authorized? :update, @example, true
   end
@@ -52,9 +57,11 @@ class ExamplesController < GroupDataController
       example.creator = current_user
     end
 
+    @example.ling = current_group.lings.find(params[:ling_id]) if params[:ling_id]
+
+
     is_authorized? :create, @example, true
 
-    @example.ling = current_group.lings.find(params[:ling_id]) if params[:ling_id]
 
     success = @example.save
     if success
@@ -68,6 +75,7 @@ class ExamplesController < GroupDataController
         elp.lings_property = current_group.lings_properties.find(params[:lp_val])
         elp.example = @example
 
+	elp.creator = @example.creator
         is_authorized? :create, elp, true
 
         success = elp.save
@@ -89,8 +97,16 @@ class ExamplesController < GroupDataController
     @example = current_group.examples.find(params[:id])
     is_authorized? :update, @example, true
 
+    creator_id = current_user.id
+    if params['example']
+      creator_id = params['example']['creator_id'] if params['example']['creator_id']
+    end
     respond_to do |format|
       if @example.update_attributes(params[:example])
+        #@example.update_attributes({:creator_id => current_user.id})
+	@example.creator_id = creator_id #params['example']['creator_id'] if params['example'] and params['example']['creator_id'
+        @example.save!
+        params[:stored_values].each{ |k,v| logger.info("#{k} = #{v}") }
         params[:stored_values].each{ |k,v| @example.store_value!(k,v) } if params[:stored_values]
         format.html {redirect_to([current_group, @example],
           :notice => (current_group.example_name + ' was successfully updated.'))}
