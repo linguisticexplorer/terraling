@@ -3,8 +3,7 @@
 %table.show-table.table.table-bordered.table-striped.table-hover
   %thead
     %tr
-      %th.col-md-1= "First Name"
-      %th.col-md-1= "Last Name"
+      %th.col-md-1= "Name"
       %th.col-md-1= "E-mail"
       %th.col-md-1= "User Type"
       %th.col-md-1= "Remove"
@@ -13,7 +12,6 @@
       %tr
         %td
           = link_to o.name, o
-        %td= o.name
         %td= o.email
         %td= o.access_level
         %td
