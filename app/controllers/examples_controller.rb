@@ -30,6 +30,7 @@ class ExamplesController < GroupDataController
     @example = Example.new do |e|
       e.group = current_group
       e.creator = current_user
+      e.ling = @ling
     end
 
     is_authorized? :create, @example, true
