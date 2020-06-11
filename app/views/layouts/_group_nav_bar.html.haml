@@ -4,10 +4,21 @@
       = @group.name 
       %b.caret
     %ul.dropdown-menu{"aria-labelledby" => "dLabel", :role => "menu"}
-      - Group.all.each do |group|
-        - if group != @group
-          %li{:role => "presentation"}
-            = link_to group.name, group
+      - if !current_user.nil? && current_user.admin?
+        - Group.all.each do |group|
+          - if group != @group
+            %li{:role => "presentation"}
+              = link_to group.name, group
+      - elsif user_signed_in? 
+        - Group.viewable_by(current_user).each do |group|
+          - if group != @group
+            %li{:role => "presentation"}
+              = link_to group.name, group
+      - else 
+        - Group.public.each do |group|
+          - if group != @group
+            %li{:role => "presentation"}
+              = link_to group.name, group
   // Search section
   - if user_signed_in?
     %li.dropdown.black-dropdown
