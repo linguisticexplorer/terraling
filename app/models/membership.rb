@@ -22,6 +22,7 @@ class Membership < ActiveRecord::Base
   # validates_existence_of :member
   validates :member, :presence => true, :existence => true
   validates :level, :presence => true
+  validates :group_id, :presence => true 
   # validates_uniqueness_of :member_id, :scope => :group_id
   validates :member_id, :uniqueness => {:scope => :group_id }
   validates_inclusion_of :level, :in => ACCESS_LEVELS

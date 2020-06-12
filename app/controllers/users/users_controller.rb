@@ -66,6 +66,7 @@ class Users::UsersController  < ApplicationController
     @memberships = []
     memberships.each do |membership|
       hash = {}
+      next if membership.role.nil?
       hash[:id] = membership.id
       hash[:group_name] = Group.find_by_id(membership.group_id).name
       hash[:role] = membership.role
@@ -88,7 +89,7 @@ class Users::UsersController  < ApplicationController
     memberships.each do |membership|
       group_id_member << Group.find_by_id(membership.group_id)
     end
-
+    group_id_member = group_id_member.compact
 
     @role_resources = [['','']] + (group_id_member.collect { |group| group.lings.collect {|d| {d.name => d.id}} }.flatten.collect{|s| s.to_a.flatten})
 
