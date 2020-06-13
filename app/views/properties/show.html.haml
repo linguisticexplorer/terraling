@@ -80,8 +80,8 @@
       .tab-pane#description
         .tabbed-pane
           .text-justify
-            - if @property.description.present? && @property.description != ""
-              %p= @property.description.html_safe
+            - if @output
+              %p= @output
             - else
               %h3 No description provided
       .tab-pane#map

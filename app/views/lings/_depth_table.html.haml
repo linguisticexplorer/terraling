@@ -36,7 +36,7 @@
       - if any_storable_values_available
         - storable_keys.each do |key|
           %td
-            = ling.stored_value(key)
+            = ling.stored_value(key).html_safe
       - if can_see_header
         %td{:id => table_actions_id(ling.name)}
           - if can_see? :update, ling

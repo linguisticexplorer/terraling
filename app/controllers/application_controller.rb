@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   require 'ipaddr'
+  require 'redcarpet'
 
   before_filter :protect
   protect_from_forgery
