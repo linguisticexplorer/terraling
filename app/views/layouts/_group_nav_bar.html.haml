@@ -15,7 +15,7 @@
             %li{:role => "presentation"}
               = link_to group.name, group
       - else 
-        - Group.public.each do |group|
+        - Group.is_public.each do |group|
           - if group != @group
             %li{:role => "presentation"}
               = link_to group.name, group
