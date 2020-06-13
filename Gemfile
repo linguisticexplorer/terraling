@@ -71,7 +71,7 @@ gem 'async-rails', "~>0.9.0"
 # replacement for native alert and confirm dialogs
 gem 'bootbox-rails', '~>0.4'
 # Advances Editor for Property descriptions
-gem 'tinymce-rails', '~>4.0.19'
+gem 'tinymce-rails', '~>4.3.8'
 
 # No need for coffeescript here, JS it's enough
 gem "uglifier", "~>2.5.3"
