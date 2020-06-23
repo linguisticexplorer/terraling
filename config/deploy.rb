@@ -11,10 +11,7 @@ ssh_options[:use_agent] = false
 ssh_options[:auth_methods] = %w(publickey)
 ssh_options[:keys] = %w(tmp/.ssh/terraling-travis.pem)
 
-# if :aws_deploy
-# end
-
-server "ec2-18-191-177-209.us-east-2.compute.amazonaws.com", :app, :web, :primary => true
+server "ec2-13-59-1-150.us-east-2.compute.amazonaws.com", :app, :web, :primary => true
 set :application  , "terraling"
 set :user         , "travis"
 set :deploy_to    , "/home/#{user}/www/#{application}"
@@ -27,7 +24,7 @@ set :keep_releases, 3
 set :scm          , :git
 set :scm_verbose  , true
 set :repository   , "git://github.com/linguisticexplorer/terraling.git"
-set :branch       , "sprint"
+set :branch       , "dev"
 set :copy_exclude , ['.git']
 
 # require "capistrano-multiyaml"
@@ -35,7 +32,7 @@ set :copy_exclude , ['.git']
 require 'capistrano-rbenv'
 
 set :rbenv_type, :user
-set :rbenv_ruby_version, '2.1.2'
+set :rbenv_ruby_version, '2.6.5'
 
 # role :web, HTTP server (Apache)/etc
 # role :app, app server
