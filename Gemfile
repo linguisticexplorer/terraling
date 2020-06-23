@@ -81,10 +81,11 @@ group :deploy do
   gem 'capistrano', "~>2.15.4"
   # gem 'capistrano-multiyaml'
   gem "capistrano-ext", "~>1.2.1"
+  gem 'capistrano-rbenv', "~>1.0.5"
   # # Comment this line if you are not using RVM
   # # Starting with RVM 1.11.3 Capistrano integration was extracted to a separate gem.
   # # See https://rvm.io/integration/capistrano/
-  gem 'rvm-capistrano', "~>1.5.4"
+  # gem 'rvm-capistrano', "~>1.5.4"
 end
 
 gem "hogan_assets", "~>1.6.0"
@@ -93,9 +94,10 @@ gem "hogan_assets", "~>1.6.0"
 # gem 'forum_monster', :git => 'https://github.com/dej611/forum_monster.git'
 # gem 'bb-ruby'
 
-gem 'net-ssh', "~>2.9.1"
-gem 'net-scp', "~>1.2.1"
-
+gem 'net-ssh', "~>5.2.0"
+gem 'net-scp', "~>2.0.0"
+gem 'ed25519', "~>1.2"
+gem 'bcrypt_pbkdf', "~>1.0.0"
 
 # # Debugger and webapp profiling
 gem "newrelic_rpm", "~>4.0.0"
