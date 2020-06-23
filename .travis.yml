@@ -4,7 +4,7 @@ addons:
   ssh_known_hosts: ec2-13-59-1-150.us-east-2.compute.amazonaws.com
 before_install:
 - gem install bundler
-bundler_args: "--without development production"
+bundler_args: ""
 script:
 - ls
 rvm:
