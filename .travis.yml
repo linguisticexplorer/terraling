@@ -4,7 +4,7 @@ addons:
   ssh_known_hosts: ec2-13-59-1-150.us-east-2.compute.amazonaws.com
 before_install:
 - gem install bundler
-bundler_args: "--without development production"
+bundler_args: ""
 script:
 - ls
 rvm:
@@ -19,10 +19,11 @@ before_deploy:
 - openssl enc -aes-256-cbc -d -in deploy_rsa.enc -out tmp/.ssh/travis_rsa -k $ENC_PASS
 - chmod 700 tmp/.ssh/
 - chmod 600 tmp/.ssh/travis_rsa
+- eval "$(ssh-agent -s)"
 - ssh-add tmp/.ssh/travis_rsa
 deploy:
   provider: script
   skip_cleanup: true
-  script: cap deploy
+  script: RAILS_ENV=production bundle exec cap deploy
   on:
     branch: dev
