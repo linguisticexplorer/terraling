@@ -7,4 +7,4 @@ bundle exec rake assets:clobber && bundle exec rake assets:precompile
 rm -f tmp/pids/server.pid
 
 # start the server
-bundle exec rails s -b 0.0.0.0
+RAILS_ENV=production LOCAL_DEV=true bundle exec rails s -b 0.0.0.0
