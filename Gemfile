@@ -5,7 +5,7 @@ gem 'rails', '~> 3.2.17'
 # # Use passenger as the web server
 gem 'passenger', "~>4.0.50"
 # # It forces to use a specific version of Rake
-gem "rake", "= 10.1.0"
+gem "rake", "13.0.1"
 gem "nokogiri", ">= 1.5.6"
 # # Nice CLI progress bar for ruby
 gem "progressbar", "~>0.21.0"

@@ -270,7 +270,7 @@ GEM
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
     rainbow (2.0.0)
-    rake (10.1.0)
+    rake (13.0.1)
     rdoc (3.12.2)
       json (~> 1.4)
     redcard (1.1.0)
@@ -429,7 +429,7 @@ DEPENDENCIES
   pry-byebug
   rails (~> 3.2.17)
   rails_best_practices (~> 1.15.4)
-  rake (= 10.1.0)
+  rake (= 13.0.1)
   redcarpet
   rolify (~> 4.1.1)
   rspec-activemodel-mocks (~> 1.0)
