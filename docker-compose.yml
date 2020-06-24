@@ -1,0 +1,12 @@
+version: '3.3'
+
+services:
+
+  terraling-dockerized:
+    build: .
+    image: terraling/terraling
+    restart: always
+    volumes:
+      - .:/terraling/
+    ports:
+      - "4000:3000"
