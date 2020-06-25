@@ -1,61 +1,67 @@
-set :stages       , %w(testing production travisci)
-set :default_stage, "production"
+# set :stages       , %w(testing production travisci)
+# set :default_stage, "production"
 
-require "capistrano/ext/multistage"
+# require "capistrano/ext/multistage"
 require "bundler/capistrano"
 
 # require profile scripts
 default_run_options[:pty]   = true
-# ssh_options[:forward_agent] = true
+
+ssh_options[:use_agent] = false
+ssh_options[:auth_methods] = %w(publickey)
+ssh_options[:keys] = %w(tmp/.ssh/terraling-travis.pem)
 
 # if :aws_deploy
-#   # ssh_options[:auth_methods]  = [:public_key]
-#   ssh_options[:keys]          = ["/home/dej611/.ssh/aws-free.pem"]
 # end
 
-
+server "ec2-18-191-177-209.us-east-2.compute.amazonaws.com", :app, :web, :primary => true
 set :application  , "terraling"
-# set :deploy_to    , "/var/www/apps/#{application}"
+set :user         , "travis"
+set :deploy_to    , "/home/#{user}/www/#{application}"
 set :deploy_via   , :remote_cache
-# set :user         , "admin"
-# set :use_sudo     , true
+set :use_sudo     , false
 # set :multiyaml_stages, "yamls/deploy.yml"
 set :keep_releases, 3
 
 # source control
 set :scm          , :git
 set :scm_verbose  , true
-set :repository   , "git://github.com/linguisticexplorer/Linguistic-Explorer.git"
-# set :branch       , "master"
+set :repository   , "git://github.com/linguisticexplorer/terraling.git"
+set :branch       , "sprint"
 set :copy_exclude , ['.git']
 
 # require "capistrano-multiyaml"
 
+require 'capistrano-rbenv'
+
+set :rbenv_type, :user
+set :rbenv_ruby_version, '2.1.2'
 
 # role :web, HTTP server (Apache)/etc
 # role :app, app server
 # role :db, master db server
 # server "50.56.97.125:10003", :app, :web, :db, :primary => true
 
-require "rvm/capistrano"
-$: << File.join(File.dirname(__FILE__), "..", "lib")
+# require "rvm/capistrano"
 
-begin
-  # RVM Ruby Version Manager
-  $:.unshift(File.expand_path('./lib', ENV['rvm_path']))  # Add RVM's lib directory to the load path.
-  require "rvm/capistrano"
-  # set :rvm_ruby_string, "1.9.2-head@ling"                 # set rvm ruby version and gemset
-  set :rvm_type, :user
-rescue LoadError
-  puts "rvm not installed"
-end
+# set :rvm_ruby_string, :local              # use the same ruby as used locally for deployment
+# set :rvm_autolibs_flag, "read-only"       # more info: rvm help autolibs
+
+# before 'deploy:setup', 'rvm:install_rvm'  # install/update RVM
+# before 'deploy:setup', 'rvm:install_ruby' # install Ruby and create gemset, OR:
+# before 'deploy:setup', 'rvm:create_gemset' # only create gemset
+
+$: << File.join(File.dirname(__FILE__), "..", "lib")
 
 # Bundler
 require 'bundler/capistrano'
 
 # Passenger mod_rails:
 namespace :deploy do
-  task :start do ; end
+  task :start do
+    # run "bundle install --with development"
+    # run "passenger start"
+  end
   task :stop do ; end
   task :restart, :roles => :app, :except => { :no_release => true } do
     # Update the gems
@@ -66,6 +72,7 @@ namespace :deploy do
     # Restart
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
   end
+  task :migrate do ; end
 end
 
 # Import and download tasks
