@@ -5,7 +5,7 @@ module ApplicationHelper
   end
 
   def link_to_google_web_font(font)
-    "<link href='http://fonts.googleapis.com/css?family=#{u(font)}' rel='stylesheet' type='text/css'>".html_safe
+    "<link href='https://fonts.googleapis.com/css?family=#{u(font)}' rel='stylesheet' type='text/css'>".html_safe
   end
 
   def page_title
