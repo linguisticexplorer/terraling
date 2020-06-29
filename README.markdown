@@ -1,115 +1,84 @@
-Linguistic Explorer: Terraling
-====
+# Terraling (dev)
 
-![http://linguisticexplorer.org](http://linguisticexplorer.org/images/lexplorer_logo4.png)
+https://new.terraling.com
 
-http://www.terraling.com
+Terraling is a Ruby on Rails web application to let you store and browse your linguistic data. It has extensive search features including the following:
 
-Terraling is a Ruby on Rails web application to let you store and browse your linguistic data and now it has new features like the following:
+* [Regular Search](https://github.com/linguisticexplorer/terraling/wiki/Regular-search)
 
-* [Regular Search] (https://github.com/linguisticexplorer/Linguistic-Explorer/wiki/Regular-search);
+* [Cross Search](https://github.com/linguisticexplorer/terraling/wiki/Cross-search)
 
-* [Cross Search] (https://github.com/linguisticexplorer/Linguistic-Explorer/wiki/Cross-search);
+* [Compare Search](https://github.com/linguisticexplorer/terraling/wiki/Compare-search)
 
-* [Compare Search] (https://github.com/linguisticexplorer/Linguistic-Explorer/wiki/Compare-search);
+* [Universal Implication Both Search](https://github.com/linguisticexplorer/terraling/wiki/Both-Implication)
 
-* [Universal Implication Both Search] (https://github.com/linguisticexplorer/Linguistic-Explorer/wiki/Both-Implication);
+* [Universal Implication Antecedent Search](https://github.com/linguisticexplorer/terraling/wiki/Antecedent-Implication)
 
-* [Universal Implication Antecedent Search] (https://github.com/linguisticexplorer/Linguistic-Explorer/wiki/Antecedent-Implication);
+* [Universal Implication Consequent Search](https://github.com/linguisticexplorer/terraling/wiki/Consequent-Implication)
 
-* [Universal Implication Consequent Search] (https://github.com/linguisticexplorer/Linguistic-Explorer/wiki/Consequent-Implication);
+* [Universal Implication Double Both Search](https://github.com/linguisticexplorer/terraling/wiki/Double-Both-Implication)
 
-* [Universal Implication Double Both Search] (https://github.com/linguisticexplorer/Linguistic-Explorer/wiki/Double-Both-Implication);
+* [Geomapping](https://github.com/linguisticexplorer/terraling/wiki/Geomapping-feature) of all the searches above and filtering of results by category/row
 
-* [Geomapping] (https://github.com/linguisticexplorer/Linguistic-Explorer/wiki/Geomapping-feature) of all the searches above and filter results by category/row;
+* [Similarity Tree Search](https://github.com/linguisticexplorer/terraling/wiki/Similarity-tree)
 
-* [Similarity Tree Search] (https://github.com/linguisticexplorer/Linguistic-Explorer/wiki/Similarity-tree);
-
-## Install
+## Installation (dev branch)
 
 #### Requirements
-* Ruby 1.9.3 - if you are stuck with 1.9.2 use version 1.3.3
-* MySQL 5.5.x
+* Ruby 2.6.5
+* MySQL 5.7
+* Docker Desktop
 
-#### How to
+#### Instructions
 
-* Download it!
+* Clone the repository
 
-  `$ git clone git://github.com/linguisticexplorer/Linguistic-Explorer.git`
+    * `$ git clone git://github.com/linguisticexplorer/terraling.git`
+    * `$ cd terraling`
 
-* Bundle it!
 
-  `$ cd Linguistic-Explorer`
+* Switch to the dev branch
 
-  `$ bundle install`
+    * `$ git checkout dev`
 
-* Configure it!
 
- `$ cp yamls/database.yml.example config/database.yml`
+* Pull the docker image
 
-  Edit your MySQL account data for development and test environment:
+    * `$ docker pull terraling/terraling`
 
- `$ vim config/database.yml`
 
-  Create tables and seed them
+* Create your database configuration file
 
-  `$ rake db:setup`
+    * `$ touch config/database.yml`
+    * `$ vim config/database.yml`
 
-* Run it!
 
-  `$ rails server`
+* Run the docker-compose script
 
-### YAML example files
+    * `$ docker-compose up`
 
-YAML files are now stored in the `yamls` folder: have a look there to configure:
 
-* your MySQL database (see above)
-* the import task for CSVs files
-* the SSWL import task (for SSWL administrators)
+## Branch Status
 
-#### Seed Data
-The seed data is included within the Terraling project, so you can quickly start a new example group by running the following:
+### Sprint
 
-  `$ rake db:seed`
+[![Build Status](https://travis-ci.org/linguisticexplorer/terraling.png?branch=sprint)](https://travis-ci.org/linguisticexplorer/terraling)
 
-## Branches Status
+### Dev
 
-### Master
+[![Build Status](https://travis-ci.org/linguisticexplorer/terraling.png?branch=dev)](https://travis-ci.org/linguisticexplorer/terraling)
 
-[![Build Status](https://travis-ci.org/linguisticexplorer/Linguistic-Explorer.png?branch=master)](https://travis-ci.org/linguisticexplorer/Linguistic-Explorer)
-[![Dependency Status](https://gemnasium.com/linguisticexplorer/Linguistic-Explorer.png)](https://gemnasium.com/linguisticexplorer/Linguistic-Explorer)
-[![Code Climate](https://codeclimate.com/github/linguisticexplorer/Linguistic-Explorer.png)](https://codeclimate.com/github/linguisticexplorer/Linguistic-Explorer)
+## Testing the app
 
-### Development
+To run automated unit testing, use RSpec:
 
-[![Build Status](https://travis-ci.org/linguisticexplorer/Linguistic-Explorer.png?branch=devel)](https://travis-ci.org/linguisticexplorer/Linguistic-Explorer)
-
-## Test it
-
-To test yourself the app write in the console
-
-  `$ rake`
+  `$ bundle exec rspec`
   
-It should run both rspec and cucumber tests.
+## Contributing
 
-**Note**
-If you are having issues when running the tests with the following line:
-```
-> [WARN] table 'Role' doesn't exist. Did you run the migration? Ignoring rolify config.
-```
-To fix this issue run the following:
-```
-$ rake db:test:prepare db:test:load
-```
-Then try to run the tests again.
-  
-## Contribute
-
-We are looking for some help in this project. Want to help us?
-
-[How To Contribute](https://github.com/linguisticexplorer/Linguistic-Explorer/wiki/How-To-Contribute)
+See [Contributing](Contributing.md).
   
 ## License
 This project is under the MIT License.
 
-Please have a look to the [LICENSE file](https://github.com/linguisticexplorer/Linguistic-Explorer/blob/master/LICENSE).
+Please have a look to the [LICENSE file](LICENSE).
