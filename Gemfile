@@ -89,6 +89,7 @@ group :deploy do
 end
 
 gem "hogan_assets", "~>1.6.0"
+gem "handlebars_assets", "~>0.23.8"
 
 # Forum gem
 # gem 'forum_monster', :git => 'https://github.com/dej611/forum_monster.git'
