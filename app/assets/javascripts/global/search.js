@@ -18,7 +18,7 @@
       hint: true,
       minLength: 1,
       highlight: true,
-      engine: Hogan
+      engine: Handlebars
     };
 
     $('#'+currentId).typeahead(options, dictionaries);
@@ -106,10 +106,10 @@
       'groups':{
         // header: '<div><h4 class="group-header">Group: '+name+'</h4></div>',
         // suggestion: Handlebars.compile('<p><strong>{{name}}</strong></p>')
-        header: HoganTemplates['typeahead/multi_search_header'].render({name: name})
+        // header: HandlebarsTemplates['typeahead/multi_search_header'].render({name: name})
       },
       'resources':{
-        header: HoganTemplates['typeahead/multi_resource_header'].render({name: name})
+        // header: HandlebarsTemplates['typeahead/multi_resource_header'].render({name: name})
       }
     };
 

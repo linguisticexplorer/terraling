@@ -13,7 +13,7 @@
   function initPage(){
 
     function makeElement (text) {
-      return HoganTemplates[T.controller.toLowerCase() + '/input'].render({text: text});
+      return HandlebarsTemplates[T.controller.toLowerCase() + '/input']({text: text});
     }
 
     function getInputValues(){
