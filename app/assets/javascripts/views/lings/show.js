@@ -51,7 +51,7 @@
       resourcesDict[currentName] = currentId;
 
       var tplPath = T.controller.toLowerCase() + '/' + T.action.toLowerCase();
-      resourceTemplate = HoganTemplates[tplPath];
+      resourceTemplate = HandlebarsTemplates[tplPath];
 
       // bind some buttons here
       bindAnalysis('#compare-lings', 'compare');
@@ -189,7 +189,7 @@
 
         resourcesDict[ling.name] = ''+ling.id;
 
-        $('#selected-lings').append(resourceTemplate.render(ling));
+        $('#selected-lings').append(resourceTemplate(ling));
 
         checkButtons(true);
       }

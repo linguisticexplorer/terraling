@@ -35,7 +35,7 @@
 
       } else {
 
-        $(id).append(HoganTemplates['unsupported'].render());
+        $(id).append(HandlebarsTemplates['unsupported']());
 
       }
     }, 700);
@@ -53,7 +53,8 @@
   }
 
   function showSpinningWheel(id){
-    var img = HoganTemplates['waiting'].render({big: true, color: '#5bd0de'});
+    const waiting = 'waiting';
+    var img = HandlebarsTemplates[waiting]({big: true, color: '#5bd0de'});
     $(id).html(img);
   }
 

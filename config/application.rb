@@ -74,9 +74,10 @@ module LinguisticExplorer
       s.in_preview          = false
     end
 
-    HoganAssets::Config.configure do |config|
+    HandlebarsAssets::Config.configure do |config|
+        config.haml_enabled = true
         # Set the extension for templates (for compiling)
-        config.hamstache_extensions = %w(hamstache)
+        config.hamlbars_extensions = %w(hamstache)
         # remove the common prefix from the HoganTemplate bucket
         config.path_prefix = 'templates'
     end

@@ -15,7 +15,7 @@
 
     var tplPath = 'waiting';
 
-    var img = HoganTemplates[tplPath].render({big: true, color: '#E53900'});
+    var img = HandlebarsTemplates[tplPath]({big: true, color: '#E53900'});
 
     $('#prop-descrip p a').attr('target', '_blank');
 

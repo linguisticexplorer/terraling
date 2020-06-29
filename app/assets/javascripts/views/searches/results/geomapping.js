@@ -33,11 +33,11 @@
     var isRegular = resultsJson.type === 'default';
 
     // change the page template with the map one
-    var mapTemplate = HoganTemplates[getTemplatePath('map')];
+    var mapTemplate = HandlebarsTemplates[getTemplatePath('map')];
 
     // TODO: finish the panel!
     // var htmlMap = mapTemplate.render({width: isRegular ? 12 : 10, panel: !isRegular});
-    var htmlMap = mapTemplate.render({width: 12, panel: false});
+    var htmlMap = mapTemplate({width: 12, panel: false});
     $(".js-pagination").html('');
     $('#paginated-results').html(htmlMap);
 

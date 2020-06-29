@@ -73,8 +73,8 @@
             errorMessages = json.success ? '' : json.errors;
 
         if(errorMessages){
-          var template = HoganTemplates[T.controller.toLowerCase() + '/errors_template'];
-          var html = template.render(errorMessages);
+          var template = HandlebarsTemplates[T.controller.toLowerCase() + '/errors_template'];
+          var html = template(errorMessages);
 
           $('#'+idToShow).append(html);
         }
@@ -120,7 +120,7 @@
 
     function getCSVTemplate(type){
       var htmlTemplate = getTemplate(resultsJson.type);
-      return HoganTemplates[htmlTemplate.replace(/\/results\//, '/download/')];
+      return HandlebarsTemplates[htmlTemplate.replace(/\/results\//, '/download/')];
     }
 
     function getHeader(table){

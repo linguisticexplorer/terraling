@@ -144,11 +144,11 @@
       });
 
       // get the template now
-      var template = HoganTemplates['searches/results/map_popup'];
+      var template = HandlebarsTemplates['searches/results/map_popup'];
 
       for( var id in lingNames){
         var entry = lingNames[id];
-        lingNames[id] = template.render(entry);
+        lingNames[id] = template(entry);
       }
 
       return lingNames;
