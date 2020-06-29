@@ -29,10 +29,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def current_group
-    Group.first
-  end
-
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected
