@@ -12,23 +12,19 @@ To start contributing, you must have the following already:
 
 # Branching Pattern
 
-There are only three branches we must be concerned about for the most part. They are __master__, __patch__, and __sprint__. Each branch corresponds to different parts of the development process. We try to maintain an always deployable __master__, with __patch__ branches in case we need to make hotfixes, and a __sprint__ branch for development purposes.
-
-## Master
-
-The master branch always remains deployable. Merging changes to the master branch will have to go through strict review. Usually, the merges come from the sprint branch, but often we will have to make patch changes in the patch branch and merge from there. This branch is rarely ever touched directly.
-
-## Patch
-
-The Patch branch is responsible for having all patch level changes, such as gem updates and security fixes. These changes are then merged directly to master, reviewed, and deployed from there.
+There are only two branches we use. They are __sprint__ and __dev__. Each branch corresponds to different parts of the development process. The first - __sprint__ - is always deployable, and represents our production code. The second - __dev__ - represents the most bleeding-edge, feature-rich version. Feature pull requests must only be made against __dev__, and only bugfixes and patches may be pull requested against __sprint__.
 
 ## Sprint
 
-The sprint branch is home of all developmental changes. This branch is the most dynamic, and will experience a large amount of changes as we work our way through chores and user stories.
+The sprint branch always remains deployable. Merging changes to the sprint branch will have to go through strict review. Usually, the merges come from the dev branch, but often we will have to make patch changes in novel branches which are then merged into sprint.
+
+## Dev
+
+The dev branch is home of all developmental changes. This branch is the most dynamic, and will experience a large amount of changes as we work our way through chores and user stories. All feature pull requests must be made against this branch.
 
 # Contributing
 
-To contribute, you must first fork the repository. Once you've done that, select the branch you will be making changes on (usually sprint). If the change you are making is not listed in our issues page or our project management page, please create one before starting any changes.
+To contribute, you must first fork the repository. Once you've done that, select the branch you will be making changes on (usually dev). If the change you are making is not listed in our issues page or our project management page, please create one before starting any changes.
 
 ## Committing
 
