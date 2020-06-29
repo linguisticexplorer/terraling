@@ -62,7 +62,19 @@
     = link_to groups_path, :style => "color: white" do
       = icon 'bars', 'Pick a Dataset'
       %b.caret
-    %ul.dropdown-menu.medium-height{"aria-labelledby" => "dLabel", :role => "menu"}
-      - @groups.each do |group|
-        %li
-          = link_to group.name, group
+    %ul.dropdown-menu{"aria-labelledby" => "dLabel", :role => "menu"}
+      - if !current_user.nil? && current_user.admin?
+        - Group.all.each do |group|
+          - if group != @group
+            %li{:role => "presentation"}
+              = link_to group.name, group
+      - elsif user_signed_in? 
+        - Group.viewable_by(current_user).each do |group|
+          - if group != @group
+            %li{:role => "presentation"}
+              = link_to group.name, group
+      - else 
+        - Group.is_public.each do |group|
+          - if group != @group
+            %li{:role => "presentation"}
+              = link_to group.name, group
