@@ -39,7 +39,7 @@
           = link_to groups_activity_path(@group) do
             Recent Activity
       %li
-        = link_to destroy_user_session_path do
+        = link_to destroy_user_session_path, method: :delete do
           Sign out
           = icon 'sign-out', '', :class=> "pull-right fa-15x"
 - else
