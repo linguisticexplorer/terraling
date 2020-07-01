@@ -63,6 +63,7 @@ LinguisticExplorer::Application.configure do
     authentication:       :plain,
     enable_starttls_auto: true
   }
+  config.action_mailer.register_template_extension('haml')
 
   # Enable threaded mode
   # config.threadsafe!

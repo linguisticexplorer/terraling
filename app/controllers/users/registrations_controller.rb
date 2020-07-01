@@ -6,6 +6,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     resource.access_level = User::USER
 
     if verify_recaptcha(model: resource) && resource.save
+      RegistrationsMailer.notify(User.where(email: ENV["HILDA"]).first, resource).deliver
       set_flash_message :notice, :signed_up
       sign_in_and_redirect(resource_name, resource)
     else
