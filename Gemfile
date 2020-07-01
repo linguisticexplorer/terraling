@@ -26,6 +26,7 @@ gem 'devise',    "~>3.3.0"
 gem 'humanizer', "~>2.6.0"
 gem 'cancancan', "~>1.10.1"
 gem 'rolify',    "~>4.1.1"
+gem 'recaptcha', "~>4.9.0"
 
 # # Model validation
 gem 'validation_reflection', "~> 1.0.0", :git => 'git://github.com/electronicbites/validation_reflection.git'
