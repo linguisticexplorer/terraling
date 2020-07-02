@@ -34,8 +34,8 @@ class LingsProperty < ActiveRecord::Base
   scope :prop_ids, -> { select("#{self.table_name}.property_id") }
   scope :property_value, -> { select("#{self.table_name}.property_value") }
 
-  scope :with_id, -> (id_or_ids) { where("#{self.table_name}.id IN (:ids)", { ids: id_or_ids }) }
-  scope :with_ling_id, -> (id_or_ids) { where("#{self.table_name}.ling_id IN (:ids)", { ids: id_or_ids }) }
+  scope :with_id, -> (id_or_ids) { where( id: id_or_ids ) }
+  scope :with_ling_id, -> (id_or_ids) { where( ling_id: id_or_ids ) }
 
   scope :property_relatives, -> (prop_id) { join(:lings).where("#{self.table_name}.property_id") }
 

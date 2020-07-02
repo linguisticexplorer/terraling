@@ -23,20 +23,21 @@
       function mapLingName(el){
         return el.name;
       }
+      
       var headers = resultsJson.header;
-      var lings = resultsJson.rows[0].lings;
+      var lings = resultsJson.rows.length > 0 ? resultsJson.rows[0].lings : [];
       return {header: headers, rows: [], lings: $.map(lings, mapLingName).join(', ') };
     }
 
     function getProperty(level){
       return function (entry, i){
-        return T.Util.isThere(entry, level, i, 'lings_property', 'property') ? entry[level][i].lings_property.property.name : ' ';
+        return T.Util.isThere(entry, level, i, 'property') ? entry[level][i].property.name : ' ';
       };
     }
 
     function getValue(level){
       return function (entry, i){
-        return T.Util.isThere(entry, level, i, 'lings_property') ? entry[level][i].lings_property.value : ' ';
+        return T.Util.isThere(entry, level, i) ? entry[level][i].value : ' ';
       };
     }
 
@@ -144,11 +145,11 @@
       });
 
       // get the template now
-      var template = HoganTemplates['searches/results/map_popup'];
+      var template = HandlebarsTemplates['searches/results/map_popup'];
 
       for( var id in lingNames){
         var entry = lingNames[id];
-        lingNames[id] = template.render(entry);
+        lingNames[id] = template(entry);
       }
 
       return lingNames;

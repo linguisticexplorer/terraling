@@ -133,12 +133,12 @@
 
     function preparePopup(json){
       // get the template now
-      var template = HoganTemplates['searches/results/map_popup'];
+      var template = HandlebarsTemplates['searches/results/map_popup'];
       
       var popups = {};
       for( var id in offspringCache){
         var entry = offspringCache[id];
-        popups[id] = template.render({name: entry.name, row1: entry.count > 1 ? 'Has '+entry.count+' '+T.groups[T.currentGroup].ling1_name : ''});
+        popups[id] = template({name: entry.name, row1: entry.count > 1 ? 'Has '+entry.count+' '+T.groups[T.currentGroup].ling1_name : ''});
       }
       return popups;
     }

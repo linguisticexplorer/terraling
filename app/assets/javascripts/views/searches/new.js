@@ -163,7 +163,7 @@
     parent.addClass("gray");
     parent.parent().children(".blue").remove();
     var tplPath = T.controller.toLowerCase() + '/form_field_disabled';
-    parent.parent().append(HoganTemplates[tplPath].render({name: name}));
+    parent.parent().append(HandlebarsTemplates[tplPath]({name: name}));
   }
 
   /* Function to enable an element */
@@ -182,7 +182,7 @@
   }
 
   function enable_similarity_radial_tree(){
-    var label = HoganTemplates[T.controller.toLowerCase() + '/form_radial_tree_field'].render();
+    var label = HandlebarsTemplates[T.controller.toLowerCase() + '/form_radial_tree_field']();
     $("#clustering").append(label);
   }
 

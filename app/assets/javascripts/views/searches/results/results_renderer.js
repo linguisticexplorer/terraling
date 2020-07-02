@@ -140,7 +140,7 @@
         // TODO: Make this check somehow to see if a .js.erb file exists
         // Alterntaively, create one for every view, but not recommended
         
-        var img = HoganTemplates['waiting'].render({medium: true, color: '#5bd0de'}),
+        var waiting = 'waiting', img = HandlebarsTemplates[waiting]({medium: true, color: '#5bd0de'}),
             once = false;
         // Manage the AJAX pagination and changing the URL
          $(document).on("click", ".js-pagination a", function (e) {

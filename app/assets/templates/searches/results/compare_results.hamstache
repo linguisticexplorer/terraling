@@ -5,19 +5,19 @@
   %thead
     %tr
       {{#header.commons.compare_property}}
-      %th {{header.commons.compare_property}}
+      %th {{.}}
       {{/header.commons.compare_property}}
       {{#header.commons.common_values}}
-      %th {{header.commons.common_values}}
+      %th {{.}}
       {{/header.commons.common_values}}
   %tbody
     {{#rows.commons}}
     %tr.search_common_result
       {{#compare_property}}
-      %td {{compare_property}}
+      %td {{.}}
       {{/compare_property}}
       {{#common_values}}
-      %td {{common_values}}
+      %td {{.}}
       {{/common_values}}
     {{/rows.commons}}
 {{/commons}}
@@ -28,7 +28,7 @@
   %thead
     %tr
       {{#header.differents.compare_property}}
-      %th {{header.differents.compare_property}}
+      %th {{.}}
       {{/header.differents.compare_property}}
       {{#header.differents.ling_value}}
       %th {{.}}
@@ -37,7 +37,7 @@
     {{#rows.differents}}
     %tr.search_diff_result
       {{#compare_property}}
-      %td {{compare_property}}
+      %td {{.}}
       {{/compare_property}}
       {{#ling_value}}
       %td {{.}}

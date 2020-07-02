@@ -57,7 +57,8 @@
     embed = !!toEmbed;
     navbarOn = !hideNavbar;
 
-    $('#waiting').html(HoganTemplates['waiting'].render({medium: true, color: '#5bc0de'}));
+    const waiting = 'waiting';
+    $('#waiting').html(HandlebarsTemplates[waiting]({medium: true, color: '#5bc0de'}));
 
     function tuneParamsForSearchType(){
       var query = $('#search_results').data('query');
@@ -212,7 +213,7 @@
 
     for( var type in templateMapping){
       if( (new RegExp(type)).test(json.type) ){
-        template = HoganTemplates[getTemplatePath(type)];
+        template = HandlebarsTemplates[getTemplatePath(type)];
         break;
       }
     }
@@ -226,12 +227,12 @@
       setBar(80, 'Data processed');
     }
 
-    htmlRows = template.render(table || {});
+    htmlRows = template(table || {});
 
     if(paginationData.pages.length > 1){
 
-      var paginationTemplate = HoganTemplates[getTemplatePath('pagination')];
-      htmlPagination = paginationTemplate.render(paginationData);
+      var paginationTemplate = HandlebarsTemplates[getTemplatePath('pagination')];
+      htmlPagination = paginationTemplate(paginationData);
     } else {
       htmlPagination = '';
     }

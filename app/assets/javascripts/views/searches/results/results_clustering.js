@@ -29,9 +29,9 @@
     }
 
     function makeGraph(table){
-      var template = HoganTemplates[getTemplate(resultsJson.type)];
+      var template = HandlebarsTemplates[getTemplate(resultsJson.type)];
       // render the element now
-      $('#paginated-results').html(template.render({}));
+      $('#paginated-results').html(template());
       // now make the chart
       options = $.extend({}, {width: $('#'+containerId).width(), height: 600, radial: false});
 

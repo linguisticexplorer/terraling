@@ -35,7 +35,7 @@
       resourcesDict[currentName] = currentId;
 
       var tplPath = T.controller.toLowerCase() + '/' + T.action.toLowerCase();
-      resourceTemplate = HoganTemplates[tplPath];
+      resourceTemplate = HandlebarsTemplates[tplPath];
 
       // init the typeahead
       setupTypeahead('property', propertyResolver, onItemSelected);
@@ -113,7 +113,7 @@
 
         resourcesDict[prop.name] = ''+prop.id;
 
-        $('#selected-props').append(resourceTemplate.render(prop));
+        $('#selected-props').append(resourceTemplate(prop));
 
         checkButtons(true);
       }
