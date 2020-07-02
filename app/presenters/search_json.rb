@@ -13,7 +13,7 @@ class SearchJSON
       :rows    => @search.results(false).as_json(root: true),
       :success => true,
       :rows_per_page => ActiveRecord::Base.per_page
-    }.to_json(:root => true).html_safe
+    }.to_json.html_safe
   end
 
   private
