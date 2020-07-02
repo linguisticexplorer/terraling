@@ -1,55 +1,39 @@
 %table.show-table.table.table-bordered.table-striped.table-hover
   %thead
     %tr
-      {{#header.ling_0}}
       %th {{header.ling_0}}
-      {{/header.ling_0}}
-      {{#header.property_0}}
       %th {{header.property_0}}
-      {{/header.property_0}}
-      {{#header.value_0}}
       %th {{header.value_0}}
-      {{/header.value_0}}
-      {{#header.example_0}}
       %th {{header.example_0}}
-      {{/header.example_0}}
       {{#header.ling_1}}
-      %th {{header.ling_1}}
+      %th {{.}}
       {{/header.ling_1}}
       {{#header.property_1}}
-      %th {{header.property_1}}
+      %th {{.}}
       {{/header.property_1}}
       {{#header.value_1}}
-      %th {{header.value_1}}
+      %th {{.}}
       {{/header.value_1}}
       {{#header.example_1}}
-      %th {{header.example_1}}
+      %th {{.}}
       {{/header.example_1}}
   %tbody
     {{#rows}}
     %tr.search_result{"data-parent-value" => "{{ling_0_id}}", "data-child-value" => "{{ling_1_id}}"}
-      {{#ling_0}}
       %td {{ling_0}}
-      {{/ling_0}}
-      {{#property_0}}
       %td {{property_0}}
-      {{/property_0}}
-      {{#value_0}}
       %td {{value_0}}
-      {{/value_0}}
-      {{#example_0}}
       %td {{example_0}}
-      {{/example_0}}
       {{#ling_1}}
-      %td {{ling_1}}
+      %td {{.}}
       {{/ling_1}}
       {{#property_1}}
-      %td {{property_1}}
+      %td {{.}}
       {{/property_1}}
       {{#value_1}}
-      %td {{value_1}}
+      %td {{.}}
       {{/value_1}}
       {{#example_1}}
-      %td {{example_1}}
+      %td {{.}}
       {{/example_1}}
     {{/rows}}
