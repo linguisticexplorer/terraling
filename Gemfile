@@ -89,7 +89,6 @@ group :deploy do
   # gem 'rvm-capistrano', "~>1.5.4"
 end
 
-gem "hogan_assets", "~>1.6.0"
 gem "handlebars_assets", "~>0.23.8"
 
 # Forum gem
