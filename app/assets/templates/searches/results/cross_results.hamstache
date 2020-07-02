@@ -3,28 +3,28 @@
     %tr
       {{#headers}}
       {{#cross_property}}
-      %th {{cross_property}}
+      %th {{.}}
       {{/cross_property}}
       {{#cross_value}}
-      %th {{cross_value}}
+      %th {{.}}
       {{/cross_value}}
       {{/headers}}
       {{#header.count}}
-      %th {{header.count}}
+      %th {{.}}
       {{/header.count}}
   %tbody
     {{#rows}}
     %tr{:id => "{{pair_id}}", :class => "search_result", :data => {"property-value" => "{{property_value}}" }}
       {{#pair}}
       {{#cross_property}}
-      %td {{cross_property}}
+      %td {{.}}
       {{/cross_property}}
       {{#cross_value}}
-      %td {{cross_value}}
+      %td {{.}}
       {{/cross_value}}
       {{/pair}}
       {{#count}}
       %td
-        %a{:href => '#', :id=> "lings_cross_{{count.index}}"} {{count.text}} 
+        %a{:href => '#', :id=> "lings_cross_{{index}}"} {{text}} 
       {{/count}}
     {{/rows}}
