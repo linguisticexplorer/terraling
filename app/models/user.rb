@@ -4,7 +4,8 @@ class User < ActiveRecord::Base
 
   ACCESS_LEVELS = [
       ADMIN = "admin",
-      USER  = "user"
+      USER  = "user",
+      NEW_USER  = "new user"
   ]
 
   CSV_ATTRIBUTES = %w[ id name email access_level password ]
@@ -104,6 +105,10 @@ class User < ActiveRecord::Base
 
   def fake_password
 
+  end
+
+  def get_access_levels
+    ACCESS_LEVELS
   end
 
   def as_json(options={})
