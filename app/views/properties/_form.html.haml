@@ -12,10 +12,14 @@
       = f.label :name, :class => "control-label"
       .controls
         = f.text_field :name, :class => "form-control"
-    .col-md-4
+    .col-md-2
       = f.label current_group.category_name, :class => "control-label"
       .controls
         = f.collection_select :category_id, @categories[:depth_0] + @categories[:depth_1], :id, :name, {:prompt => 'Select a ' + current_group.category_name}, {:class => "form-control"}
+    .col-md-2
+      = f.label :creator_id, :class => "control-label"
+      .controls.controls
+        = select :property, :creator_id, current_group.members.collect {|m| [ m.name, m.id ]  }, {} , :class => "form-control"
   .form-group
     .col-md-12
       = f.label :description, :class => "control-label"
