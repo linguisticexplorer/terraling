@@ -3,7 +3,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     email = params[:user].delete(:email)
     build_resource sign_up_params
     resource.email = email
-    resource.access_level = User::USER
+    resource.access_level = User::NEW_USER
 
     if verify_recaptcha(model: resource) && resource.save
       RegistrationsMailer.notify(User.where(email: ENV["HILDA"]).first, resource).deliver
