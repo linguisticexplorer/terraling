@@ -56,7 +56,7 @@ LinguisticExplorer::Application.configure do
   #    :host => 'linguisticexplorer.terraling.com',
   #    :enable_starttls_auto => false
   #}
-  config.action_mailer.default_url_options = { :host => 'test.terraling.com' }
+  config.action_mailer.default_url_options = { :host => 'new.terraling.com' }
   config.action_mailer.smtp_settings = {
     address:              'smtp.gmail.com',
     port:                 587,
