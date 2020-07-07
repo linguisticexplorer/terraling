@@ -1,9 +1,27 @@
-%h1 Group Activity
-%ul{ :style => "list-style: circle"}
-  - @list.each do |item|
-    - if item[:type].eql?(:example)
-      %li= "#{item[:user].name} updated #{link_to('Example', group_example_path(@group,item[:value].id))} at #{item[:value].updated_at.to_formatted_s(:long_ordinal)} ".html_safe
-    - if item[:type].eql?(:property)
-      %li= "#{item[:user].name} updated #{link_to('Property', group_property_path(@group,item[:value].id))} at #{item[:value].updated_at.to_formatted_s(:long_ordinal)} ".html_safe
-    - if item[:type].eql?(:ling)
-      %li= "#{item[:user].name} updated #{link_to('Ling', group_ling_path(@group,item[:value].id))} at #{item[:value].updated_at.to_formatted_s(:long_ordinal)} ".html_safe
+%h1= "Recent Activity for '#{current_group.name}' group"
+- if !@list || @list.empty?
+  .well.well-lg{:style => "width: 100%; padding: 200px 10px 200px 10px; text-align: center;"}
+    %h1
+      ⌛
+    %p
+      No recent activity
+- else
+  %table.show-table.table.table-bordered.table-striped.table-hover
+    %thead
+      %tr
+        %th.col-md-1
+          User
+        %th.col-md-1
+          Resource
+        %th.col-md-1
+          Resource Type
+        %th.col-md-1
+          Time
+          %span.glyphicon.glyphicon-arrow-down
+    %tbody
+      - @list.each do |item|
+        %tr
+          %td= link_to(item[:user].name, item[:user])
+          %td= link_to(item[:resource].name, [current_group, item[:resource]])
+          %td= item[:resource].class.name
+          %td= item[:resource].updated_at.to_formatted_s(:long_ordinal) + " " + item[:resource].updated_at.zone
