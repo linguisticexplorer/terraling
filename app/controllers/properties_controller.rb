@@ -139,7 +139,12 @@ class PropertiesController < GroupDataController
     @property = current_group.properties.find(params[:id])
     is_authorized? :update, @property
 
-    if @property.update_attributes(params[:property])
+    creator_id = @property.creator_id
+    if params[:property]
+      creator_id = params[:property][:creator_id] || creator_id
+    end
+
+    if @property.update_attribute(:creator_id, creator_id) && @property.update_attributes(params[:property])
       redirect_to([current_group, @property],
                   :notice => (current_group.property_name + ' was successfully updated.'))
     else

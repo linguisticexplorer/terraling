@@ -10,14 +10,19 @@
           %li= msg
   = f.hidden_field :depth
   .form-group
-    .col-md-6
+    .col-md-5
       = label_tag :name, "Name", :class => "control-label"
       .controls
         = f.text_field :name, :class => "form-control"
-    .col-md-4
+    .col-md-3
       = label_tag :iso_code, "ISO Code", :class => "control-label"
       .controls
         = text_field :iso_code, "ISO Code", :placeholder => "Any ISO standard code here", :class => "form-control", :disabled => "disabled"
+    .col-md-2
+      = f.label :creator_id, :class => "control-label"
+      .controls
+      .controls.controls
+        = select :ling, :creator_id, current_group.members.collect {|m| [ m.name, m.id ]  }, {} , :class => "form-control"
   - if @parents && !@parents.empty?
     .form-group
       .col-md-6
