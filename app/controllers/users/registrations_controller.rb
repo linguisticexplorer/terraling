@@ -1,8 +1,10 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   def create
     email = params[:user].delete(:email)
+    website = params[:user].delete(:website)
     build_resource sign_up_params
     resource.email = email
+    resource.website = website
     resource.access_level = User::NEW_USER
 
     if verify_recaptcha(model: resource) && resource.save

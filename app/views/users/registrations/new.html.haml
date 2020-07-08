@@ -11,6 +11,10 @@
     .controls
       = f.text_field :name
   .form-group
+    = f.label "Website (departmental or personal)", :class => "control-label"
+    .controls
+      = f.text_field :website
+  .form-group
     = f.label :password, :class => "control-label"
     .controls
       = f.password_field :password

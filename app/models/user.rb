@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates_presence_of :name, :email, :access_level
+  validates_presence_of :name, :email, :access_level, :website
 
   has_many :memberships, :foreign_key => :member_id, :dependent => :destroy
   has_many :searches, :foreign_key=> :creator_id, :dependent => :destroy
