@@ -1,5 +1,6 @@
-%h1 Users
-%h2 New Users
+#pagination_top.apple_pagination.will-paginate
+  = alphabetical_paginate paginate_params
+
 %table.show-table.table.table-bordered.table-striped.table-hover
   %thead
     %tr
@@ -8,7 +9,7 @@
       %th.col-md-1= "User Type"
       %th.col-md-1= "Remove"
   %tbody
-    - @new_users.each do |o|
+    - @users.each do |o|
       %tr
         %td
           = link_to o.name, o
@@ -18,8 +19,5 @@
           = link_to o, :class => 'btn btn-danger', :rel => "tooltip", :title => "Destroy", :data => { :confirm => "Are you sure you want to remove #{o.name}?"}, :method => :delete do
             = icon 'trash-o'
 
-%h2 Verified Users
-= link_to 'Download CSV list', users_path(format: :csv)
-#pagination_table
-  = render :partial => "index_table", :locals => {:users => @user_array, :paginate_params => @params }
-
+#pagination_top.apple_pagination.will-paginate
+  = alphabetical_paginate paginate_params

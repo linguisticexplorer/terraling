@@ -2,11 +2,16 @@ class Users::UsersController  < ApplicationController
   before_filter :require_admin
 
   def index
-    @user_array = User.all.to_a
+
+    @new_users = User.new_user
+    @old_users = User.not_new_user
+
+    @pagination_options = {db_mode: true, db_field: "name", default_field: "a", numbers: false, :bootstrap3 => true, :js => false}
+    @users, @params = @old_users.alpha_paginate(params[:letter], @pagination_options)
 
     respond_to do |format|
       format.html
-      format.csv { send_data User.select("id,name,email,access_level").order(:id).to_csv }
+      format.csv { send_data User.not_new_user.select("id,name,email,access_level").order(:id).to_csv }
     end
   end
 
