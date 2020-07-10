@@ -1,6 +1,6 @@
 class SearchesController < GroupDataController
 
-  before_filter :check_max_search_notice, :only => [:new, :preview, :index]
+  before_action :check_max_search_notice, :only => [:new, :preview, :index]
   rescue_from Exceptions::ResultSearchError, :with => :rescue_from_result_error
   rescue_from Exceptions::SearchError, :with => :rescue_from_search_error
 
@@ -205,7 +205,7 @@ class SearchesController < GroupDataController
       block.call
     rescue Exception => exception
       flash[:alert] = exception.message
-      redirect_to :back
+      redirect_back fallback_location: root_path
     end
   end
 

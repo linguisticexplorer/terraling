@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   require 'ipaddr'
   require 'redcarpet'
 
-  before_filter :protect
+  before_action :protect
   protect_from_forgery
   helper_method :current_group
 

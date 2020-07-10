@@ -295,9 +295,6 @@ class LingsController < GroupDataController
     # Depth is protected from mass assignment
     depth = params[:ling].delete(:depth)
 
-    Rails.logger.info "\n\n\n" + ling_params.inspect.to_s + "\n\n\n"
-    Rails.logger.info "\n\n\n" + depth.inspect.to_s + "\n\n\n"
-
     @ling = Ling.new(ling_params) do |ling|
       ling.group    = current_group
       ling.creator  = current_user
