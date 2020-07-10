@@ -15,7 +15,7 @@ describe SearchComparisonsController do
 
       expect(@ability).to receive(:can?).with(:create, @sc).and_return true
 
-      get :new, :group_id => @group.id
+      get :new, :params => { :group_id => @group.id }
     end
   end
 
@@ -28,7 +28,7 @@ describe SearchComparisonsController do
 
       expect(@ability).to receive(:can?).with(:create, @sc).and_return true
 
-      get :create, :group_id => @group.id, :search_comparison => {}
+      get :create, :params => { :group_id => @group.id, :search_comparison => {} }
     end
   end
 end
