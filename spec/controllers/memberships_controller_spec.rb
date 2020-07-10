@@ -156,7 +156,7 @@ describe MembershipsController do
 
       it "should set creator to be the currently logged in user" do
         user = FactoryGirl.create(:user)
-        group_admin = FactoryGirl.create(:user, :access_level => 'user', :name => 'admin', :email => 'a@dmin.com')
+        group_admin = FactoryGirl.create(:user, :access_level => 'user', :name => 'admin', :email => 'a@dmin.com', :website => 'example.com')
         Membership.create(:member => group_admin, :group => groups(:inclusive), :level => "admin")
         sign_in group_admin
         post :create, :membership => {'level' => 'member', :member_id => user.id}, :group_id => groups(:inclusive).id

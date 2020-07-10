@@ -100,9 +100,9 @@ module CSVHelper
     @users = [].tap do |models|
       User::ACCESS_LEVELS.each do |al|
         models << FactoryGirl.create(:user, :name => "Bob #{al.capitalize}", :email => "bob#{al}@example.com",
-                          :access_level => al, :password => "password_#{al}")
+                          :access_level => al, :password => "password_#{al}", :website => "example.com")
       end
-      models << FactoryGirl.create(:user, :name => "Bob the expert", :email => "bobexpert@example.com", :access_level => User::USER, :password => "password_expert")
+      models << FactoryGirl.create(:user, :name => "Bob the expert", :email => "bobexpert@example.com", :access_level => User::USER, :password => "password_expert", :website => "example.com")
     end
     @admin = @users.first
     @user = @users.last
