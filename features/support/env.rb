@@ -66,7 +66,7 @@
 	# http://github.com/bmabey/database_cleaner for more info.
 	if defined?(ActiveRecord::Base)
 	  begin
-	    require 'database_cleaner'
+	    require 'database_cleaner/active_record'
 	    DatabaseCleaner.strategy = :truncation
 	  rescue LoadError => ignore_if_database_cleaner_not_present
 	  end
