@@ -315,6 +315,10 @@ class LingsController < GroupDataController
   end
 
   def update
+    if params[:ling].nil?
+      render :action => "edit" and return
+    end
+
     @ling = current_group.lings.find(params[:id])
     @depth = @ling.depth
 
