@@ -33,17 +33,17 @@ describe GroupsController do
         expect(@ability).to receive(:can?).with(:show, @group).and_return true
         allow(@controller).to receive_message_chain(:current_ability).and_return(@ability)
         allow(Group).to receive_message_chain(:find).and_return(@group)
-        get :index, :group_id => @group.id
+        get :index, :params => { :group_id => @group.id }
       end
 
       it "should redirect to show for that group if valid" do
-        get :index, :group_id => groups(:inclusive).id
+        get :index, :params => { :group_id => groups(:inclusive).id }
         expect(response).to redirect_to(group_path(groups(:inclusive)))
         expect(assigns[:group]).to eq(groups(:inclusive))
       end
 
       it "should render index as normal if invalid" do
-        get :index, :group_id => "invalid-id"
+        get :index, :params => { :group_id => "invalid-id" }
         expect(response).not_to redirect_to(groups_path + "/invalid-id")
         expect(assigns[:group]).to be_nil
       end
@@ -57,12 +57,12 @@ describe GroupsController do
       expect(@ability).to receive(:can?).with(:show, @group).and_return true
       allow(@controller).to receive_message_chain(:current_ability).and_return(@ability)
       allow(Group).to receive_message_chain(:find).and_return(@group)
-      get :show, :id => @group.id
+      get :show, :params => { :id => @group.id }
     end
 
     describe "assigns" do
       it "@group should match the requested group id" do
-        get :show, :id => groups(:inclusive).id
+        get :show, :params => { :id => groups(:inclusive).id }
         expect(assigns(:group)).to eq(groups(:inclusive))
       end
     end
@@ -97,12 +97,12 @@ describe GroupsController do
       expect(@ability).to receive(:can?).with(:update, @group).and_return true
       allow(@controller).to receive_message_chain(:current_ability).and_return(@ability)
       allow(Group).to receive_message_chain(:find).and_return(@group)
-      get :edit, :id => @group.id
+      get :edit, :params => { :id => @group.id }
     end
 
     describe "assigns" do
       it "the requested group to @group" do
-        get :edit, :id => groups(:inclusive).id
+        get :edit, :params => { :id => groups(:inclusive).id }
         expect(assigns(:group)).to eq(groups(:inclusive))
       end
     end
@@ -110,7 +110,7 @@ describe GroupsController do
 
   describe "create" do
     def do_create_with_params(params)
-      post :create, :group => params
+      post :create, :params => { :group => params }
     end
 
     it "should authorize :create on group" do
@@ -162,7 +162,7 @@ describe GroupsController do
 
   describe "update" do
     def do_update_on_group_with_params(group, params)
-      put :update, :id => group.id, :group => params
+      put :update, :params => { :id => group.id, :group => params }
     end
 
     it "should authorize :update on the passed group" do
@@ -186,14 +186,16 @@ describe GroupsController do
       end
 
       it "assigns the requested group as @group" do
+        params = {'name' => 'lamegroup'}
         @group = groups(:inclusive)
-        do_update_on_group_with_params(@group, {})
+        do_update_on_group_with_params(@group, params)
         expect(assigns(:group)).to eq(@group)
       end
 
       it "redirects to the group" do
+        params = {'name' => 'lamegroup'}
         @group = groups(:inclusive)
-        do_update_on_group_with_params(@group, {})
+        do_update_on_group_with_params(@group, params)
         expect(response).to redirect_to(group_url(@group))
       end
     end
@@ -218,18 +220,18 @@ describe GroupsController do
       @group = FactoryGirl.create(:group)
       expect(@ability).to receive(:can?).with(:destroy, @group).and_return(true)
       allow(Group).to receive_message_chain(:find).and_return(@group)
-      delete :destroy, :id => @group.id
+      delete :destroy, :params => { :id => @group.id }
     end
 
     it "calls destroy on the requested group" do
       group_id = groups(:inclusive).id
       expect(Group.find(group_id)).not_to be_nil
-      delete :destroy, :id => group_id
+      delete :destroy, :params => { :id => group_id }
       expect(Group.find_by_id(group_id)).to be_nil
     end
 
     it "redirects to the groups list" do
-      delete :destroy, :id => groups(:inclusive).id
+      delete :destroy, :params => { :id => groups(:inclusive).id }
       expect(response).to redirect_to(groups_url)
     end
   end
