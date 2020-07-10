@@ -2,17 +2,6 @@ version: '3.3'
 
 services:
 
-  terraling-dockerized-mysql:
-      image: mysql:5.7
-      restart: always
-      volumes:
-        - ./terraling_backup.sql:/docker-entrypoint-initdb.d/terraling_backup.sql
-      environment:
-        MYSQL_ROOT_PASSWORD: Terraling1!
-        MYSQL_DATABASE: terraling_production
-      expose:
-        - '3306'
-
   terraling-dockerized:
     build: .
     image: terraling/terraling
@@ -21,5 +10,3 @@ services:
       - .:/terraling/
     ports:
       - "4000:3000"
-    depends_on:
-      - terraling-dockerized-mysql
