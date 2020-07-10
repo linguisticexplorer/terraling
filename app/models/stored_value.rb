@@ -8,10 +8,8 @@ class StoredValue < ApplicationRecord
 
   belongs_to :storable, :polymorphic => true
   belongs_to :group
-  # validates_presence_of :key, :value, :storable
-  # validates_existence_of :storable
   validates :key, :presence => true
-  validates :storable, :presence => true, :existence => true
+  validates :storable, :presence => true
   validate :key_is_allowed_for_storable
 
   scope :with_key, -> (name) { where(:key => name) }

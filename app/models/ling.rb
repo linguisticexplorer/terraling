@@ -9,13 +9,9 @@ class Ling < ApplicationRecord
     CSV_ATTRIBUTES
   end
 
-  # validates_presence_of :name, :depth
-  # validates_numericality_of :depth
-  # validates_uniqueness_of :name, :scope => :group_id
-  # validates_existence_of :parent, :allow_nil => true
   validates :name, :presence => true, :uniqueness => { :scope => :group_id }
   validates :depth, :presence => true, :numericality => true
-  validates :parent, :existence => true, :allow_nil => true
+  validates :parent, :presence => true, :allow_nil => true
   
   validate :parent_depth_check
   validate :group_association_match

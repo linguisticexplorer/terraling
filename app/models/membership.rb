@@ -18,12 +18,9 @@ class Membership < ApplicationRecord
 
   include Groupable
 
-  # validates_presence_of :member, :level
-  # validates_existence_of :member
-  validates :member, :presence => true, :existence => true
+  validates :member, :presence => true
   validates :level, :presence => true
   validates :group_id, :presence => true 
-  # validates_uniqueness_of :member_id, :scope => :group_id
   validates :member_id, :uniqueness => {:scope => :group_id }
   validates_inclusion_of :level, :in => ACCESS_LEVELS
   # validates :level, acceptance: { accept: ["admin", "member"] }

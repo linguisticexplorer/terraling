@@ -8,11 +8,8 @@ class Property < ApplicationRecord
     CSV_ATTRIBUTES
   end
 
-  # validates_presence_of :name, :category
-  # validates_uniqueness_of :name, :scope => :group_id
-  # validates_existence_of :category
   validates :name, :presence => true, :uniqueness => { :scope => :group_id }
-  validates :category, :presence => true, :existence => true
+  validates :category, :presence => true
   validate :group_association_match
 
   belongs_to :category
