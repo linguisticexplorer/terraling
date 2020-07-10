@@ -8,7 +8,7 @@ module SearchResults
 
     def initialize(group, params)
       @group  = group
-      @params = (params || {}).symbolize_keys
+      @params = (params.to_h || {}).symbolize_keys
       
       # due a rails 3.2 bug we have to clean multiselect
       # results from blank first-value in array

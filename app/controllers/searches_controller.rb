@@ -55,7 +55,7 @@ class SearchesController < GroupDataController
 
     @search_lings = { "search" => { "lings" => params["search"]["lings"] } }
 
-    is_valid_search?(params[:search]) do
+    is_valid_search?(search_params) do
       # perhaps a switch for non-javascript things here?
       respond_with(@search) do |format|
         format.html
