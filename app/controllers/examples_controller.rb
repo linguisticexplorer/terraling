@@ -94,13 +94,19 @@ class ExamplesController < GroupDataController
   end
 
   def update
+    if params[:example].nil?
+      format.html {render :action => "edit" }
+      format.json {render json: {success: false}}
+      return
+    end
+
     @example = current_group.examples.find(params[:id])
     is_authorized? :update, @example, true
 
     creator_id = @example.creator_id || current_user.id
 
     if params[:example]
-      creator_id = params[:example][:creator_id] || @ling.creator_id
+      creator_id = params[:example][:creator_id] || @ling&.creator_id || creator_id
     end
 
     respond_to do |format|
