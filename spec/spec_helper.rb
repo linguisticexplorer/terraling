@@ -4,6 +4,7 @@
 # Spork.prefork do
   # Simplecov needs to start at the top
   require 'simplecov'
+  require 'rails-controller-testing'
 
   ENV["RAILS_ENV"] ||= 'test'
 
