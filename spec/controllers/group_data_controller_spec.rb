@@ -2,12 +2,12 @@ require 'rails_helper'
 
 class ExtendingController < GroupDataController
   def index
-    render :nothing => true
+    render body: nil
   end
 
   def data_test
     @ling = Ling.find(params[:id])
-    render :nothing => true
+    render body: nil
   end
 end
 
@@ -23,7 +23,7 @@ describe ExtendingController do
   end
 
   it "should preload group on every action by default" do
-    get :index, :group_id => groups(:inclusive).id
+    get :index, :params => { :group_id => groups(:inclusive).id }
     expect(response).to be_success
     expect(assigns(:group)).to eq(groups(:inclusive))
   end
