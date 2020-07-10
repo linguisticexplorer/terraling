@@ -5,7 +5,7 @@ class User < ApplicationRecord
   ACCESS_LEVELS = [
       ADMIN = "admin",
       USER  = "user",
-      NEW_USER  = "new user"
+      NEW_USER  = "new_user"
   ]
 
   CSV_ATTRIBUTES = %w[ id name email access_level password ]
