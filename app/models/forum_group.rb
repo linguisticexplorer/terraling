@@ -1,4 +1,4 @@
-class ForumGroup < ActiveRecord::Base
+class ForumGroup < ApplicationRecord
   
   # Associations
   has_many :forums, :dependent => :destroy

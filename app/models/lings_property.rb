@@ -1,4 +1,4 @@
-class LingsProperty < ActiveRecord::Base
+class LingsProperty < ApplicationRecord
   include Groupable
   include CSVAttributes
 

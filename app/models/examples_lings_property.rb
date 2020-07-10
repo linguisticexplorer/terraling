@@ -1,4 +1,4 @@
-class ExamplesLingsProperty < ActiveRecord::Base
+class ExamplesLingsProperty < ApplicationRecord
   include Groupable
   include CSVAttributes
 

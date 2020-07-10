@@ -1,4 +1,4 @@
-class Example < ActiveRecord::Base
+class Example < ApplicationRecord
   include Groupable
   include CSVAttributes
 

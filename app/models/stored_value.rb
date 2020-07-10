@@ -1,4 +1,4 @@
-class StoredValue < ActiveRecord::Base
+class StoredValue < ApplicationRecord
   include CSVAttributes
   
   CSV_ATTRIBUTES = %w[ id storable_id storable_type key value group_id ]

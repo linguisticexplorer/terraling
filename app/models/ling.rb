@@ -1,4 +1,4 @@
-class Ling < ActiveRecord::Base
+class Ling < ApplicationRecord
   resourcify
   
   include Groupable

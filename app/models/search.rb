@@ -1,4 +1,4 @@
-class Search < ActiveRecord::Base
+class Search < ApplicationRecord
   MAX_SEARCH_LIMIT = 25
 
   # Thresholds
