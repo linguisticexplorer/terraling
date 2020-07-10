@@ -10,8 +10,6 @@ gem "nokogiri", ">= 1.5.6"
 # # Nice CLI progress bar for ruby
 gem "progressbar", "~>0.21.0"
 
-gem "protected_attributes"
-
 # # Database
 gem 'mysql2', '~>0.4.4'
 # # Having problem with new migrations?

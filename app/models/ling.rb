@@ -34,8 +34,6 @@ class Ling < ActiveRecord::Base
   include Concerns::Selects
   include Concerns::Orders
 
-  attr_protected :depth
-
   scope :parent_ids, -> { select("#{self.table_name}.parent_id") }
   scope :with_parent_id, -> (id_or_ids) { where("#{self.table_name}.parent_id IN (:ids)", { ids: id_or_ids }) }
 

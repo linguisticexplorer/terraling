@@ -34,9 +34,6 @@ class User < ActiveRecord::Base
   has_many :topics, :dependent => :destroy
   has_many :posts, :dependent => :destroy
 
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :humanizer_question_id, :humanizer_answer
-
   scope :new_user, -> { where( :access_level => NEW_USER ) }
   scope :not_new_user, -> { where( :access_level => [USER, ADMIN] ) }
 

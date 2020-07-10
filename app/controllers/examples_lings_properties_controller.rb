@@ -31,7 +31,7 @@ class ExamplesLingsPropertiesController < GroupDataController
   end
 
   def create
-    @examples_lings_property = ExamplesLingsProperty.new(params[:examples_lings_property]) do |elp|
+    @examples_lings_property = ExamplesLingsProperty.new(examples_lings_property_params) do |elp|
       elp.group = current_group
       elp.creator = current_user
     end
@@ -60,5 +60,9 @@ class ExamplesLingsPropertiesController < GroupDataController
     @examples_lings_property.destroy
 
     redirect_to(current_group)
+  end
+
+  def examples_lings_property_params
+    params.require(:examples_lings_property).permit(:group_id, :lings_property_id, :example_id)
   end
 end

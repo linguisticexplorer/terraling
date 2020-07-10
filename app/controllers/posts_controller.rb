@@ -13,7 +13,9 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post.user = current_user
+    @post = Post.new(post_params) do |post|
+      post.user = current_user
+    end
 
     if @post.save
       flash[:notice] = "Post was successfully created."
@@ -24,7 +26,7 @@ class PostsController < ApplicationController
   end
 
   def update
-    if @post.update_attributes(params[:post])
+    if @post.update_attributes(post_params)
       flash[:notice] = "Post was successfully updated."
       redirect_to topic_path(@post.topic)
     end
@@ -42,5 +44,9 @@ class PostsController < ApplicationController
         redirect_to forum_path(@post.forum)
       end
     end
+  end
+
+  def post_params
+    params.require(:post).permit(:body)
   end
 end

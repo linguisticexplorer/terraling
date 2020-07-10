@@ -7,8 +7,6 @@ class LingsProperty < ActiveRecord::Base
     CSV_ATTRIBUTES
   end
 
-  attr_accessible :property, :ling, :value, :group, :ling_id, :property_id, :group_id
-
   # validates_presence_of :value, :property, :ling
   # validates_existence_of :ling, :property
   # validates_uniqueness_of :value, :scope => [:ling_id, :property_id]

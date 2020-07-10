@@ -209,4 +209,8 @@ class SearchesController < GroupDataController
     end
   end
 
+  def search_params
+    params.require(:search).permit(:group, :name, :creator)
+  end
+
 end
