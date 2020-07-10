@@ -14,7 +14,7 @@ describe MembershipsController do
 
       expect(Group).to receive(:memberships).and_return @group.memberships
 
-      get :index, :group_id => @group.id
+      get :index, :params => { :group_id => @group.id }
     end
 
     describe "assigns" do
@@ -22,7 +22,7 @@ describe MembershipsController do
         @group = groups(:inclusive)
         membership = FactoryGirl.create(:membership, :group => @group)
 
-        get :index, :group_id => @group.id, :letter => "all"
+        get :index, :params => { :group_id => @group.id, :letter => "all" }
 
         expect(assigns(:memberships)).to include membership
       end
@@ -35,7 +35,7 @@ describe MembershipsController do
         @group = groups(:inclusive)
         membership = FactoryGirl.create(:membership, :group => @group)
 
-        get :show, :id => membership.id, :group_id => @group.id
+        get :show, :params => { :id => membership.id, :group_id => @group.id }
 
         expect(assigns(:membership)).to eq membership
       end
@@ -49,7 +49,7 @@ describe MembershipsController do
       expect(Group).to receive(:lings).and_return @group.lings
       expect(Group).to receive(:memberships).and_return @group.memberships
 
-      get :show, :id => @membership.id, :group_id => @group.id
+      get :show, :params => { :id => @membership.id, :group_id => @group.id }
       expect(assigns(:membership)).to eq @membership
     end
   end
@@ -63,17 +63,17 @@ describe MembershipsController do
 
       allow(Membership).to receive_message_chain(:new).and_return(@membership)
       allow(Group).to receive_message_chain(:find).and_return(@group)
-      get :new, :group_id => @group.id
+      get :new, :params => { :group_id => @group.id }
     end
 
     describe "assigns" do
       it "a new membership to @membership" do
-        get :new, :group_id => groups(:inclusive).id
+        get :new, :params => { :group_id => groups(:inclusive).id }
         expect(assigns(:membership)).to be_new_record
       end
 
       it "all users to @users" do
-        get :new, :group_id => groups(:inclusive).id
+        get :new, :params => { :group_id => groups(:inclusive).id }
         expect(assigns(:users).size).to eq User.count
       end
     end
@@ -90,7 +90,7 @@ describe MembershipsController do
       allow(Membership).to receive_message_chain(:find).and_return @membership
       allow(Group).to receive_message_chain(:find).and_return Group
       allow(Group).to receive_message_chain(:memberships).and_return Membership
-      get :edit, :id => @membership.id, :group_id => @group.id
+      get :edit, :params => { :id => @membership.id, :group_id => @group.id }
     end
 
     it "loads the requested membership through current group" do
@@ -100,7 +100,7 @@ describe MembershipsController do
 
       expect(Group).to receive(:memberships).and_return @group.memberships
 
-      get :edit, :id => @membership.id, :group_id => @group.id
+      get :edit, :params => { :id => @membership.id, :group_id => @group.id }
     end
 
     describe "assigns" do
@@ -108,7 +108,7 @@ describe MembershipsController do
         @group = groups(:inclusive)
         @membership = FactoryGirl.create(:membership, :group => @group)
 
-        get :edit, :id => @membership.id, :group_id => @group.id
+        get :edit, :params => { :id => @membership.id, :group_id => @group.id }
 
         expect(assigns(:membership)).to eq @membership
       end
@@ -117,7 +117,7 @@ describe MembershipsController do
         @group = groups(:inclusive)
         @membership = FactoryGirl.create(:membership, :group => @group)
 
-        get :edit, :id => @membership.id, :group_id => @group.id
+        get :edit, :params => { :id => @membership.id, :group_id => @group.id }
 
         expect(assigns(:users).size).to eq User.count
       end
@@ -135,13 +135,13 @@ describe MembershipsController do
 
       allow(Membership).to receive_message_chain(:new).and_return(@membership)
       allow(Group).to receive_message_chain(:find).and_return(@group)
-      post :create, :membership => {'level' => 'member', :member_id => @user.id}, :group_id => @group.id
+      post :create, :params => { :membership => {'level' => 'member', :member_id => @user.id}, :group_id => @group.id }
     end
 
     describe "with valid params" do
       it "assigns a newly created membership to @membership" do
         expect {
-          post :create, :membership => {'level' => 'member', :member_id => FactoryGirl.create(:user).id}, :group_id => groups(:inclusive).id
+          post :create, :params => { :membership => {'level' => 'member', :member_id => FactoryGirl.create(:user).id}, :group_id => groups(:inclusive).id }
           expect(assigns(:membership)).not_to be_new_record
           expect(assigns(:membership)).to be_valid
           expect(assigns(:membership).level).to eq 'member'
@@ -150,7 +150,7 @@ describe MembershipsController do
       end
 
       it "redirects to the created membership" do
-        post :create, :membership => {'level' => 'member', :member_id => FactoryGirl.create(:user).id}, :group_id => groups(:inclusive).id
+        post :create, :params => { :membership => {'level' => 'member', :member_id => FactoryGirl.create(:user).id}, :group_id => groups(:inclusive).id }
         expect(response).to redirect_to(group_membership_url(assigns(:group), assigns(:membership)))
       end
 
@@ -159,7 +159,7 @@ describe MembershipsController do
         group_admin = FactoryGirl.create(:user, :access_level => 'user', :name => 'admin', :email => 'a@dmin.com', :website => 'example.com')
         Membership.create(:member => group_admin, :group => groups(:inclusive), :level => "admin")
         sign_in group_admin
-        post :create, :membership => {'level' => 'member', :member_id => user.id}, :group_id => groups(:inclusive).id
+        post :create, :params => { :membership => {'level' => 'member', :member_id => user.id}, :group_id => groups(:inclusive).id }
         expect(assigns(:membership).creator).to eq group_admin
       end
 
@@ -167,7 +167,7 @@ describe MembershipsController do
         user = FactoryGirl.create(:user)
         @group = groups(:inclusive)
 
-        post :create, :membership => {'level' => 'member', :member_id => user.id}, :group_id => @group.id
+        post :create, :params => { :membership => {'level' => 'member', :member_id => user.id}, :group_id => @group.id }
 
         expect(assigns(:group)).to eq @group
         expect(assigns(:membership).group).to eq @group
@@ -176,7 +176,7 @@ describe MembershipsController do
 
      describe "with invalid params" do
       def do_invalid_create
-        post :create, :membership => { 'level' => '', :member_id => FactoryGirl.create(:user).id }, :group_id => groups(:inclusive).id
+        post :create, :params => { :membership => { 'level' => '', :member_id => FactoryGirl.create(:user).id }, :group_id => groups(:inclusive).id }
       end
 
       it "does not save a new membership" do
@@ -204,7 +204,7 @@ describe MembershipsController do
 
       allow(Membership).to receive_message_chain(:find).and_return(@membership)
       allow(Group).to receive_message_chain(:find).and_return(@group)
-      put :update, :id => @membership.id, :membership => {'level' => ''}, :group_id => @group.id
+      put :update, :params => { :id => @membership.id, :membership => {'level' => 'admin'}, :group_id => @group.id }
     end
 
     it "loads the requested membership through current group" do
@@ -215,7 +215,7 @@ describe MembershipsController do
 
       expect(@group).to receive(:memberships).and_return @mems
 
-      put :update, :id => @membership.id, :membership => {'level' => ''}, :group_id => @group.id
+      put :update, :params => { :id => @membership.id, :membership => {'level' => 'admin'}, :group_id => @group.id }
 
       expect(assigns(:membership)).to eq @membership
     end
@@ -228,14 +228,14 @@ describe MembershipsController do
         allow(Membership).to receive_message_chain(:find).with(@membership.id.to_s).and_return @membership
         allow(Group).to receive_message_chain(:find).and_return @group
         
-        expect(@membership).to receive(:update_attributes).with({:level => ''}).and_return true
+        expect(@membership).to receive(:update_attributes).with({'level' => ''}).and_return true
 
-        put :update, :id => @membership.id, :membership => {'level' => ''}, :group_id => @group.id
+        put :update, :params => { :id => @membership.id, :membership => {'level' => ''}, :group_id => @group.id }
       end
 
       it "assigns the requested membership as @membership" do
         membership = FactoryGirl.create(:membership, :group => groups(:inclusive))
-        put :update, :id => membership.id, :group_id => groups(:inclusive).id
+        put :update, :params => { :id => membership.id, :membership => {'level' => 'admin'}, :group_id => groups(:inclusive).id }
         expect(assigns(:membership)).to eq membership
       end
 
@@ -243,7 +243,7 @@ describe MembershipsController do
         @group = groups(:inclusive)
         membership = FactoryGirl.create(:membership, :group => @group)
 
-        put :update, :id => membership, :group_id => @group.id
+        put :update, :params => { :id => membership, :membership => {'level' => 'admin'}, :group_id => @group.id }
 
         expect(response).to redirect_to(group_membership_url(@group, membership))
       end
@@ -252,13 +252,13 @@ describe MembershipsController do
     describe "with invalid params" do
       it "assigns the membership as @membership" do
         @membership = FactoryGirl.create(:membership, :group => groups(:inclusive))
-        put :update, :id => @membership, :membership => {'level' => ''}, :group_id => groups(:inclusive).id
+        put :update, :params => { :id => @membership, :membership => {'level' => ''}, :group_id => groups(:inclusive).id }
         expect(assigns(:membership)).to eq @membership
       end
 
       it "re-renders the 'edit' template" do
         @membership = FactoryGirl.create(:membership, :group => groups(:inclusive))
-        put :update, :id => @membership, :membership => {'level' => ''}, :group_id => groups(:inclusive).id
+        put :update, :params => { :id => @membership, :membership => {'level' => ''}, :group_id => groups(:inclusive).id }
         expect(response).to render_template("edit")
       end
     end
@@ -266,7 +266,7 @@ describe MembershipsController do
 
   describe "destroy" do
     def do_destroy_on_membership(membership)
-      delete :destroy, :group_id => membership.group.id, :id => membership.id
+      delete :destroy, :params => { :group_id => membership.group.id, :id => membership.id }
     end
 
     it "should authorize :destroy on the passed membership" do
@@ -286,7 +286,7 @@ describe MembershipsController do
       expect(@group).to receive(:memberships).and_return Membership.where(:group_id => @group)
 
       allow(Group).to receive_message_chain(:find).and_return @group
-      delete :destroy, :group_id => @group.id, :id => @membership.id
+      delete :destroy, :params => { :group_id => @group.id, :id => @membership.id }
     end
 
     it "calls destroy on the requested membership" do
@@ -305,7 +305,7 @@ describe MembershipsController do
       @group = groups(:inclusive)
       @membership = FactoryGirl.create(:membership, :group => @group)
 
-      delete :destroy, :id => @membership.id, :group_id => @group.id
+      delete :destroy, :params => { :id => @membership.id, :group_id => @group.id }
 
       expect(response).to redirect_to(group_memberships_url(@group))
     end
