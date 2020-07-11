@@ -62,8 +62,10 @@ module GroupData
         expect(@importer.user_ids.values.first).to eq User.find_by_name(@users.first.name).id
       end
 
-      it "should import memberships" do
+      it "should import all verified memberships" do
         expect(@current_group.memberships.size).to eq @memberships.size
+
+        @users.reject! { |u| u.access_level == User::NEW_USER }
         @users.each_with_index do |user, i|
           imported_user = User.find_by_name(user.name)
           imported  = @current_group.membership_for(imported_user)

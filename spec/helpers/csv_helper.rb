@@ -99,6 +99,8 @@ module CSVHelper
     # Create users
     @users = [].tap do |models|
       User::ACCESS_LEVELS.each do |al|
+        next if al == User::NEW_USER
+        
         models << FactoryGirl.create(:user, :name => "Bob #{al.capitalize}", :email => "bob#{al}@example.com",
                           :access_level => al, :password => "password_#{al}", :website => "example.com")
       end
