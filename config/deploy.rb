@@ -9,7 +9,7 @@ default_run_options[:pty]   = true
 
 ssh_options[:use_agent] = false
 ssh_options[:auth_methods] = %w(publickey)
-ssh_options[:keys] = %w(tmp/.ssh/terraling-travis.pem)
+ssh_options[:keys] = %w(tmp/.ssh/travis_rsa)
 
 server "ec2-13-59-1-150.us-east-2.compute.amazonaws.com", :app, :web, :primary => true
 set :application  , "terraling"
