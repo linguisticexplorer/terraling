@@ -1,4 +1,4 @@
-class Property < ActiveRecord::Base
+class Property < ApplicationRecord
   
   include Groupable
   include CSVAttributes
@@ -8,11 +8,8 @@ class Property < ActiveRecord::Base
     CSV_ATTRIBUTES
   end
 
-  # validates_presence_of :name, :category
-  # validates_uniqueness_of :name, :scope => :group_id
-  # validates_existence_of :category
   validates :name, :presence => true, :uniqueness => { :scope => :group_id }
-  validates :category, :presence => true, :existence => true
+  validates :category, :presence => true
   validate :group_association_match
 
   belongs_to :category
@@ -24,7 +21,7 @@ class Property < ActiveRecord::Base
   include Concerns::Orders
 
   # override
-  scope :at_depth, lambda { |depth| scoped & Category.at_depth(depth) }
+  scope :at_depth, lambda { |depth| all & Category.at_depth(depth) }
 
   def depth
     category.depth

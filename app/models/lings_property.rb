@@ -1,4 +1,4 @@
-class LingsProperty < ActiveRecord::Base
+class LingsProperty < ApplicationRecord
   include Groupable
   include CSVAttributes
 
@@ -6,12 +6,9 @@ class LingsProperty < ActiveRecord::Base
   def self.csv_attributes
     CSV_ATTRIBUTES
   end
-
-  # validates_presence_of :value, :property, :ling
-  # validates_existence_of :ling, :property
-  # validates_uniqueness_of :value, :scope => [:ling_id, :property_id]
-  validates :ling, :presence => true, :existence => true
-  validates :property, :presence => true, :existence => true
+  
+  validates :ling, :presence => true
+  validates :property, :presence => true
   validates :value, :presence => true, :uniqueness => { :scope => [:ling_id, :property_id] }
   validate :association_depth_match
   validate :group_association_match
@@ -28,21 +25,21 @@ class LingsProperty < ActiveRecord::Base
   include Concerns::Selects
   include Concerns::Wheres
 
-  scope :ling_ids, select("#{self.table_name}.ling_id")
-  scope :prop_ids, select("#{self.table_name}.property_id")
-  scope :property_value, select("#{self.table_name}.property_value")
+  scope :ling_ids, -> { select("#{self.table_name}.ling_id") }
+  scope :prop_ids, -> { select("#{self.table_name}.property_id") }
+  scope :property_value, -> { select("#{self.table_name}.property_value") }
 
-  scope :with_id, lambda { |id_or_ids| where("#{self.table_name}.id" => id_or_ids) }
-  scope :with_ling_id, lambda { |id_or_ids| where("#{self.table_name}.ling_id" => id_or_ids) }
+  scope :with_id, -> (id_or_ids) { where( id: id_or_ids ) }
+  scope :with_ling_id, -> (id_or_ids) { where( ling_id: id_or_ids ) }
 
-  scope :property_relatives, lambda { |prop_id| join(:lings).where("#{self.table_name}.property_id") }
+  scope :property_relatives, -> (prop_id) { join(:lings).where("#{self.table_name}.property_id") }
 
   def self.group_by_statement
     LingsProperty.column_names.map { |c| "lings_properties.#{c}"}.join(", ")
   end
 
   def self.select_ids
-    ids.ling_ids.prop_ids.property_value
+    all_ids.ling_ids.prop_ids.property_value
   end
 
   def ling_name

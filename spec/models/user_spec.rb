@@ -15,10 +15,11 @@ describe User do
   end
 
   describe "createable with combinations" do
-    it "should allow sane looking names and passwords, and require access_level and email after the fact" do
+    it "should allow sane looking names and passwords, and require access_level, website and email after the fact" do
       u = User.new(:name => "FIXME", :password => "password")
       u.email = "FIXME@FiX.com"
       u.access_level = "user"
+      u.website = "example.com"
       u.bypass_humanizer = true
       u.save!
       expect(u).not_to be_new_record

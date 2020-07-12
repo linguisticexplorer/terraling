@@ -35,10 +35,10 @@ production:
   encoding: utf8
   reconnect: false
   database: <%= application %>_production
-  username: <%= user %>
+  username: <%= application %>
   password: <%= Capistrano::CLI.ui.ask("Enter MySQL database password: ") %>
   pool: 5
-  host: localhost
+  host: terraling.czratf1fojpm.us-east-2.rds.amazonaws.com
 
 cucumber:
   <<: *test

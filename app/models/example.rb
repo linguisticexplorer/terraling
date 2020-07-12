@@ -1,4 +1,4 @@
-class Example < ActiveRecord::Base
+class Example < ApplicationRecord
   include Groupable
   include CSVAttributes
 
@@ -12,11 +12,10 @@ class Example < ActiveRecord::Base
   has_many :examples_lings_properties, :dependent => :destroy
   has_many :lings_properties, :through => :examples_lings_properties
 
-  # validates_existence_of :ling, :allow_nil => true
-  validates :ling, :existence => { :allow_nil => true }
+  validates :ling, :presence => true, :allow_nil => true
   validate :group_association_match
 
-  default_scope includes(:stored_values)
+  default_scope { includes(:stored_values) }
   scope :in_group, lambda { |group| where(:group_id => group.id) }
 
   def grouped_name

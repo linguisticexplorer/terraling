@@ -35,7 +35,7 @@
       resourcesDict[currentName] = currentId;
 
       var tplPath = T.controller.toLowerCase() + '/' + T.action.toLowerCase();
-      resourceTemplate = HoganTemplates[tplPath];
+      resourceTemplate = HandlebarsTemplates[tplPath];
 
       // init the typeahead
       setupTypeahead('property', propertyResolver, onItemSelected);
@@ -113,7 +113,7 @@
 
         resourcesDict[prop.name] = ''+prop.id;
 
-        $('#selected-props').append(resourceTemplate.render(prop));
+        $('#selected-props').append(resourceTemplate(prop));
 
         checkButtons(true);
       }
@@ -141,15 +141,14 @@
 
       item.remove();
 
-      checkButtons($('ul#selected-items li').length);
+      checkButtons($('#selected-props li').length);
 
       evt.preventDefault();
     }
 
     function removeProperties() {
-      $('#selected-items li').each( function () {
-          var item = $(this);
-          item.remove();
+      document.querySelectorAll("#selected-props li").forEach(function(prop) {
+          prop.remove();
       });
       // reset the cache
       resourcesDict = {};
@@ -157,7 +156,7 @@
       checkButtons(false);
 
 
-      evt.preventDefault();
+      // evt.preventDefault();
     }
 
 })();

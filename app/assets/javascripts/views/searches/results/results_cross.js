@@ -46,8 +46,8 @@
 
         // load the modal
         if(!modal){
-          modal = HoganTemplates[T.controller.toLowerCase() + '/results/cross_modal'];
-          $('body').append(modal.render({name: T.groups[T.currentGroup].ling0_name + suffix}));
+          modal = HandlebarsTemplates[T.controller.toLowerCase() + '/results/cross_modal'];
+          $('body').append(modal({name: T.groups[T.currentGroup].ling0_name + suffix}));
         }
 
         var table = [];
@@ -80,8 +80,8 @@
         }
         table.push(row);
 
-        var template = HoganTemplates[T.controller.toLowerCase() + '/results/cross_row_results'];
-        var html = template.render({rows: table});
+        var template = HandlebarsTemplates[T.controller.toLowerCase() + '/results/cross_row_results'];
+        var html = template({rows: table});
 
         $('#lings_cross').html(html);
         $('#cross_lings_modal').modal('show');
@@ -254,16 +254,16 @@
       } 
  
     return styler;
-  }
+    }
 
     function preparePopup(json){
       // get the template now
-      var template = HoganTemplates['searches/results/map_popup'];
+      var template = HandlebarsTemplates['searches/results/map_popup'];
       
       var popups = {};
       for( var id in lingsCache){
         var entry = lingsCache[id];
-        popups[id] = template.render({name: entry.name, row1: 'Found in '+entry.count+' rows'});
+        popups[id] = template({name: entry.name, row1: 'Found in '+entry.count+' rows'});
       }
       return popups;
     }

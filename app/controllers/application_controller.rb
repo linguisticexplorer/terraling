@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   require 'ipaddr'
   require 'redcarpet'
 
-  before_filter :protect
+  before_action :protect
   protect_from_forgery
   helper_method :current_group
 
@@ -29,8 +29,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def current_group
-    # Group.first # changed to default to first group
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
+  protected
+
+  def configure_permitted_parameters
+    registration_params = [:email, :password, :password_confirmation, :name, :website]
+
+    if params[:action] == 'create'
+      devise_parameter_sanitizer.permit(:sign_up, keys: registration_params)
+    end
   end
 
   def collection_authorize!(action, collection, *args)
@@ -54,6 +62,10 @@ class ApplicationController < ActionController::Base
 
   def show_error_message(exception)
     redirect_to root_url, :alert => exception.message
+  end
+
+  def default_serializer_options
+    {root: true}
   end
   
 end

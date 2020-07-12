@@ -9,7 +9,7 @@
 //= require leaflet
 //= require d3
 //= require async
-//= require hogan.js
+//= require handlebars
 //= require tinymce-jquery
 //= require_tree ../templates
 //= require_tree .

@@ -1,19 +1,16 @@
-class Post < ActiveRecord::Base
+class Post < ApplicationRecord
   
   # Associations
   belongs_to :forum, :counter_cache => true
   belongs_to :topic, :counter_cache => true, :touch => true 
   belongs_to :user, :class_name => "User", :counter_cache => true
   
-  # Accessors
-  attr_accessible :body
-  
   # Validations
   validates :body, :presence => true
   validates :user, :presence => true
   
   # Default Scope
-  default_scope :order => 'created_at ASC'
+  default_scope { order(created_at: :asc) }
   
   # Scope to display only the last n posts. Used for "Recent Posts" display
   scope :recent, lambda {

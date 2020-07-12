@@ -20,7 +20,7 @@
     // Check current role and toggle panel
     enableRolesPanel();
 
-    resourceTemplate = HoganTemplates[T.controller.toLowerCase() + '/edit'];
+    resourceTemplate = HandlebarsTemplates[T.controller.toLowerCase() + '/edit'];
     mapResourcesRoles();
     
     $('.membership_role').change(enableRolesPanel);
@@ -87,7 +87,7 @@
 
       resourcesDict[ling.name] = ''+ling.id;
 
-      $('#selected-resources').append(resourceTemplate.render(ling));
+      $('#selected-resources').append(resourceTemplate(ling));
     }
 
     updateResourceField();

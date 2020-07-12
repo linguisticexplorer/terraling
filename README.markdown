@@ -1,6 +1,6 @@
-# Terraling
+# Terraling (dev)
 
-https://www.terraling.com
+https://new.terraling.com
 
 Terraling is a Ruby on Rails web application to let you store and browse your linguistic data. It has extensive search features including the following:
 
@@ -22,11 +22,12 @@ Terraling is a Ruby on Rails web application to let you store and browse your li
 
 * [Similarity Tree Search](https://github.com/linguisticexplorer/terraling/wiki/Similarity-tree)
 
-## Installation
+## Installation (dev branch)
 
 #### Requirements
-* Ruby 2.1.2
+* Ruby 2.6.5
 * MySQL 5.7
+* Docker Desktop
 
 #### Instructions
 
@@ -36,9 +37,14 @@ Terraling is a Ruby on Rails web application to let you store and browse your li
     * `$ cd terraling`
 
 
-* Install the required dependencies
+* Switch to the dev branch
 
-    * `$ bundle install`
+    * `$ git checkout dev`
+
+
+* Pull the docker image
+
+    * `$ docker pull terraling/terraling`
 
 
 * Create your database configuration file
@@ -47,21 +53,9 @@ Terraling is a Ruby on Rails web application to let you store and browse your li
     * `$ vim config/database.yml`
 
 
-* Allow rails to serve static assets (don't commit this change)
+* Run the docker-compose script
 
-    * `$ vim config/environments/production.rb`
-    * Change `config.serve_static_assets = false` to `true`
-
-
-* Disable Cloudflare protections (don't commit this change)
-
-    * `$ vim app/controllers/application_controller.rb`
-    * Comment line 5, `before_filter :protect`
-
-
-* Run the server
-
-    * `$ RAILS_ENV=production bundle exec rails s`
+    * `$ docker-compose up`
 
 
 ## Branch Status

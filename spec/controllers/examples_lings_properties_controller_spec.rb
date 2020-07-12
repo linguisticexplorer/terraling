@@ -10,7 +10,7 @@ describe ExamplesLingsPropertiesController do
   describe "show" do
     describe "assigns" do
       it "@examples_lings_property should match the passed id" do
-        get :show, :id => examples_lings_properties(:inclusive), :group_id => groups(:inclusive).id
+        get :show, :params => { :id => examples_lings_properties(:inclusive), :group_id => groups(:inclusive).id }
         expect(assigns(:examples_lings_property)).to eq(examples_lings_properties(:inclusive))
       end
     end
@@ -22,7 +22,7 @@ describe ExamplesLingsPropertiesController do
 
       expect(Group).to receive(:examples_lings_properties).and_return @group.examples_lings_properties
 
-      get :show, :id => @elp.id, :group_id => @group.id
+      get :show, :params => { :id => @elp.id, :group_id => @group.id }
     end
   end
 
@@ -35,12 +35,12 @@ describe ExamplesLingsPropertiesController do
 
       allow(ExamplesLingsProperty).to receive_message_chain(:new).and_return(@elp)
       allow(Group).to receive_message_chain(:find).and_return(@group)
-      get :new, :group_id => @group.id
+      get :new, :params => { :group_id => @group.id }
     end
 
     describe "assigns" do
       it "a new examples_lings_property to @examples_lings_property" do
-        get :new, :group_id => groups(:inclusive).id
+        get :new, :params => { :group_id => groups(:inclusive).id }
         expect(assigns(:examples_lings_property)).to be_new_record
       end
 
@@ -48,7 +48,7 @@ describe ExamplesLingsPropertiesController do
         @group = groups(:inclusive)
         sign_in_as_group_admin
 
-        get :new, :group_id => groups(:inclusive).id
+        get :new, :params => { :group_id => groups(:inclusive).id }
         expect(assigns(:examples)).to eq(@group.examples)
       end
 
@@ -56,7 +56,7 @@ describe ExamplesLingsPropertiesController do
         @group = groups(:inclusive)
         sign_in_as_group_admin
 
-        get :new, :group_id => groups(:inclusive).id
+        get :new, :params => { :group_id => groups(:inclusive).id }
         expect(assigns(:lings_properties)).to eq(@group.lings_properties.sort_by(&:description))
       end
 
@@ -64,7 +64,7 @@ describe ExamplesLingsPropertiesController do
         @group = groups(:inclusive)
         sign_in_as_group_admin
 
-        get :new, :group_id => groups(:inclusive).id, :ling_id => lings(:level0).id
+        get :new, :params => { :group_id => groups(:inclusive).id, :ling_id => lings(:level0).id }
         expect(assigns(:lings_properties)).to eq(false)
       end
     end
@@ -90,7 +90,7 @@ describe ExamplesLingsPropertiesController do
       allow(ExamplesLingsProperty).to receive_message_chain(:new).and_return(@elp)
       allow(Group).to receive_message_chain(:find).and_return(@group)
 
-      post :create, :examples_lings_property => {'example_id' => @example.id, 'lings_property_id' => @lp.id}, :group_id => @group.id
+      post :create, :params => { :examples_lings_property => {'example_id' => @example.id, 'lings_property_id' => @lp.id}, :group_id => @group.id }
     end
 
     describe "with valid params" do
@@ -99,7 +99,7 @@ describe ExamplesLingsPropertiesController do
           example = examples(:inclusive)
           lings_property = lings_properties(:inclusive)
 
-          post :create, :examples_lings_property => {'example_id' => example.id, 'lings_property_id' => lings_property.id.to_i}, :group_id => groups(:inclusive).id
+          post :create, :params => { :examples_lings_property => {'example_id' => example.id, 'lings_property_id' => lings_property.id.to_i}, :group_id => groups(:inclusive).id }
 
           expect(assigns(:examples_lings_property)).not_to be_new_record
           expect(assigns(:examples_lings_property)).to be_valid
@@ -112,7 +112,7 @@ describe ExamplesLingsPropertiesController do
         example = examples(:inclusive)
         lings_property = lings_properties(:inclusive)
 
-        post :create, :examples_lings_property => {'example_id' => example.id, 'lings_property_id' => lings_property.id}, :group_id => groups(:inclusive).id
+        post :create, :params => { :examples_lings_property => {'example_id' => example.id, 'lings_property_id' => lings_property.id}, :group_id => groups(:inclusive).id }
 
         expect(response).to redirect_to(group_examples_lings_property_url(assigns(:group), assigns(:examples_lings_property)))
       end
@@ -121,7 +121,7 @@ describe ExamplesLingsPropertiesController do
         example = examples(:inclusive)
         lings_property = lings_properties(:inclusive)
 
-        post :create, :examples_lings_property => {'example_id' => example.id, 'lings_property_id' => lings_property.id}, :group_id => groups(:inclusive).id
+        post :create, :params => { :examples_lings_property => {'example_id' => example.id, 'lings_property_id' => lings_property.id}, :group_id => groups(:inclusive).id }
 
         expect(assigns(:examples_lings_property).creator).to eq(@user)
       end
@@ -131,7 +131,7 @@ describe ExamplesLingsPropertiesController do
         @lp = lings_properties(:level0)
         @example = FactoryGirl.create(:example, :ling => @lp.ling, :group => @group)
 
-        post :create, :examples_lings_property => {'example_id' => @example.id, 'lings_property_id' => @lp.id}, :group_id => @group.id
+        post :create, :params => { :examples_lings_property => {'example_id' => @example.id, 'lings_property_id' => @lp.id}, :group_id => @group.id }
 
         expect(assigns(:group)).to eq(@group)
         expect(assigns(:examples_lings_property).group).to eq(@group)
@@ -141,13 +141,13 @@ describe ExamplesLingsPropertiesController do
     describe "with invalid params" do
       it "does not save a new property" do
         expect {
-          post :create, :examples_lings_property => {:example_id => nil}, :group_id => groups(:inclusive).id
+          post :create, :params => { :examples_lings_property => {:example_id => nil}, :group_id => groups(:inclusive).id }
           expect(assigns(:examples_lings_property)).not_to be_valid
         }.to change(ExamplesLingsProperty, :count).by(0)
       end
 
       it "re-renders the 'new' template" do
-        post :create, :examples_lings_property => {:example_id => nil}, :group_id => groups(:inclusive).id
+        post :create, :params => { :examples_lings_property => {:example_id => nil}, :group_id => groups(:inclusive).id }
         expect(response).to be_success
         expect(response).to render_template("new")
       end
@@ -157,7 +157,7 @@ describe ExamplesLingsPropertiesController do
         @group = @example.group
         @other_example = examples(:exclusive)
 
-        post :create, :examples_lings_property => {:example_id => nil}, :group_id => @group.id
+        post :create, :params => { :examples_lings_property => {:example_id => nil}, :group_id => @group.id }
 
         expect(assigns(:examples)).to include @example
         expect(assigns(:examples)).not_to include @other_example
@@ -168,7 +168,7 @@ describe ExamplesLingsPropertiesController do
         @group = @lings_property.group
         @other_lings_property = lings_properties(:exclusive)
 
-        post :create, :examples_lings_property => {:example_id => nil}, :group_id => @group.id
+        post :create, :params => { :examples_lings_property => {:example_id => nil}, :group_id => @group.id }
 
         expect(assigns(:lings_properties)).to include @lings_property
         expect(assigns(:lings_properties)).not_to include @other_lings_property
@@ -178,7 +178,7 @@ describe ExamplesLingsPropertiesController do
 
   describe "destroy" do
     def do_destroy_on_examples_lings_property(elp)
-      delete :destroy, :group_id => elp.group.id, :id => elp.id
+      delete :destroy, :params => { :group_id => elp.group.id, :id => elp.id }
     end
 
     before do
@@ -213,7 +213,7 @@ describe ExamplesLingsPropertiesController do
     
     ## TODO: Redirect to the ling page once done
     it "redirects to the examples_lings_properties list" do
-      delete :destroy, :id => examples_lings_properties(:inclusive), :group_id => groups(:inclusive).id
+      delete :destroy, :params => { :id => examples_lings_properties(:inclusive), :group_id => groups(:inclusive).id }
       expect(response).to redirect_to(assigns(:group))
     end
   end

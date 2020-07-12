@@ -20,6 +20,7 @@ module LinguisticExplorer
 
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
+    config.enable_dependency_loading = true
     config.autoload_paths << Rails.root.join('lib')
 
     # Only load the plugins named here, in the order given (default is alphabetical).
@@ -71,9 +72,10 @@ module LinguisticExplorer
       s.in_preview          = false
     end
 
-    HoganAssets::Config.configure do |config|
+    HandlebarsAssets::Config.configure do |config|
+        config.haml_enabled = true
         # Set the extension for templates (for compiling)
-        config.hamstache_extensions = %w(hamstache)
+        config.hamlbars_extensions = %w(hamstache)
         # remove the common prefix from the HoganTemplate bucket
         config.path_prefix = 'templates'
     end

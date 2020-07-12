@@ -3,7 +3,7 @@ class ExamplesController < GroupDataController
   respond_to :html, :js
 
   def index
-    @examples = current_group.examples.includes(:group, :ling).paginate(:page => params[:page], :order => "name")
+    @examples = current_group.examples.includes(:group, :ling).order("name").page(params[:page])
 
     respond_with(@examples) do |format|
       format.html
@@ -41,18 +41,18 @@ class ExamplesController < GroupDataController
     @example = current_group.examples.find(params[:id])
     @ling = params[:ling_id] ? current_group.lings.find(params[:ling_id]) : @example.ling 
 
-    prop_id = params[:prop_id] ||  @example.examples_lings_properties.first.lings_property.property_id
-    lp_id = params[:lp_id] || @example.examples_lings_properties.first.lings_property_id
+    prop_id = params[:prop_id] ||  (@example.examples_lings_properties.first.lings_property.property_id if @example.examples_lings_properties.first.presence)
+    lp_id = params[:lp_id] || (@example.examples_lings_properties.first.lings_property_id if @example.examples_lings_properties.first.presence)
     
-    @property = current_group.properties.find(prop_id)# if params[:prop_id]
-    @lp = current_group.lings_properties.find(lp_id) #if params[:lp_id]
+    @property = current_group.properties.find(prop_id) if prop_id
+    @lp = current_group.lings_properties.find(lp_id) if lp_id
     @creators = User.all.map { |user| [ user.name.capitalize ,user.id ] }
 
     is_authorized? :update, @example, true
   end
 
   def create
-    @example = Example.new(params[:example]) do |example|
+    @example = Example.new(example_params) do |example|
       example.group = current_group
       example.creator = current_user
     end
@@ -94,18 +94,26 @@ class ExamplesController < GroupDataController
   end
 
   def update
+    if params[:example].nil?
+      format.html {render :action => "edit" }
+      format.json {render json: {success: false}}
+      return
+    end
+
     @example = current_group.examples.find(params[:id])
     is_authorized? :update, @example, true
 
     creator_id = @example.creator_id || current_user.id
 
     if params[:example]
-      creator_id = params[:example][:creator_id] || @ling.creator_id
+      creator_id = params[:example][:creator_id] || @ling&.creator_id || creator_id
     end
 
     respond_to do |format|
-      if @example.update_attribute(:creator_id, creator_id) && @example.update_attributes(params[:example].except(:creator_id))
-        params[:stored_values].each{ |k,v| logger.info("#{k} = #{v}") }
+      if @example.update_attribute(:creator_id, creator_id) && @example.update_attributes(example_params.except(:creator_id))
+	@example.creator_id = creator_id #params['example']['creator_id'] if params['example'] and params['example']['creator_id'
+        @example.save!
+        params[:stored_values].each{ |k,v| logger.info("#{k} = #{v}") } if params[:stored_values]
         params[:stored_values].each{ |k,v| @example.store_value!(k,v) } if params[:stored_values]
         format.html {redirect_to([current_group, @example],
           :notice => (current_group.example_name + ' was successfully updated.'))}
@@ -124,6 +132,10 @@ class ExamplesController < GroupDataController
     @example.destroy
 
     redirect_to(group_examples_url(current_group))
+  end
+
+  def example_params
+    params.require(:example).permit!
   end
 
   private

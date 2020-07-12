@@ -1,11 +1,11 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   include CSVAttributes
   include Humanizer
 
   ACCESS_LEVELS = [
       ADMIN = "admin",
       USER  = "user",
-      NEW_USER  = "new user"
+      NEW_USER  = "new_user"
   ]
 
   CSV_ATTRIBUTES = %w[ id name email access_level password ]
@@ -34,11 +34,8 @@ class User < ActiveRecord::Base
   has_many :topics, :dependent => :destroy
   has_many :posts, :dependent => :destroy
 
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :humanizer_question_id, :humanizer_answer
-
-  scope :new_user, where( :access_level => NEW_USER )
-  scope :not_new_user, where( :access_level => [USER, ADMIN] )
+  scope :new_user, -> { where( :access_level => NEW_USER ) }
+  scope :not_new_user, -> { where( :access_level => [USER, ADMIN] ) }
 
   def admin?
     ADMIN == self.access_level

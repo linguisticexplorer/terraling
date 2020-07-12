@@ -1,4 +1,4 @@
-class Topic < ActiveRecord::Base
+class Topic < ApplicationRecord
   
   # Associations
   has_many :posts, :dependent => :destroy
@@ -7,7 +7,6 @@ class Topic < ActiveRecord::Base
   
   # Accessors
   attr_accessor :body
-  attr_accessible :title, :body, :sticky, :locked
   
   # Validations
   validates :title,   :presence => true
@@ -16,7 +15,7 @@ class Topic < ActiveRecord::Base
   validates :user,    :presence => true
   
   # Scopes
-  default_scope :order => 'sticky DESC, updated_at DESC'
+  default_scope  { order(sticky: :desc, updated_at: :desc) }
   
   # Callbacks
   after_create :create_initial_post

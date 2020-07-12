@@ -1,5 +1,5 @@
 class LingsController < GroupDataController
-  helper :groups
+  # helper :groups
 
   respond_to :html, :js
   
@@ -40,7 +40,7 @@ class LingsController < GroupDataController
 
     is_authorized? :read, @ling
 
-    @values = @ling.lings_properties.order(:property_id).paginate(:page => params[:page])
+    @values = @ling.lings_properties.order(:property_id).page(params[:page])
     @ordered_values = @ling.lings_properties.sort_by {|v| (v.property.nil?) ? "" :  v.property.name }
 
     @values_count = @ling.lings_properties.count(:id)
@@ -48,8 +48,9 @@ class LingsController < GroupDataController
 
     examples = []
     @ordered_values.each do |value|
-      elps = current_group.examples_lings_properties.find_all_by_lings_property_id(value.id)
-      ling_obj = { "property_name" => value.property.name, "examples" => [] }
+      next if value.property.nil?
+      elps = current_group.examples_lings_properties.where(:lings_property_id => value.id).to_a #find_all_by_lings_property_id(value.id)
+      ling_obj = { "property_name" => value.property.nil? ? "" : value.property.name, "examples" => [] }
       if elps.any?
         elps.each do |elp|
           example = Example.find(elp.example.id)
@@ -294,7 +295,7 @@ class LingsController < GroupDataController
     # Depth is protected from mass assignment
     depth = params[:ling].delete(:depth)
 
-    @ling = Ling.new(params[:ling]) do |ling|
+    @ling = Ling.new(ling_params) do |ling|
       ling.group    = current_group
       ling.creator  = current_user
       ling.depth    = depth.to_i
@@ -308,12 +309,16 @@ class LingsController < GroupDataController
       redirect_to([current_group, @ling],
                   :notice => (current_group.ling_name_for_depth(@depth) + ' was successfully created.'))
     else
-      @parents = @depth ? Ling.find_all_by_depth(@depth - 1) : []
+      @parents = @depth ? Ling.where(:depth => (@depth - 1)).to_a : [] #find_all_by_depth(@depth - 1) : []
       render :action => "new"
     end
   end
 
   def update
+    if params[:ling].nil?
+      render :action => "edit" and return
+    end
+
     @ling = current_group.lings.find(params[:id])
     @depth = @ling.depth
 
@@ -324,12 +329,12 @@ class LingsController < GroupDataController
       creator_id = params[:ling][:creator_id] || creator_id
     end
 
-    if @ling.update_attribute(:creator_id, creator_id) && @ling.update_attributes(params[:ling].except(:depth).except(:creator_id))
+    if @ling.update_attribute(:creator_id, creator_id) && @ling.update_attributes(ling_params.except(:depth).except(:creator_id))
       params[:stored_values].each{ |k,v| @ling.store_value!(k,v) } if params[:stored_values]
       redirect_to(group_ling_url(current_group, @ling),
                   :notice => (current_group.ling_name_for_depth(@depth) + ' was successfully updated.') )
     else
-      @parents = @depth ? Ling.find_all_by_depth(@depth - 1) : []
+      @parents = @depth ? Ling.where(:depth => (@depth - 1)).to_a : [] #find_all_by_depth(@depth - 1) : []
       render :action => "edit"
     end
   end
@@ -342,6 +347,10 @@ class LingsController < GroupDataController
     @ling.destroy
 
     redirect_to(group_lings_depth_url(current_group, @depth))
+  end
+
+  def ling_params
+    params.require(:ling).permit(:name, :property, :ling, :value, :group, :ling_id, :property_id, :group_id)
   end
 
   private

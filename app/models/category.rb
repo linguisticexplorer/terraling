@@ -1,4 +1,4 @@
-class Category < ActiveRecord::Base
+class Category < ApplicationRecord
   include Groupable
   include CSVAttributes
 
@@ -13,8 +13,6 @@ class Category < ActiveRecord::Base
   validates :name, :presence => true, :uniqueness => {:scope => :group_id}
   validates :depth, :presence => true, :numericality => true
   validate :depth_for_group
-
-  # attr_protected :depth
 
   has_many :properties, :dependent => :destroy
 

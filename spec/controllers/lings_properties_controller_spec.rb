@@ -10,7 +10,7 @@ describe LingsPropertiesController do
   describe "show" do
     describe "assigns" do
       it "@lings_property should match the passed id" do
-        get :show, :id => lings_properties(:smelly), :group_id => groups(:inclusive).id
+        get :show, :params => { :id => lings_properties(:smelly), :group_id => groups(:inclusive).id }
         expect(assigns(:lings_property)).to eq lings_properties(:smelly)
       end
     end
@@ -22,13 +22,13 @@ describe LingsPropertiesController do
 
       expect(Group).to receive(:lings_properties).and_return @group.lings_properties
 
-      get :show, :id => @lp.id, :group_id => @group.id
+      get :show, :params => { :id => @lp.id, :group_id => @group.id }
     end
   end
 
   describe "destroy" do
     def do_destroy_on_lings_property(lp)
-      delete :destroy, :group_id => lp.group.id, :id => lp.id
+      delete :destroy, :params => { :group_id => lp.group.id, :id => lp.id }
     end
 
     before do
@@ -64,7 +64,7 @@ describe LingsPropertiesController do
     # TODO: change this to go back to the ling page once destroyed
     it "redirects to the group home page" do
       @group = groups(:inclusive)
-      delete :destroy, :id => lings_properties(:inclusive), :group_id => @group.id
+      delete :destroy, :params => { :id => lings_properties(:inclusive), :group_id => @group.id }
       expect(response).to redirect_to(@group)
     end
   end

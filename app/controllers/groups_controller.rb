@@ -18,9 +18,9 @@ class GroupsController < ApplicationController
     end
 
     @groups = if user_signed_in?
-      Group.accessible_by(current_ability).uniq.paginate(:page => params[:page], :order => "name")
+      Group.order("name").page(params[:page]).accessible_by(current_ability).uniq
     else
-      Group.public.paginate(:page => params[:page], :order => "name")
+      Group.order("name").page(params[:page]).is_public
     end
   end
 
@@ -28,11 +28,11 @@ class GroupsController < ApplicationController
     @groups = if user_signed_in?
       Group.accessible_by(current_ability).uniq
     else
-      Group.public
+      Group.is_public
     end
     # Check for each group when the last change on lings has been done,
     # and attach to it
-    render :json => @groups.to_json(:except => [:created_at, :updated_at, :display_style]).html_safe
+    render :json => @groups.to_json(:except => [:created_at, :updated_at, :display_style], :root => true).html_safe
   end
 
   def show
@@ -51,7 +51,7 @@ class GroupsController < ApplicationController
   end
 
   def create
-    @group = Group.new(params[:group])
+    @group = Group.new(group_params)
     is_authorized? :create, @group
 
     if @group.save
@@ -62,10 +62,14 @@ class GroupsController < ApplicationController
   end
 
   def update
+    if params[:group].nil?
+      render :action => "edit" and return
+    end
+
     @group = Group.find(params[:id])
     is_authorized? :update, @group
 
-    if @group.update_attributes(params[:group])
+    if @group.update_attributes(group_params)
       redirect_to(@group, :notice => 'Group was successfully updated.')
     else
       render :action => "edit"
@@ -82,12 +86,11 @@ class GroupsController < ApplicationController
 
   def user
     @groups = if user_signed_in?
-      Group.accessible_by(current_ability).uniq.paginate(:page => params[:page], :order => "name")
+      Group.accessible_by(current_ability).uniq.order("name").page(params[:page])
     else
-      Group.public.paginate(:page => params[:page], :order => "name")
+      Group.is_public.order("name").page(params[:page])
     end
   end
-
 
   def activity
     @group = Group.find(params[:id])
@@ -108,5 +111,9 @@ class GroupsController < ApplicationController
   def current_group
     #params[:group_id] && Group.find(params[:group_id]) || @group
     @group
+  end
+
+  def group_params
+    params.require(:group).permit(:name, :group, :examples_lings_properties, :ling0_name, :ling1_name, :depth_maximum, :privacy)
   end
 end

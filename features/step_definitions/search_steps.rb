@@ -100,7 +100,7 @@ Then /^I should see the following search results\:$/ do |table|
     elsif ling && prop
       LingsProperty.find_by_ling_id_and_property_id(ling.id, prop.id)
     elsif ling
-      LingsProperty.find_all_by_ling_id(ling.id)
+      LingsProperty.where(:ling_id => (ling.id)).to_a #find_all_by_ling_id(ling.id)
     elsif prop
       LingsProperty.find_by_property_id(prop.id)
     end

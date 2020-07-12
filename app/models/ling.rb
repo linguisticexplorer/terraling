@@ -1,4 +1,4 @@
-class Ling < ActiveRecord::Base
+class Ling < ApplicationRecord
   resourcify
   
   include Groupable
@@ -9,13 +9,9 @@ class Ling < ActiveRecord::Base
     CSV_ATTRIBUTES
   end
 
-  # validates_presence_of :name, :depth
-  # validates_numericality_of :depth
-  # validates_uniqueness_of :name, :scope => :group_id
-  # validates_existence_of :parent, :allow_nil => true
   validates :name, :presence => true, :uniqueness => { :scope => :group_id }
   validates :depth, :presence => true, :numericality => true
-  validates :parent, :existence => true, :allow_nil => true
+  validates :parent, :presence => true, :allow_nil => true
   
   validate :parent_depth_check
   validate :group_association_match
@@ -34,10 +30,8 @@ class Ling < ActiveRecord::Base
   include Concerns::Selects
   include Concerns::Orders
 
-  attr_protected :depth
-
-  scope :parent_ids, select("#{self.table_name}.parent_id")
-  scope :with_parent_id, lambda { |id_or_ids| where("#{self.table_name}.parent_id" => id_or_ids) }
+  scope :parent_ids, -> { select("#{self.table_name}.parent_id") }
+  scope :with_parent_id, -> (id_or_ids) { where("#{self.table_name}.parent_id IN (:ids)", { ids: id_or_ids }) }
 
   attr_reader :info
 

@@ -51,7 +51,7 @@
       resourcesDict[currentName] = currentId;
 
       var tplPath = T.controller.toLowerCase() + '/' + T.action.toLowerCase();
-      resourceTemplate = HoganTemplates[tplPath];
+      resourceTemplate = HandlebarsTemplates[tplPath];
 
       // bind some buttons here
       bindAnalysis('#compare-lings', 'compare');
@@ -158,9 +158,8 @@
     }
 
     function removeLanguages() {
-      $('#selected-lings li').each( function () {
-          var item = $(this);
-          item.remove();
+      document.querySelectorAll("#selected-lings li").forEach(function(ling) {
+          ling.remove();
       });
       // reset the cache
       resourcesDict = {};
@@ -168,7 +167,7 @@
       checkButtons(false);
 
 
-      evt.preventDefault();
+      // evt.preventDefault();
     }
 
     function setupTypeahead(){
@@ -190,7 +189,7 @@
 
         resourcesDict[ling.name] = ''+ling.id;
 
-        $('#selected-lings').append(resourceTemplate.render(ling));
+        $('#selected-lings').append(resourceTemplate(ling));
 
         checkButtons(true);
       }

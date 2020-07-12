@@ -12,7 +12,7 @@ class ForumsController < ApplicationController
   end
 
   def update
-    if @forum.update_attributes(params[:forum])
+    if @forum.update_attributes(forum_params)
       flash[:notice] = "Forum was updated successfully."
       redirect_to forum_url(@forum)
     end
@@ -23,5 +23,9 @@ class ForumsController < ApplicationController
       flash[:notice] = "Forum was deleted."
       redirect_to forums_url
     end
+  end
+
+  def forum_params
+    params.require(:forum).permit(:title, :description, :state, :position, :forum_group_id)
   end
 end

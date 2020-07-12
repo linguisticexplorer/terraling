@@ -10,7 +10,7 @@ class SearchJSON
     {
       :type    => get_search_type(),
       :header  => build_results_header,
-      :rows    => @search.results(false),
+      :rows    => @search.results(false).as_json(root: true),
       :success => true,
       :rows_per_page => ActiveRecord::Base.per_page
     }.to_json.html_safe

@@ -1,4 +1,4 @@
-class Search < ActiveRecord::Base
+class Search < ApplicationRecord
   MAX_SEARCH_LIMIT = 25
 
   # Thresholds
@@ -16,17 +16,17 @@ class Search < ActiveRecord::Base
   validate :creator_not_over_search_limit
 
   serialize :query, JSON
-  serialize :result_groups, JSON
+  serialize :result_groups
 
   json_accessor :query, :result_groups
 
-  scope :by, lambda { |creator| where( :creator_id => creator.id ) }
+  scope :by, -> (creator) { where( creator_id: creator.id ) }
 
   attr_accessor :parent_ids, :child_ids, :offset
 
   class << self
     def reached_max_limit?(creator, group)
-      scoped.by(creator).in_group(group).count >= MAX_SEARCH_LIMIT
+      all.by(creator).in_group(group).count >= MAX_SEARCH_LIMIT
     end
   end
 

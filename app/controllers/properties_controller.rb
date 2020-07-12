@@ -4,7 +4,7 @@ class PropertiesController < GroupDataController
 
   def index
     # Added Eager Loading
-    @properties = current_group.properties.includes(:category).paginate(:page => params[:page], :order =>"name")
+    @properties = current_group.properties.includes(:category).order("name").page(params[:page])
     @properties.map { |prop| prop.get_infos } unless params[:plain]
     
     @hasCategories = current_group.categories.count > 0
@@ -81,6 +81,7 @@ class PropertiesController < GroupDataController
       p.group = current_group
       p.creator = current_user
     end
+    
     is_authorized? :create, @property
 
     @categories = get_categories
@@ -120,7 +121,7 @@ class PropertiesController < GroupDataController
   end
 
   def create
-    @property = Property.new(params[:property]) do |property|
+    @property = Property.new(property_params) do |property|
       property.group = current_group
       property.creator = current_user
     end
@@ -144,7 +145,7 @@ class PropertiesController < GroupDataController
       creator_id = params[:property][:creator_id] || creator_id
     end
 
-    if @property.update_attribute(:creator_id, creator_id) && @property.update_attributes(params[:property])
+    if @property.update_attribute(:creator_id, creator_id) && @property.update_attributes(property_params)
       redirect_to([current_group, @property],
                   :notice => (current_group.property_name + ' was successfully updated.'))
     else
@@ -160,6 +161,10 @@ class PropertiesController < GroupDataController
     @property.destroy
 
     redirect_to(group_properties_url(current_group))
+  end
+
+  def property_params
+    params.require(:property).permit(:name, :category_id, :description, :group_id)
   end
 
   private
