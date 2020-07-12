@@ -14,8 +14,6 @@ class Category < ActiveRecord::Base
   validates :depth, :presence => true, :numericality => true
   validate :depth_for_group
 
-  # attr_protected :depth
-
   has_many :properties, :dependent => :destroy
 
   include Concerns::Wheres

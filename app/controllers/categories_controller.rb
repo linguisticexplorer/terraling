@@ -49,7 +49,7 @@ class CategoriesController < GroupDataController
   def create
     @depth = params[:category].delete(:depth).to_i
 
-    @category = Category.new(params[:category]) do |category|
+    @category = Category.new(category_params) do |category|
       category.group = current_group
       category.creator = current_user
       category.depth = @depth
@@ -71,7 +71,7 @@ class CategoriesController < GroupDataController
 
     params[:category][:depth] = params[:category][:depth].to_i
 
-    if @category.update_attributes(params[:category])
+    if @category.update_attributes(category_params)
       redirect_to([current_group, @category],
                   :notice => (current_group.category_name + ' was successfully updated.'))
     else
@@ -86,5 +86,9 @@ class CategoriesController < GroupDataController
     @category.destroy
 
     redirect_to(group_categories_url(current_group))
+  end
+  
+  def category_params
+    params.require(:category).permit!
   end
 end

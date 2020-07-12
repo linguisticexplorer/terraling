@@ -52,7 +52,7 @@ class ExamplesController < GroupDataController
   end
 
   def create
-    @example = Example.new(params[:example]) do |example|
+    @example = Example.new(example_params) do |example|
       example.group = current_group
       example.creator = current_user
     end
@@ -104,7 +104,7 @@ class ExamplesController < GroupDataController
     end
 
     respond_to do |format|
-      if @example.update_attribute(:creator_id, creator_id) && @example.update_attributes(params[:example].except(:creator_id))
+      if @example.update_attribute(:creator_id, creator_id) && @example.update_attributes(example_params.except(:creator_id))
 	@example.creator_id = creator_id #params['example']['creator_id'] if params['example'] and params['example']['creator_id'
         @example.save!
         params[:stored_values].each{ |k,v| logger.info("#{k} = #{v}") } if params[:stored_values]
@@ -126,6 +126,10 @@ class ExamplesController < GroupDataController
     @example.destroy
 
     redirect_to(group_examples_url(current_group))
+  end
+
+  def example_params
+    params.require(:example).permit!
   end
 
   private

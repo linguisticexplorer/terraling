@@ -55,7 +55,7 @@ class SearchesController < GroupDataController
 
     @search_lings = { "search" => { "lings" => params["search"]["lings"] } }
 
-    is_valid_search?(params[:search]) do
+    is_valid_search?(search_params) do
       # perhaps a switch for non-javascript things here?
       respond_with(@search) do |format|
         format.html
@@ -207,6 +207,10 @@ class SearchesController < GroupDataController
       flash[:alert] = exception.message
       redirect_to :back
     end
+  end
+
+  def search_params
+    params.require(:search).permit(:group, :name, :creator)
   end
 
 end

@@ -295,7 +295,10 @@ class LingsController < GroupDataController
     # Depth is protected from mass assignment
     depth = params[:ling].delete(:depth)
 
-    @ling = Ling.new(params[:ling]) do |ling|
+    Rails.logger.info "\n\n\n" + ling_params.inspect.to_s + "\n\n\n"
+    Rails.logger.info "\n\n\n" + depth.inspect.to_s + "\n\n\n"
+
+    @ling = Ling.new(ling_params) do |ling|
       ling.group    = current_group
       ling.creator  = current_user
       ling.depth    = depth.to_i
@@ -325,7 +328,7 @@ class LingsController < GroupDataController
       creator_id = params[:ling][:creator_id] || creator_id
     end
 
-    if @ling.update_attribute(:creator_id, creator_id) && @ling.update_attributes(params[:ling].except(:depth).except(:creator_id))
+    if @ling.update_attribute(:creator_id, creator_id) && @ling.update_attributes(ling_params.except(:depth).except(:creator_id))
       params[:stored_values].each{ |k,v| @ling.store_value!(k,v) } if params[:stored_values]
       redirect_to(group_ling_url(current_group, @ling),
                   :notice => (current_group.ling_name_for_depth(@depth) + ' was successfully updated.') )
@@ -343,6 +346,10 @@ class LingsController < GroupDataController
     @ling.destroy
 
     redirect_to(group_lings_depth_url(current_group, @depth))
+  end
+
+  def ling_params
+    params.require(:ling).permit(:name, :property, :ling, :value, :group, :ling_id, :property_id, :group_id)
   end
 
   private

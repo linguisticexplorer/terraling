@@ -12,8 +12,6 @@ class Search < ActiveRecord::Base
   include SearchResults
   include JsonAccessible
 
-  attr_accessible :group, :name
-
   validates_presence_of :creator, :name
   validate :creator_not_over_search_limit
 

@@ -8,6 +8,7 @@ class TopicsController < ApplicationController
   end
 
   def create
+    @topic = Topic.new(topic_params)
     @topic.user = current_user
 
     if @topic.save
@@ -19,7 +20,7 @@ class TopicsController < ApplicationController
   end
 
   def update
-    if @topic.update_attributes(params[:topic])
+    if @topic.update_attributes(topic_params)
       flash[:notice] = "Topic was updated successfully."
       redirect_to topic_url(@topic)
     end
@@ -30,5 +31,9 @@ class TopicsController < ApplicationController
       flash[:notice] = "Topic was deleted successfully."
       redirect_to forum_url(@topic.forum)
     end
+  end
+
+  def topic_params
+    params.require(:topic).permit(:title, :body, :sticky, :locked)
   end
 end

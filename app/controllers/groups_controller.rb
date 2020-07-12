@@ -51,7 +51,7 @@ class GroupsController < ApplicationController
   end
 
   def create
-    @group = Group.new(params[:group])
+    @group = Group.new(group_params)
     is_authorized? :create, @group
 
     if @group.save
@@ -65,7 +65,7 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
     is_authorized? :update, @group
 
-    if @group.update_attributes(params[:group])
+    if @group.update_attributes(group_params)
       redirect_to(@group, :notice => 'Group was successfully updated.')
     else
       render :action => "edit"
@@ -88,7 +88,6 @@ class GroupsController < ApplicationController
     end
   end
 
-
   def activity
     @group = Group.find(params[:id])
     is_authorized? :manage, @group
@@ -108,5 +107,9 @@ class GroupsController < ApplicationController
   def current_group
     #params[:group_id] && Group.find(params[:group_id]) || @group
     @group
+  end
+
+  def group_params
+    params.require(:group).permit(:name, :group, :examples_lings_properties, :ling0_name, :ling1_name, :depth_maximum, :privacy)
   end
 end
