@@ -11,6 +11,10 @@
     .controls
       = f.text_field :name
   .form-group
+    = f.label "Website (departmental or personal)", :class => "control-label"
+    .controls
+      = f.text_field :website
+  .form-group
     = f.label :password, :class => "control-label"
     .controls
       = f.password_field :password
@@ -19,10 +23,8 @@
     .controls
       = f.password_field :password_confirmation
   .form-group
-    = f.label :humanizer_answer, @user.humanizer_question, :class => "control-label"
     .controls
-      = f.text_field :humanizer_answer, {:autocomplete => "off"}
-      = f.hidden_field :humanizer_question_id
+      = recaptcha_tags
   .form-group
     .controls
       = f.submit "Register", :class => "btn"

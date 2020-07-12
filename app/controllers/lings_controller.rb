@@ -320,7 +320,12 @@ class LingsController < GroupDataController
 
     is_authorized? :update, @ling, true
 
-    if @ling.update_attributes(params[:ling])
+    creator_id = @ling.creator_id
+    if params[:ling]
+      creator_id = params[:ling][:creator_id] || creator_id
+    end
+
+    if @ling.update_attribute(:creator_id, creator_id) && @ling.update_attributes(params[:ling].except(:depth).except(:creator_id))
       params[:stored_values].each{ |k,v| @ling.store_value!(k,v) } if params[:stored_values]
       redirect_to(group_ling_url(current_group, @ling),
                   :notice => (current_group.ling_name_for_depth(@depth) + ' was successfully updated.') )

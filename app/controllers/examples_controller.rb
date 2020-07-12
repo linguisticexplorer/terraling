@@ -97,13 +97,14 @@ class ExamplesController < GroupDataController
     @example = current_group.examples.find(params[:id])
     is_authorized? :update, @example, true
 
-    creator_id = current_user.id
-    if params['example']
-      creator_id = params['example']['creator_id'] if params['example']['creator_id']
+    creator_id = @example.creator_id || current_user.id
+
+    if params[:example]
+      creator_id = params[:example][:creator_id] || @ling.creator_id
     end
+
     respond_to do |format|
-      if @example.update_attributes(params[:example])
-        #@example.update_attributes({:creator_id => current_user.id})
+      if @example.update_attribute(:creator_id, creator_id) && @example.update_attributes(params[:example].except(:creator_id))
 	@example.creator_id = creator_id #params['example']['creator_id'] if params['example'] and params['example']['creator_id'
         @example.save!
         params[:stored_values].each{ |k,v| logger.info("#{k} = #{v}") } if params[:stored_values]

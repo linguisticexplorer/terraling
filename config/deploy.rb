@@ -6,15 +6,10 @@ require "bundler/capistrano"
 
 # require profile scripts
 default_run_options[:pty]   = true
-ssh_options[:forward_agent] = true
 
-# if :aws_deploy
-set :ssh_options, {
-  config: false,
-  # auth_methods: [:private_key],
-  keys: "tmp/.ssh/travis_rsa"
-}
-# end
+ssh_options[:use_agent] = false
+ssh_options[:auth_methods] = %w(publickey)
+ssh_options[:keys] = %w(tmp/.ssh/travis_rsa)
 
 server "ec2-13-59-1-150.us-east-2.compute.amazonaws.com", :app, :web, :primary => true
 set :application  , "terraling"

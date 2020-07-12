@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
 
   def protect
     if ENV["LOCAL_DEV"] or in_cloudflare_range?(request.headers["HTTP_REMOTE_ADDR"])
-     Rails.logger.info "\n\n\n\nValid request\n\n\n\n\n"
+      Rails.logger.info "\n\n\n\nValid request\n\n\n\n\n"
     else
       Rails.logger.info "\n\n\n\nInvalid request - UNAUTHORIZED\n\n\n\n"
       render json: {}, status: 401

@@ -4,7 +4,8 @@ class User < ActiveRecord::Base
 
   ACCESS_LEVELS = [
       ADMIN = "admin",
-      USER  = "user"
+      USER  = "user",
+      NEW_USER  = "new user"
   ]
 
   CSV_ATTRIBUTES = %w[ id name email access_level password ]
@@ -25,7 +26,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates_presence_of :name, :email, :access_level
+  validates_presence_of :name, :email, :access_level, :website
 
   has_many :memberships, :foreign_key => :member_id, :dependent => :destroy
   has_many :searches, :foreign_key=> :creator_id, :dependent => :destroy
@@ -35,6 +36,9 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :humanizer_question_id, :humanizer_answer
+
+  scope :new_user, -> { where( :access_level => NEW_USER ) }
+  scope :not_new_user, -> { where( :access_level => [USER, ADMIN] ) }
 
   def admin?
     ADMIN == self.access_level
@@ -104,6 +108,10 @@ class User < ActiveRecord::Base
 
   def fake_password
 
+  end
+
+  def get_access_levels
+    ACCESS_LEVELS
   end
 
   def as_json(options={})

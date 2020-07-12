@@ -1,14 +1,14 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   def create
     email = params[:user].delete(:email)
+    website = params[:user].delete(:website)
     build_resource sign_up_params
     resource.email = email
-    resource.access_level = User::USER
-    puts email
+    resource.website = website
+    resource.access_level = User::NEW_USER
 
-    result = resource.save
-
-    if result
+    if verify_recaptcha(model: resource) && resource.save
+      RegistrationsMailer.notify(User.where(email: ENV["HILDA"]).first, resource).deliver
       set_flash_message :notice, :signed_up
       sign_in_and_redirect(resource_name, resource)
     else
