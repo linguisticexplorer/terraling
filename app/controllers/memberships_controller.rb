@@ -109,14 +109,17 @@ class MembershipsController < GroupDataController
   end
 
   def update
+    if params[:membership].nil?
+      render :action => "edit" and return
+    end
+
     @membership = current_group.memberships.find(params[:id])
 
     is_authorized? :update, @membership
 
     attributes, roles = get_attributes_and_roles
 
-
-    if @membership.update_attributes attributes
+    if @membership.update_attributes(membership_params)
       # Set the expertise in all the passed resources
       if roles[:role] && roles[:resources].any?
         @membership.set_expertise_in roles[:resources]
@@ -136,6 +139,10 @@ class MembershipsController < GroupDataController
     redirect_to(group_memberships_url(current_group))
   end
 
+  def membership_params
+    params.require(:membership).permit!
+  end
+
   private
 
   def get_attributes_and_roles
@@ -143,7 +150,7 @@ class MembershipsController < GroupDataController
     roles = {}
 
     if params[:membership]
-      m_params = params[:membership] || {}
+      m_params = params.require(:membership).permit! || {}
       selected_role = m_params[:role] || ''
 
       level = m_params[:level] || selected_role
@@ -164,7 +171,7 @@ class MembershipsController < GroupDataController
       }
     else
       # TODO: refactor this horrible code!
-      accessible = Membership.accessible_attributes
+      accessible = Membership.new.attributes
       params.each do |key, value|
         case key
         when :role

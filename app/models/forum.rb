@@ -1,4 +1,4 @@
-class Forum < ActiveRecord::Base
+class Forum < ApplicationRecord
   
   # Associations
   has_many :topics, :dependent => :destroy

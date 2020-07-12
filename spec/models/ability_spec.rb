@@ -112,7 +112,7 @@ describe Ability do
       end
 
       it "should not be able to manage other users" do
-        expect(@logged).not_to be_able_to(:manage, FactoryGirl.create(:user, :name => "otherguy", :email => "other@example.com"))
+        expect(@logged).not_to be_able_to(:manage, FactoryGirl.create(:user, :name => "otherguy", :email => "other@example.com", :website => "example.com"))
       end
 
       # describe "within Forum" do

@@ -47,6 +47,10 @@ class CategoriesController < GroupDataController
   end
 
   def create
+    if params[:category].nil?
+      render :action => "new" and return
+    end
+
     @depth = params[:category].delete(:depth).to_i
 
     @category = Category.new(category_params) do |category|
@@ -65,11 +69,15 @@ class CategoriesController < GroupDataController
   end
 
   def update
+    if params[:category].nil?
+      render :action => "edit" and return
+    end
+
     @category = current_group.categories.find(params[:id])
     
     is_authorized? :update, @category
 
-    params[:category][:depth] = params[:category][:depth].to_i
+    @depth = params.try(:category).try(:depth).nil? ? @category.depth : params[:category][:depth]&.to_i
 
     if @category.update_attributes(category_params)
       redirect_to([current_group, @category],

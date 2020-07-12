@@ -62,6 +62,10 @@ class GroupsController < ApplicationController
   end
 
   def update
+    if params[:group].nil?
+      render :action => "edit" and return
+    end
+
     @group = Group.find(params[:id])
     is_authorized? :update, @group
 

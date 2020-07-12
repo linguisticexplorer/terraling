@@ -4,6 +4,7 @@
 # Spork.prefork do
   # Simplecov needs to start at the top
   require 'simplecov'
+  require 'rails-controller-testing'
 
   ENV["RAILS_ENV"] ||= 'test'
 
@@ -11,12 +12,10 @@
   require File.expand_path("../../config/environment", __FILE__)
   require 'rspec/rails'
   require 'rspec/collection_matchers'
-  require 'database_cleaner'
+  require 'database_cleaner/active_record'
   require 'factory_girl'
   require 'cancan/matchers'
   require 'rspec/active_model/mocks'
-  # Removed
-  # require 'validates_existence/rspec_macros'
 
   # Requires supporting ruby files with custom matchers and macros, etc,
   # in spec/support/ and its subdirectories.
@@ -48,9 +47,6 @@
     
     # This make rspec 3x works as in 2.x where it assumes that class types from locations
     config.infer_spec_type_from_file_location!
-
-    # include validates_existence helpers
-    # config.include(ValidatesExistence::RspecMacros)
 
     # include spec helpers in controllers
     config.include Devise::TestHelpers, :type => :controller

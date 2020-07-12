@@ -20,6 +20,7 @@ module LinguisticExplorer
 
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
+    config.enable_dependency_loading = true
     config.autoload_paths << Rails.root.join('lib')
 
     # Only load the plugins named here, in the order given (default is alphabetical).

@@ -1,4 +1,4 @@
-class StoredValue < ActiveRecord::Base
+class StoredValue < ApplicationRecord
   include CSVAttributes
   
   CSV_ATTRIBUTES = %w[ id storable_id storable_type key value group_id ]
@@ -8,10 +8,8 @@ class StoredValue < ActiveRecord::Base
 
   belongs_to :storable, :polymorphic => true
   belongs_to :group
-  # validates_presence_of :key, :value, :storable
-  # validates_existence_of :storable
   validates :key, :presence => true
-  validates :storable, :presence => true, :existence => true
+  validates :storable, :presence => true
   validate :key_is_allowed_for_storable
 
   scope :with_key, -> (name) { where(:key => name) }

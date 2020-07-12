@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Scaffolding
-gem 'rails', '>= 4.1.16'
+gem 'rails', '5.2.4.3'
 # # Use passenger as the web server
 gem 'passenger', "~>4.0.50"
 # # It forces to use a specific version of Rake
@@ -28,18 +28,14 @@ gem 'cancancan', "~>1.15.0"
 gem 'rolify',    "~>5.1.0"
 gem 'recaptcha', "~>4.9.0"
 
-# # Model validation
-# gem 'validation_reflection', "~> 1.0.0", :git => 'git://github.com/electronicbites/validation_reflection.git'
-gem "validates_existence", "~> 0.9.2"
-
 # # Presentation Related gems
 gem 'json'
 # # Use HAML instead of ERB
-gem 'haml-rails', "~>0.4"
+gem 'haml-rails', "~>2.0.1"
 # # new styles
-gem 'will_paginate-bootstrap', "~>1.0.1"
+gem 'will_paginate-bootstrap', "~>1.0.2"
 # # for easy pagination
-gem 'will_paginate', "~>3.0.7"
+gem 'will_paginate', "~>3.3.0"
 # # experimental
 gem "alphabetical_paginate", :git => "git://github.com/dej611/alphabetical_paginate.git"
 # # iconv for utf-8 to latin1 conversion
@@ -56,7 +52,7 @@ gem 'twitter-typeahead-rails', "~>0.10.5"
 
 # # Js libs
 # # jQuery
-gem 'jquery-rails', "~>3.1.2"
+gem 'jquery-rails', "~>4.4.0"
 # # jQuery UI
 gem 'jquery-ui-rails', "~>5.0.0"
 # # Add Modernizr to dynamically run HTML5 checks and load JS polyfills conditionally
@@ -121,20 +117,21 @@ group :test, :development do
   # Disable for the moment
   # gem "spork-rails"
 
-  gem 'rspec-rails', '~> 3.5.0'
-  gem 'rspec-collection_matchers', '~> 1.1.3'
-  gem 'rspec-activemodel-mocks', '~> 1.0.3'
-  gem 'shoulda-matchers', "~>3.1.1"
+  gem 'rspec-rails', '~> 4.0.0'
+  gem 'rspec-collection_matchers', '~> 1.2.0'
+  gem 'rspec-activemodel-mocks', '~> 1.1.0'
+  gem 'shoulda-matchers', "~>4.3.0"
+  gem 'rails-controller-testing'
   # gem 'rspec_rails3_validation_expectations', '0.0.2', :git => 'https://github.com/bosh/rspec_rails3_validation_expectations.git'
 
   gem "cucumber", "~> 1.1.0"
 
   # Due to the new name resolution approach of the bundler gem it has the require option
   gem 'cucumber-rails', :require => false
-  gem 'capybara', "~>2.7.1"
-  gem 'launchy', "~>2.4.2"
-  gem "database_cleaner", "~> 1.2.0"
-  gem 'factory_girl_rails', "~> 1.1"
+  gem 'capybara', "~>3.33.0"
+  gem 'launchy', "~>2.5.0"
+  gem 'database_cleaner-active_record'
+  gem 'factory_girl_rails', "~> 4.9.0"
 
   # # Query Tracer: useful to debug
   # # Do not activate unless you really need it!
@@ -150,7 +147,7 @@ group :test, :development do
   # gem 'phantomjs', :require => 'phantomjs/poltergeist'
 
   # # Metrics, metrics, metrics...
-  gem 'brakeman', "~>2.6.2"
+  gem 'brakeman', "~>4.8.2"
   gem 'ruby-prof', "~>0.15.1"
   gem 'metric_fu', "~>4.11.1"
   gem 'rails_best_practices', "~>1.15.4"

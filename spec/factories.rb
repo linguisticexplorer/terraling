@@ -12,6 +12,7 @@ FactoryGirl.define do
     f.name             "Bob Jones"
     f.email            "bob@example.com"
     f.access_level     "user"
+    f.website          "example.com"
     f.password         "password"
     f.bypass_humanizer true
   end

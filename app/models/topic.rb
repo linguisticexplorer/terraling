@@ -1,4 +1,4 @@
-class Topic < ActiveRecord::Base
+class Topic < ApplicationRecord
   
   # Associations
   has_many :posts, :dependent => :destroy

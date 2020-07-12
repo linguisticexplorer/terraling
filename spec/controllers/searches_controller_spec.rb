@@ -15,7 +15,7 @@ describe SearchesController do
 
       expect(@ability).to receive(:can?).with(:search, @search).and_return true
 
-      get :new, :group_id => @group.id
+      get :new, :params => { :group_id => @group.id }
     end
   end
 
@@ -27,7 +27,7 @@ describe SearchesController do
 
       expect(@ability).to receive(:can?).with(:search, @search).and_return true
 
-      get :preview, :group_id => @group.id, :search => {}
+      get :preview, :params => { :group_id => @group.id, :search => {:creator => ""} }
     end
   end
 
@@ -39,7 +39,7 @@ describe SearchesController do
 
       expect(@ability).to receive(:can?).with(:create, @search).and_return true
 
-      post :create, :group_id => @group.id, :search => {}
+      post :create, :params => { :group_id => @group.id, :search => {} }
     end
   end
 
@@ -52,7 +52,7 @@ describe SearchesController do
 
       expect(@group).to receive(:searches).and_return @searches
 
-      get :show, :id => @search.id, :group_id => @group.id
+      get :show, :params => { :id => @search.id, :group_id => @group.id }
 
       expect(assigns(:search)).to eq @search
     end
@@ -64,7 +64,7 @@ describe SearchesController do
 
       expect(@ability).to receive(:can?).with(:search, @search).and_return true
 
-      get :show, :group_id => @group.id, :id => @search.id
+      get :show, :params => { :group_id => @group.id, :id => @search.id }
     end
   end
 
@@ -85,7 +85,7 @@ describe SearchesController do
 
         @searches.each{ |s| expect(@ability).to receive(:can?).with(:update, s).and_return true }
 
-        get :index, :group_id => @group.id
+        get :index, :params => { :group_id => @group.id }
       end
 
       it "should load searches through current_group" do
@@ -97,7 +97,7 @@ describe SearchesController do
 
         expect(@group).to receive(:searches).and_return @searches
 
-        get :index, :group_id => @group.id
+        get :index, :params => { :group_id => @group.id }
 
         expect(assigns(:searches)).to include @search
       end
@@ -112,7 +112,7 @@ describe SearchesController do
 
       expect(@ability).to receive(:can?).with(:destroy, @search).and_return true
 
-      delete :destroy, :group_id => @group.id, :id => @search.id
+      delete :destroy, :params => { :group_id => @group.id, :id => @search.id }
     end
 
     it "should load @search through current_group" do
@@ -122,7 +122,7 @@ describe SearchesController do
       expect(@group).to receive(:searches).and_return Search.where(:group_id => @group.id)
 
       allow(Group).to receive_message_chain(:find).and_return @group
-      delete :destroy, :group_id => @group.id, :id => @search.id
+      delete :destroy, :params => { :group_id => @group.id, :id => @search.id }
     end
   end
 end
