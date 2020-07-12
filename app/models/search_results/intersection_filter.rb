@@ -1,7 +1,5 @@
 module SearchResults
 
-  require 'pry'
-
   class IntersectionFilter < Filter
 
     def initialize(filter, query)
