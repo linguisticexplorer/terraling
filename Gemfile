@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 # Scaffolding
 gem 'rails', '5.2.4.3'
 # # Use passenger as the web server
-gem 'passenger', "~>4.0.50"
+gem 'passenger', "~>6.0.5"
 # # It forces to use a specific version of Rake
 gem "rake", "= 11.3.0"
 gem "nokogiri", ">= 1.5.6"
