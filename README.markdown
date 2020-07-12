@@ -63,7 +63,7 @@ Terraling is a Ruby on Rails web application to let you store and browse your li
 
 * First, run the test docker-compose script:
 
-    * `$ docker-compose -f docker-compose.test.yml up`
+    * `$ docker-compose -f docker-compose.rspec.yml up`
 
 
 * Then, enter the running container via:

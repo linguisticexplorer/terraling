@@ -24,4 +24,4 @@ services:
     depends_on:
       - terraling-dockerized-mysql
     entrypoint:
-      - /terraling/docker-entry.test.sh
+      - /terraling/docker-entry.rspec.sh
