@@ -1,6 +1,6 @@
-# Terraling (dev)
+# Terraling
 
-https://new.terraling.com
+https://terraling.com
 
 Terraling is a Ruby on Rails web application to let you store and browse your linguistic data. It has extensive search features including the following:
 
@@ -22,7 +22,7 @@ Terraling is a Ruby on Rails web application to let you store and browse your li
 
 * [Similarity Tree Search](https://github.com/linguisticexplorer/terraling/wiki/Similarity-tree)
 
-## Installation (dev branch)
+## Installation
 
 #### Requirements
 * Ruby 2.6.5
@@ -35,11 +35,6 @@ Terraling is a Ruby on Rails web application to let you store and browse your li
 
     * `$ git clone git://github.com/linguisticexplorer/terraling.git`
     * `$ cd terraling`
-
-
-* Switch to the dev branch
-
-    * `$ git checkout dev`
 
 
 * Pull the docker image
@@ -64,15 +59,22 @@ Terraling is a Ruby on Rails web application to let you store and browse your li
 
 [![Build Status](https://travis-ci.org/linguisticexplorer/terraling.png?branch=sprint)](https://travis-ci.org/linguisticexplorer/terraling)
 
-### Dev
-
-[![Build Status](https://travis-ci.org/linguisticexplorer/terraling.png?branch=dev)](https://travis-ci.org/linguisticexplorer/terraling)
-
 ## Testing the app
 
-To run automated unit testing, use RSpec:
+* First, run the test docker-compose script:
 
-  `$ bundle exec rspec`
+    * `$ docker-compose -f docker-compose.test.yml up`
+
+
+* Then, enter the running container via:
+
+    * `$ docker exec -it $(docker ps -aqf "name=terraling/terraling") /bin/bash`
+
+
+* Run RSpec unit testing
+
+    * `$ bundle exec rspec`
+
   
 ## Contributing
 
@@ -81,4 +83,4 @@ See [Contributing](Contributing.md).
 ## License
 This project is under the MIT License.
 
-Please have a look to the [LICENSE file](LICENSE).
+Please have a look at the [LICENSE file](LICENSE).
