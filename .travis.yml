@@ -1,7 +1,7 @@
 language: ruby
 cache: bundler
 addons:
-  ssh_known_hosts: ec2-13-59-1-150.us-east-2.compute.amazonaws.com
+  ssh_known_hosts: $DEPLOY_HOST
 before_install:
 - gem install bundler
 bundler_args: ""
@@ -16,9 +16,9 @@ branches:
   - dev
 after_success:
 - mkdir -p tmp/.ssh
-- openssl enc -aes-256-cbc -d -in deploy_rsa.enc -out tmp/.ssh/travis_rsa -k $ENC_PASS
+- openssl enc -aes-256-cbc -d -in deploy_rsa.enc -out tmp/.ssh/terraling-travis.pem -k $ENC_PASS
 - chmod 700 tmp/.ssh/
-- chmod 600 tmp/.ssh/travis_rsa
+- chmod 600 tmp/.ssh/terraling-travis.pem
 - eval "$(ssh-agent -s)"
-- ssh-add tmp/.ssh/travis_rsa
+- ssh-add tmp/.ssh/terraling-travis.pem
 - RAILS_ENV=production bundle exec cap deploy
