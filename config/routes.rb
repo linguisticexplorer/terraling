@@ -8,7 +8,7 @@ LinguisticExplorer::Application.routes.draw do
     get     "users" => 'users/users#index'
     get     "users/:id" => 'users/users#show', :as => :user
     get     "users/:id/edit" => 'users/users#edit'
-    put     "users/:id" => 'users/users#update'
+    patch     "users/:id" => 'users/users#update'
     delete  "users/:id" => 'users/users#destroy'
   end
 
