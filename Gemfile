@@ -24,7 +24,7 @@ gem 'mysql2', '~>0.4.4'
 # # for Users and authentication
 gem 'devise',    "~>4.4.0"
 gem 'humanizer', "~>2.6.3"
-gem 'cancancan', "~>1.15.0"
+gem 'cancancan', "~>3.1.0"
 gem 'rolify',    "~>5.1.0"
 gem 'recaptcha', "~>4.9.0"
 
