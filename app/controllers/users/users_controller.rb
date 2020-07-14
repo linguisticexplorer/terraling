@@ -60,7 +60,13 @@ class Users::UsersController  < ApplicationController
 
   def destroy
     User.delete(params[:id]) unless params[:id].eql? current_user.id
-    @user_array = User.all.to_a
+    
+    @new_users = User.new_user
+    @old_users = User.not_new_user
+
+    @pagination_options = {db_mode: true, db_field: "name", default_field: "a", numbers: false, :bootstrap3 => true, :js => false}
+    @users, @params = @old_users.alpha_paginate(params[:letter], @pagination_options)
+
     render :index
   end
 
