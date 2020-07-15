@@ -1,10 +1,6 @@
 LinguisticExplorer::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
-  # Log the query plan for queries taking more than this (works
-  # with SQLite, MySQL, and PostgreSQL)
-  config.active_record.auto_explain_threshold_in_seconds = 0.5
-
   # In the development environment your application's code is reloaded on
   # every request.  This slows down response time but is perfect for development
   # since you don't have to restart the webserver when you make code changes.
@@ -38,6 +34,22 @@ LinguisticExplorer::Application.configure do
 
   # Required setting for running in production
   config.eager_load = false;
+
+  # needed for Devise and Postfix
+  #config.action_mailer.default_url_options = {
+  #    :host => 'linguisticexplorer.terraling.com',
+  #    :enable_starttls_auto => false
+  #}
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    port:                 587,
+    domain:               'terraling.com',
+    user_name:            ENV["SMTP_USER"],
+    password:             ENV["SMTP_PASS"],
+    authentication:       :plain,
+    enable_starttls_auto: true
+  }
+  config.action_mailer.register_template_extension('haml')
 
 end
 

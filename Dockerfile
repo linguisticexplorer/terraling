@@ -8,7 +8,7 @@ WORKDIR /terraling
 ENV RAILS_ENV production
 
 # 1.17.3 is required
-RUN bundle install --without test
+RUN bundle install
 
 RUN apt-get update && apt-get -y install nodejs
 
