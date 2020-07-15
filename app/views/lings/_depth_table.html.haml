@@ -1,7 +1,7 @@
 #pagination_top.apple_pagination.will-paginate
   = alphabetical_paginate paginate_params
 - storable_keys = current_group.ling_storable_keys
-- any_storable_values_available = check_all_lings(storable_keys, lings)
+- any_storable_values_available = @stored_kv.size > 0
 %table.show-table.table.table-bordered.table-striped.table-hover
   %tr
     %th.col-md-3 Name
