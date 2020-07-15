@@ -33,7 +33,7 @@ class Ling < ApplicationRecord
   scope :parent_ids, -> { select("#{self.table_name}.parent_id") }
   scope :with_parent_id, -> (id_or_ids) { where("#{self.table_name}.parent_id IN (:ids)", { ids: id_or_ids }) }
 
-  attr_reader :info
+  attr_accessor :info
 
   def get_infos
     props_in_ling
