@@ -357,21 +357,17 @@ class LingsController < GroupDataController
 
   def load_stats(lings, plain, depth)
     unless plain
-      lings.each do |lings_with_params|
-        # If it is a multilanguage group map each subling
-         if depth > 0
-          lings_with_params.first.map { |ling_at_depth| load_infos(ling_at_depth) }
-         else
-        # otherwise map just the ling
-          load_infos(lings_with_params)
-         end
-      end
+      ling_collection = depth > 0 ? lings.first.first : lings
+      ling_ids = ling_collection.collect{|s| s.id}
+      ling_property_count = LingsProperty.in_group(current_group).where(ling_id: ling_ids).group(:ling_id).count
+      ling_collection.each { |ling| ling.info = ling_property_count[ling.id] }
+      ling_collection.map  { |ling| ling.get_infos }
+
+      @stored_kv = {}
+      stored_kvs = StoredValue.where(storable_type: "Ling").where(storable_id: ling_ids).where(key: current_group.ling_storable_keys)
+      stored_kvs.each {|sv| @stored_kv[sv.storable_id] = {sv.key => sv.value}.merge(@stored_kv[sv.storable_id] || {}) }
     end
     lings
-  end
-
-  def load_infos(ling)
-    ling.get_infos
   end
 
 end
