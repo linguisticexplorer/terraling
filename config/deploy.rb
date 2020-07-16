@@ -24,7 +24,7 @@ set :keep_releases, 3
 set :scm          , :git
 set :scm_verbose  , true
 set :repository   , "git://github.com/linguisticexplorer/terraling.git"
-set :branch       , ENV["BRANCH"]
+set :branch       , ENV["BRANCH"].downcase
 set :copy_exclude , ['.git']
 
 # require "capistrano-multiyaml"
