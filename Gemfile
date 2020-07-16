@@ -148,10 +148,10 @@ group :test, :development do
 
   # # Metrics, metrics, metrics...
   gem 'brakeman', "~>4.8.2"
-  gem 'ruby-prof', "~>0.15.1"
-  gem 'metric_fu', "~>4.11.1"
-  gem 'rails_best_practices', "~>1.15.4"
-  gem 'simplecov', '~> 0.7.1', :require => false
+  gem 'ruby-prof', "~>1.4.1"
+  gem 'metric_fu', "~>4.13.0"
+  gem 'rails_best_practices', "~>1.20.0"
+  gem 'simplecov', '~> 0.18.5', :require => false
 
 end
 
