@@ -18,10 +18,11 @@ class GroupsController < ApplicationController
     end
 
     @groups = if user_signed_in?
-      Group.order("name").page(params[:page]).accessible_by(current_ability).uniq
+      @groups = Group.page(params[:page]).order("name").accessible_by(current_ability).distinct
     else
-      Group.order("name").page(params[:page]).is_public
+      Group.page(params[:page]).order("name").is_public
     end
+
   end
 
   def list
