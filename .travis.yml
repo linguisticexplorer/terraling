@@ -13,12 +13,14 @@ gemfile:
 - Gemfile
 branches:
   only:
-  - sprint
+    - sprint
+    - dev
+    
 after_success:
 - mkdir -p tmp/.ssh
-- openssl enc -aes-256-cbc -d -in deploy_rsa.enc -out tmp/.ssh/terraling-travis.pem -k $ENC_PASS
+- openssl enc -aes-256-cbc -d -in $PRIVATE_KEY_NAME -out tmp/.ssh/travis_rsa -k $ENC_PASS
 - chmod 700 tmp/.ssh/
-- chmod 600 tmp/.ssh/terraling-travis.pem
+- chmod 600 tmp/.ssh/travis_rsa
 - eval "$(ssh-agent -s)"
-- ssh-add tmp/.ssh/terraling-travis.pem
-- RAILS_ENV=production bundle exec cap deploy
+- ssh-add tmp/.ssh/travis_rsa
+- DEPLOY_HOST=$DEPLOY_HOST BRANCH=$BRANCH RAILS_ENV=production bundle exec cap deploy
