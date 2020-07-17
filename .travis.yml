@@ -11,6 +11,11 @@ rvm:
 - 2.6.5
 gemfile:
 - Gemfile
+branches:
+  only:
+    - sprint
+    - dev
+    
 after_success:
 - mkdir -p tmp/.ssh
 - openssl enc -aes-256-cbc -d -in $PRIVATE_KEY_NAME -out tmp/.ssh/travis_rsa -k $ENC_PASS
