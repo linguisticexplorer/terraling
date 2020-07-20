@@ -370,4 +370,8 @@ class LingsController < GroupDataController
     lings
   end
 
+  def load_infos(ling)
+    ling.get_infos
+  end
+
 end
