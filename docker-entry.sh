@@ -5,7 +5,7 @@ export SMTP_PASS=password
 
 export RECAPTCHA_SITE_KEY=6LcYxasZAAAAAL25mMYFfzO-DmDEHjqkFVw0d7_5
 export RECAPTCHA_SECRET_KEY=6LcYxasZAAAAAM3ZSKVicnCsKx4U5D262UzdAUEP
-export NEW_USER_NOTIFY=dev@localhost
+export NEW_USER_NOTIFY=user@example.com
 
 export RAILS_ENV=development
 export LOCAL_DEV=true

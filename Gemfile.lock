@@ -117,7 +117,6 @@ GEM
       nokogiri (>= 1.5.0)
     d3-rails (3.4.13)
       railties (>= 3.1)
-    daemon_controller (1.2.0)
     daemons (1.3.1)
     database_cleaner (1.8.5)
     database_cleaner-active_record (1.8.0)
@@ -249,8 +248,7 @@ GEM
     parallel (1.19.2)
     parser (2.7.1.4)
       ast (~> 2.4.1)
-    passenger (4.0.60)
-      daemon_controller (>= 1.2.0)
+    passenger (6.0.6)
       rack
       rake (>= 0.8.1)
     path_expander (1.1.0)
@@ -465,7 +463,7 @@ DEPENDENCIES
   net-ssh (~> 5.2.0)
   newrelic_rpm (~> 4.0.0)
   nokogiri (>= 1.5.6)
-  passenger (~> 4.0.50)
+  passenger (~> 6.0.6)
   progressbar (~> 0.21.0)
   pry
   pry-byebug
