@@ -19,7 +19,7 @@ module GroupStats
   end
 
   def members_in_group
-    @mem_total ||= self.memberships.where(group_id: id).count
+    @mem_total ||= self.memberships.where(group_id: id).select { |membership| membership.member.present? }.count
   end
 
   def lings_with_property_quota(depth)
