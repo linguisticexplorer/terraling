@@ -6,8 +6,8 @@ class MembershipsController < GroupDataController
     pagination_options = {db_mode: true, db_field: "name", default_field: "a", :bootstrap3 => true, :js => false}
     @memberships, @params = current_group.memberships.
         includes(:member).to_a.
+        select { |membership| membership.member.present? }.
         alpha_paginate(params[:letter], pagination_options) do |membership|
-          # Handle nil (?!) values
           user = membership.member
           user.present? ? user.name : '*'
         end
@@ -23,8 +23,8 @@ class MembershipsController < GroupDataController
 
     @contributors, @params = current_group.memberships.
       includes(:member).with_role(:expert, :any).to_a.
+      select { |membership| membership.member.present? }.
       alpha_paginate(params[:letter], pagination_options) do |membership|
-          # Handle nil (?!) values
           user = membership.member
           user.present? ? user.name : '*'
         end
