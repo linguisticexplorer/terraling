@@ -21,6 +21,9 @@ gem 'mysql2', '~>0.4.4'
 # # Optimizator query
 # #gem 'slim_scrooge'
 
+# # Middleware
+gem 'rack-cors', "~>1.1.1"
+
 # # for Users and authentication
 gem 'devise',    "~>4.4.0"
 gem 'humanizer', "~>2.6.3"
