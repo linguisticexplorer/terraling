@@ -7,7 +7,8 @@ WORKDIR /terraling
 
 ENV RAILS_ENV production
 
-# 1.17.3 is required
+# 2.1.4 is required
+RUN gem install bundler:2.1.4
 RUN bundle install
 
 RUN apt-get update && apt-get -y install nodejs
