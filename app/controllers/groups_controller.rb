@@ -23,6 +23,12 @@ class GroupsController < ApplicationController
       Group.page(params[:page]).order("name").is_public
     end
 
+    respond_with(@groups) do |format|
+      format.html
+      format.json {render @groups.to_json}
+    end
+
+
   end
 
   def list
@@ -39,6 +45,12 @@ class GroupsController < ApplicationController
   def show
     @group = Group.find(params[:id])
     is_authorized? :show, @group
+
+    respond_with(@group) do |format|
+      format.html
+      format.json {render @group.to_json}
+    end
+
   end
 
   def new
