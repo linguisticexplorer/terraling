@@ -25,7 +25,7 @@ class GroupsController < ApplicationController
 
     respond_with(@groups) do |format|
       format.html
-      format.json {render @groups.to_json}
+      format.json {render @groups.to_json(:except => [:created_at, :updated_at, :display_style], :root => true).html_safe}
     end
 
 
@@ -48,7 +48,7 @@ class GroupsController < ApplicationController
 
     respond_with(@group) do |format|
       format.html
-      format.json {render @group.to_json}
+      format.json {render @group.to_json(:except => [:created_at, :updated_at, :display_style], :root => true).html_safe}
     end
 
   end
