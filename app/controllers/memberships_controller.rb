@@ -43,7 +43,17 @@ class MembershipsController < GroupDataController
   end
   
   def list
-    render :json => current_group.memberships.includes(:member).to_json.html_safe
+    memberships = current_group.memberships
+
+    members = []
+
+    memberships.each do |membership|
+      next if membership.member.nil?
+
+      members << membership.member
+    end
+
+    render :json => members.to_json.html_safe
   end
 
   def show
