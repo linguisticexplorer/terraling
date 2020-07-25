@@ -43,7 +43,7 @@ class MembershipsController < GroupDataController
   end
   
   def list
-    memberships = current_group.memberships
+    memberships = current_group.memberships.includes(:member)
 
     members = []
 
