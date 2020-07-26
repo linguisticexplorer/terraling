@@ -75,9 +75,24 @@ class PropertiesController < GroupDataController
       logger.info @output
     end
 
-    respond_with(@values) do |format|
+    lings = []
+    @values.each do |value|
+      ling = {
+        "name" => value.ling.name,
+        "value" => value.value
+      }
+      
+      lings << ling
+    end
+
+    @property_obj = {
+      "name" => @property.name,
+      "lings" => lings
+    }
+
+    respond_to do |format|
       format.html
-      format.js
+      format.any(:json) { send_data(JSON.generate(@property_obj).encode('utf-8'), :type => "application/json; charset=utf-8;") }
     end
     
   end
