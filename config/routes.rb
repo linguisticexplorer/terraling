@@ -25,6 +25,7 @@ LinguisticExplorer::Application.routes.draw do
   get "/groups/:group_id/lings/list" => "lings#by_depth",:as => "group_lings_by_depth"
   get "/groups/:group_id/list" => "lings#list" ,:as => "group_lings_all"
 
+  get "/groups/:group_id/properties/depth/:depth/list" => "properties#by_depth"
   get "/groups/:group_id/properties/list" => "properties#list"
 
   get "/groups/:group_id/memberships/list" => "memberships#list"

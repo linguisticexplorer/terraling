@@ -13,6 +13,13 @@ class PropertiesController < GroupDataController
       format.js
     end
   end
+ 
+  def by_depth
+    # Look for ids first, then for depth or get depth 0 by default
+    condition = params[:id] ? Property.find(params[:id]).depth : params[:depth] || 0
+    Rails.logger.info "\n\n\n\n\n#{current_group.properties.inspect.to_s}\n\n\n\n\n"
+    render :json => current_group.properties.at_depth(condition).to_json.html_safe
+  end
 
   def list
     @property = Property.new do |p|
