@@ -79,6 +79,7 @@ class PropertiesController < GroupDataController
     @values.each do |value|
       ling = {
         "name" => value.ling.name,
+        "id" => value.ling.id,
         "value" => value.value
       }
       
