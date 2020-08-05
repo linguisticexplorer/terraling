@@ -42,7 +42,7 @@ gem "alphabetical_paginate", :git => "git://github.com/dej611/alphabetical_pagin
 gem 'iconv', "~>1.0.4"
 # # Bootstrap gem
 gem "autoprefixer-rails", "~>6.4.0"
-gem 'bootstrap-sass', "~> 3.2.0"
+gem 'bootstrap-sass', "~> 3.4.1"
 # # Some more icons
 gem 'font-awesome-sass', "~> 4.2.0"
 # # sass support: it should be out of the assets group!
