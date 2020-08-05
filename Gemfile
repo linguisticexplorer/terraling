@@ -96,6 +96,7 @@ gem 'bcrypt_pbkdf', "~>1.0.0"
 
 # # Debugger and webapp profiling
 gem "newrelic_rpm", "~>4.0.0"
+gem "rollbar", "~>2.26.1"
 
 # Pure Ruby library to use R language from Ruby code
 # it needs that R interpreter is installed and R_HOME is configured

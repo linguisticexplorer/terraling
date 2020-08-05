@@ -26,13 +26,12 @@ class PropertiesController < GroupDataController
   end
 
   def show
-    @depth = params[:depth].to_i
     @property = current_group.properties.find(params[:id])
 
     is_authorized? :read, @property
 
     # Filter the number of lings to show based on the pagination
-    lings = current_group.lings.at_depth(@depth)
+    lings = current_group.lings
     # Now get the values of the filtered lings
     lings_ids = [lings].flatten.map(&:id)
     @values = @property.lings_properties.includes(:ling).where(:ling_id => lings_ids)
