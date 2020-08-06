@@ -18,6 +18,8 @@ class Users::UsersController  < ApplicationController
   def show
     @user = User.find(params[:id])
     get_data
+
+    @teams = Team.all
   end
 
   def update
@@ -48,8 +50,16 @@ class Users::UsersController  < ApplicationController
         Membership.find_by_member_id(@user.id).remove_expertise_in(Ling.find_by_id(id))
       end
     end
+
+    if params[:user_team]
+      user_team = UserTeam.where(user_id: @user.id).where(team_id: params[:user_team][:team_id]).first || UserTeam.new(user_id: @user.id, team_id: params[:user_team][:team_id])
+
+      user_team.save!
+    end
+
     @user.name = params[:name] unless params[:name].blank?
     @user.email = params[:email] unless params[:email].blank?
+    @user.website = params[:website] unless params[:website].blank?
     @user.access_level = params[:access_level][:level] unless params[:access_level].blank?
     @user.save!
 

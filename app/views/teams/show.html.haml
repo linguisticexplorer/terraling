@@ -37,7 +37,8 @@
         %th.col-md-1 Website
         %th.col-md-1 Email
       %tbody
-        - @users.each do |user|
+        - @users.each do |user_team|
+          - user = User.find(user_team.user_id)
           %tr
             %td.align-center= link_to user.name, user
             %td.align-center= user.website

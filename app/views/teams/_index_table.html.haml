@@ -15,7 +15,7 @@
           = link_to o.name, o
         %td= o.website
         %td= o.num_users
-        %td= o.primary_author_id
+        %td= User.find(o.primary_author_id).name
 
 #pagination_top.apple_pagination.will-paginate
   = alphabetical_paginate paginate_params

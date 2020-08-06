@@ -20,7 +20,12 @@
             .form-group
               %label.strong.col-md-4.control-label{for: "website"} Website
               .col-md-4
-                %input#email.form-control.input-md{name: "website", placeholder: "#{@user.website}", style: "cursor: auto;", type: "text"}
+                %input#website.form-control.input-md{name: "website", placeholder: "#{@user.website}", style: "cursor: auto;", type: "text"}
+            .form-group
+              .col-md-4
+                %label.strong.col-md-4.control-label{for: "user_team[team_id]"} Team
+                .controls.controls
+                  = select :user_team, :team_id, Team.all.collect {|m| [ m.name, m.id ]  }, {} , :class => "form-control"
           .component
             / Button Drop Down
             .form-group
