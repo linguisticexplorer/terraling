@@ -18,8 +18,6 @@ class TeamsController < ApplicationController
         @team = Team.find(params[:id])
         @users = UserTeam.page(params[:page]).users_with_team_id(params[:id])
 
-        is_authorized? :read, @team
-
         options = {
             filter_html:     true,
             hard_wrap:       true,
