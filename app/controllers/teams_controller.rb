@@ -70,12 +70,31 @@ class TeamsController < ApplicationController
     end
 
     def edit
+        @team = Team.find(params[:id])
+        is_authorized? :update, @team
     end
 
     def update
+        if params[:team].nil?
+          render :action => "edit" and return
+        end
+    
+        @team = Team.find(params[:id])
+        is_authorized? :update, @team
+    
+        if @team.update_attributes(team_params)
+          redirect_to(@team, :notice => 'Group was successfully updated.')
+        else
+          render :action => "edit"
+        end
     end
 
     def destroy
+        @team = Team.find(params[:id])
+        is_authorized? :destroy, @team
+        @team.destroy
+    
+        redirect_to(teams_url)
     end
 
     private
