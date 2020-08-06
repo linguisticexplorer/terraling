@@ -4,10 +4,13 @@
   %h1
     = "Team View: "
     = @team.name
-    -if @team.primary_author
-      %span.small.pull-right
-        Primary Author
-        = @team.primary_author
+    #team_settings.pull-right
+      - if true
+        = link_to edit_team_path(@team), :class => "btn btn-default", :rel => "tooltip", :title => "Edit Team", :data => {:toggle => "tooltip", :animation => "true"}  do
+          = icon 'edit'
+      - if true
+        = link_to [@team], :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-danger', :rel => "tooltip", :title => "Delete", :data => {:toggle => "tooltip", :animation => "true"} do
+          = icon 'trash-o'
 
 .row
   %h2 Website
@@ -16,6 +19,11 @@
 .row
   %h2 Information
   = @output
+
+- if @team.primary_author
+  .row
+    %h2 Primary Author
+    = @team.primary_author
 
 .row
   %h2 Users
