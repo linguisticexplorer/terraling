@@ -1,0 +1,5 @@
+%h1 Teams
+= link_to 'Download CSV list', teams_path(format: :csv)
+#pagination_table
+  = render :partial => "index_table", :locals => {:teams => @team_array, :paginate_params => @params }
+

@@ -1,0 +1,28 @@
+= form_for(@team, :html => {:class => "form-horizontal"}) do |f|
+  - if @team.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@team.errors.count, "error")
+        prohibited this group from being saved:
+      %ul
+        - @team.errors.full_messages.each do |msg|
+          %li= msg
+  .form-group
+    %legend 
+    .col-md-4
+      = f.label :name, 'Name', :class => "control-label"
+      .controls
+        = f.text_field :name, :class => "form-control"
+    .col-md-4
+      = f.label :website, "Website", :class => "control-label"
+      .controls
+        = f.text_field :website, :class => "form-control"
+    .col-md-4
+      = f.label :information, "Information", :class => "control-label"
+      .controls
+        = f.text_area :information, :rows => 10, :class => "form-control tinymce", :id => "info"
+  .form-group
+    .col-md-2
+      .controls
+        = f.submit('Submit', :class => "btn btn-success")
+        = link_to 'Cancel', @team, :class => "btn btn-default"
