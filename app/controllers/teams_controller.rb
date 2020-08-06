@@ -16,6 +16,7 @@ class TeamsController < ApplicationController
 
     def show
         @team = Team.find(params[:id])
+        @users = User.page(params[:page]).with_team_id(params[:id])
 
         is_authorized? :read, @team
 
