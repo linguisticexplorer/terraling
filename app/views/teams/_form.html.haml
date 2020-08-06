@@ -9,18 +9,24 @@
           %li= msg
   .form-group
     %legend 
-    .col-md-4
+    .col-md-6
       = f.label :name, 'Name', :class => "control-label"
       .controls
         = f.text_field :name, :class => "form-control"
-    .col-md-4
+    .col-md-6
       = f.label :website, "Website", :class => "control-label"
       .controls
         = f.text_field :website, :class => "form-control"
-    .col-md-4
+  .form-group
+    .col-md-12
       = f.label :information, "Information", :class => "control-label"
       .controls
         = f.text_area :information, :rows => 10, :class => "form-control tinymce", :id => "info"
+  .form-group
+    .col-md-4
+      = f.label :primary_author_id, :class => "control-label"
+      .controls.controls
+        = select :team, :primary_author_id, User.all.collect {|m| [ m.name, m.id ]  }, {} , :class => "form-control"
   .form-group
     .col-md-2
       .controls

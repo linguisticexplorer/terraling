@@ -8,11 +8,12 @@ class Team < ApplicationRecord
 
     validates_presence_of :name, :website
 
-    has_many :users, :through => :userteams
+    has_many :user_teams
+    has_many :users, :through => :user_teams
 
     def primary_author
         if self.primary_author_id
-            User.find(self.primary_author_id)
+            User.find(self.primary_author_id).try(:name)
         else
             nil
         end

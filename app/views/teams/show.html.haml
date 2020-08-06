@@ -5,10 +5,10 @@
     = "Team View: "
     = @team.name
     #team_settings.pull-right
-      - if true
+      - if true # check if can edit
         = link_to edit_team_path(@team), :class => "btn btn-default", :rel => "tooltip", :title => "Edit Team", :data => {:toggle => "tooltip", :animation => "true"}  do
           = icon 'edit'
-      - if true
+      - if true # check if can delete
         = link_to [@team], :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-danger', :rel => "tooltip", :title => "Delete", :data => {:toggle => "tooltip", :animation => "true"} do
           = icon 'trash-o'
 
