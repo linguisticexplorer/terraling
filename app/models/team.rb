@@ -6,4 +6,14 @@ class Team < ApplicationRecord
       CSV_ATTRIBUTES
     end
 
+    validates_presence_of :name, :website
+
+    def primary_author
+        if self.primary_author_id
+            User.find(self.primary_author_id)
+        else
+            nil
+        end
+    end
+
 end
