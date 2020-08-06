@@ -6,7 +6,7 @@
     %tr
       %th.col-md-1= "Name"
       %th.col-md-1= "Website"
-      %th.col-md-1= "Information"
+      %th.col-md-1= "Number of Users"
       %th.col-md-1= "Primary Author"
   %tbody
     - @teams.each do |o|
@@ -14,7 +14,7 @@
         %td
           = link_to o.name, o
         %td= o.website
-        %td= o.information
+        %td= o.num_users
         %td= o.primary_author_id
 
 #pagination_top.apple_pagination.will-paginate

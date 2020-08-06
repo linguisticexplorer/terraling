@@ -16,4 +16,8 @@ class Team < ApplicationRecord
         end
     end
 
+    def num_users
+        User.with_team_id(self.id).count
+    end
+
 end
