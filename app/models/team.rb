@@ -8,6 +8,8 @@ class Team < ApplicationRecord
 
     validates_presence_of :name, :website
 
+    has_many :users, :through => :userteams
+
     def primary_author
         if self.primary_author_id
             User.find(self.primary_author_id)
@@ -17,7 +19,7 @@ class Team < ApplicationRecord
     end
 
     def num_users
-        User.with_team_id(self.id).count
+        UserTeam.users_with_team_id(self.id).count
     end
 
 end

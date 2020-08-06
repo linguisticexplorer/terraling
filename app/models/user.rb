@@ -33,10 +33,10 @@ class User < ApplicationRecord
   has_many :groups, :through => :memberships
   has_many :topics, :dependent => :destroy
   has_many :posts, :dependent => :destroy
+  has_many :teams, :through => :userteams
 
   scope :new_user, -> { where( :access_level => NEW_USER ) }
   scope :not_new_user, -> { where( :access_level => [USER, ADMIN] ) }
-  scope :with_team_id, -> (team_id) { where( :access_level => [ADMIN] ) }
 
   def admin?
     ADMIN == self.access_level
