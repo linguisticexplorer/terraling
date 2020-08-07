@@ -30,16 +30,16 @@
 
         updateLists();
 
-        let append = document.getElementById("append-button");
+        var append = document.getElementById("append-button");
 
         append.addEventListener('click', (e) => {
             e.preventDefault();
 
             if (otherteams.length === 0) { return; }
 
-            let selectedName = otherTeamContainer.options[otherTeamContainer.selectedIndex].value;
+            var selectedName = otherTeamContainer.options[otherTeamContainer.selectedIndex].value;
 
-            let selectedObject = {};
+            var selectedObject = {};
 
             otherteams = otherteams.reduce((arr, ot) => {
                 if (ot.name === selectedName) {
@@ -69,26 +69,26 @@
         }
 
         userteams.forEach((ut) => {
-            let input = document.createElement("input");
+            var input = document.createElement("input");
             input.classList.add("form-control", "input-md");
             input.value = ut.name;
             input.setAttribute("readonly","");
 
-            let hidden = document.createElement("input");
+            var hidden = document.createElement("input");
             hidden.setAttribute("hidden", "true");
             hidden.setAttribute("name", "userteams[]");
             hidden.value = ut.id;
 
 
-            let button = document.createElement("button");
+            var button = document.createElement("button");
             button.classList.add("btn", "btn-danger");
             button.innerHTML = '<i class="fa fa-trash"></i>';
             button.setAttribute("type", "button");
 
-            let span = document.createElement("span");
+            var span = document.createElement("span");
             span.classList.add("input-group-btn", "remove-btn");
 
-            let div = document.createElement("div");
+            var div = document.createElement("div");
             div.classList.add("input-group");
             
             span.prepend(button);
@@ -103,7 +103,7 @@
         otherTeamContainer.innerHTML = "";
 
         otherteams.forEach((ot) => {
-            let option = document.createElement("option");
+            var option = document.createElement("option");
             option.appendChild(document.createTextNode(ot.name));
 
             otherTeamContainer.prepend(option);
@@ -116,11 +116,11 @@
                 console.log('wtf');
                 e.preventDefault();
 
-                let matchingInput = removeBtn.parentElement.querySelector("input");
+                var matchingInput = removeBtn.parentElement.querySelector("input");
 
-                let selectedName = matchingInput.value;
+                var selectedName = matchingInput.value;
 
-                let selectedObject = {};
+                var selectedObject = {};
 
                 userteams = userteams.reduce((arr, ut) => {
                     if (ut.name === selectedName) {
