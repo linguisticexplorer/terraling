@@ -14,7 +14,11 @@
 %h1
   = "#{current_group.property_name}: "
   = @property.name
-  -if @property.creator
+  -if @property.team
+    %span.small.pull-right
+      Contributed by
+      = @property.team.name
+  -elsif @property.creator
     %span.small.pull-right
       Set by
       = @property.creator.name

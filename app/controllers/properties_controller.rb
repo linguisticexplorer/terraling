@@ -163,7 +163,7 @@ class PropertiesController < GroupDataController
   end
 
   def property_params
-    params.require(:property).permit(:name, :category_id, :description, :group_id)
+    params.require(:property).permit(:name, :category_id, :description, :group_id, :team_id)
   end
 
   private

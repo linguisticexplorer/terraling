@@ -20,6 +20,10 @@
       = f.label :creator_id, :class => "control-label"
       .controls.controls
         = select :property, :creator_id, current_group.members.collect {|m| [ m.name, m.id ]  }, {} , :class => "form-control"
+    .col-md-2
+      = f.label :team_id, :class => "control-label"
+      .controls.controls
+        = select :property, :team_id, Team.all.to_a.collect {|m| [ m.name, m.id ]  }, {:include_blank => ""} , :class => "form-control"
   .form-group
     .col-md-12
       = f.label :description, :class => "control-label"

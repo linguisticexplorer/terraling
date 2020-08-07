@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_06_035207) do
+ActiveRecord::Schema.define(version: 2020_08_07_030807) do
 
   create_table "categories", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "group_id"
@@ -141,6 +141,7 @@ ActiveRecord::Schema.define(version: 2020_08_06_035207) do
     t.integer "category_id"
     t.integer "creator_id"
     t.text "description", limit: 16777215
+    t.integer "team_id"
     t.index ["group_id"], name: "index_properties_on_group_id"
   end
 
