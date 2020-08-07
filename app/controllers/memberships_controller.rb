@@ -120,7 +120,7 @@ class MembershipsController < GroupDataController
 
     attributes, roles = get_attributes_and_roles
 
-    if @membership.update_attributes(membership_params)
+    if @membership.update_attributes(attributes)
       # Set the expertise in all the passed resources
       if roles[:role] && roles[:resources].any?
         @membership.set_expertise_in roles[:resources]
