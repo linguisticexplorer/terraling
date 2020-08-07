@@ -1,0 +1,48 @@
+- page_heading "#{@team.name}"
+
+.row
+  %h1
+    = "Team View: "
+    = @team.name
+    #team_settings.pull-right
+      - if can? :edit, @team # check if can edit
+        = link_to edit_team_path(@team), :class => "btn btn-default", :rel => "tooltip", :title => "Edit Team", :data => {:toggle => "tooltip", :animation => "true"}  do
+          = icon 'edit'
+      - if can? :destroy, @team # check if can delete
+        = link_to [@team], :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-danger', :rel => "tooltip", :title => "Delete", :data => {:toggle => "tooltip", :animation => "true"} do
+          = icon 'trash-o'
+
+.row
+  %h2 Website
+  = @team.website
+
+.row
+  %h2 Information
+  = @output
+
+- if @team.primary_author
+  .row
+    %h2 Primary Author
+    = @team.primary_author
+
+.row
+  %h2 Users
+  #pagination_table.col-md-12
+    #pagination_top.apple_pagination.will-paginate
+      / render page links in the view:
+      = will_paginate @users, renderer: BootstrapPagination::Rails
+    %table.show-table.table.table-bordered.table-striped.table-hover
+      %thead
+        %th.col-md-1 User
+        %th.col-md-1 Website
+        %th.col-md-1 Email
+      %tbody
+        - @users.each do |user_team|
+          - user = User.find(user_team.user_id)
+          %tr
+            %td.align-center= link_to user.name, user
+            %td.align-center= user.website
+            %td.align-center= user.email
+    #pagination_bottom.apple_pagination.will-paginate
+      / render page links in the view:
+      = will_paginate @users, renderer: BootstrapPagination::Rails

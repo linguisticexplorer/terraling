@@ -4,7 +4,7 @@
     = will_paginate @properties, renderer: BootstrapPagination::Rails
   %table.show-table.table.table-bordered.table-striped.table-hover
     %tr
-      %th.col-md- Name
+      %th.col-md-2 Name
       - if current_group.categories.size > 1
         %th= current_group.category_name
       %th.col-md-2
@@ -12,6 +12,8 @@
         .pull-right
           %a{:href => "#", :rel => "tooltip", :title => "This is a measure of how many languages have a value set for the given property", :data => {:toggle => "tooltip", :animation => "true"} }
             = icon 'question-circle', '', :class => "fa-15x"
+      %th.col-md-2
+        Team
       - if can_see_header? [:update, :destroy], @properties
         %th.col-md-2 Actions
     - @properties.each do |property|
@@ -25,6 +27,7 @@
           .strong
             %a{:href => "#", :rel => "tooltip", :title => label, :data => {:toggle => "tooltip", :placement => "left" } }
               %strong{:class => "#{number_to_text_class(percentage)}"} #{percentage}%
+        %td= property.team ? link_to(property.team.name, team_path(property.team)) : ""
         - if can_see_any? [:update,:destroy], property
           %td{:id => table_actions_id(property.name)}
             - if can_see? :update, property

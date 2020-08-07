@@ -35,6 +35,9 @@
         %li
           = link_to users_path do
             Users
+        %li
+          = link_to teams_path do
+            Teams
         - if @group && !@group.new_record?
           %li
             = link_to groups_activity_path(@group) do
