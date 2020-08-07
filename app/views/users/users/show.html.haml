@@ -21,11 +21,6 @@
               %label.strong.col-md-4.control-label{for: "website"} Website
               .col-md-4
                 %input#website.form-control.input-md{name: "website", placeholder: "#{@user.website}", style: "cursor: auto;", type: "text"}
-            .form-group
-              .col-md-4
-                %label.strong.col-md-4.control-label{for: "user_team[team_id]"} Team
-                .controls.controls
-                  = select :user_team, :team_id, Team.all.collect {|m| [ m.name, m.id ]  }, {} , :class => "form-control"
           .component
             / Button Drop Down
             .form-group
@@ -39,6 +34,37 @@
               %label.strong.col-md-7.control-label{for: "submit"}
               .col-md-1
                 %button.col-md-12.btn.btn-default{type: "submit"} Submit
+
+%h1 Teams
+
+#form-container
+  =form_for(@user, url: {action: "update"}, html: {class: "form-horizontal"}) do
+    .form-group
+      .col-md-8
+        = label :example_fields, :class => "control-label" do
+          Data field names available for Examples, drag and drop to order
+          %a{:href => "#", :rel => "tooltip", :title => "'text' is pre-included by default", :data => {:toggle => "tooltip", :animation => "true"} }
+            = icon 'question-circle', '', :class => "fa-15x"
+        #row-fix.controls
+          .row
+            #order.col-md-5
+          .row
+            .col-md-5
+              #list.input-group
+                %input#user_teams{:type => "hidden", :value => @user.teams.all.to_a.collect { |t| [t.name, t.id] }, :name => "user[teams][]"}
+              #add.input-group
+                %select#append.form-control.col-md-2
+                  - (Team.all - @user.teams).each do |t|
+                    %option
+                      = t.name
+                %span.input-group-btn
+                  %button#append-button.btn.btn-success{:type => "button"}
+                    =icon "plus"
+    .form-group
+      %label.strong.col-md-7.control-label{for: "submit"}
+      .col-md-1
+        %button.btn.btn-default{type: "submit"} Submit
+
 %h1 Remove Roles
 
 #form-container

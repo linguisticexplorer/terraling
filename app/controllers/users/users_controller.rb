@@ -18,8 +18,6 @@ class Users::UsersController  < ApplicationController
   def show
     @user = User.find(params[:id])
     get_data
-
-    @teams = Team.all
   end
 
   def update
@@ -52,9 +50,11 @@ class Users::UsersController  < ApplicationController
     end
 
     if params[:user_team]
-      user_team = UserTeam.where(user_id: @user.id).where(team_id: params[:user_team][:team_id]).first || UserTeam.new(user_id: @user.id, team_id: params[:user_team][:team_id])
+      if params[:user_team][:team_id] > 0
+        user_team = UserTeam.where(user_id: @user.id).where(team_id: params[:user_team][:team_id]).first || UserTeam.new(user_id: @user.id, team_id: params[:user_team][:team_id])
 
-      user_team.save!
+        user_team.save!
+      end
     end
 
     @user.name = params[:name] unless params[:name].blank?
