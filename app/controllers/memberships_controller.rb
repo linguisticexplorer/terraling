@@ -24,6 +24,7 @@ class MembershipsController < GroupDataController
     @contributors, @params = current_group.memberships.
       includes(:member).with_role(:expert, :any).to_a.
       select { |membership| membership.member.present? }.
+      uniq.
       alpha_paginate(params[:letter], pagination_options) do |membership|
           user = membership.member
           user.present? ? user.name : '*'
