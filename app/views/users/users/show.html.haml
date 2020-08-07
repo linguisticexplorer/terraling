@@ -37,33 +37,31 @@
 
 %h1 Teams
 
-#form-container
+#form-container.team-form
   =form_for(@user, url: {action: "update"}, html: {class: "form-horizontal"}) do
     .form-group
       .col-md-8
         = label :example_fields, :class => "control-label" do
-          Data field names available for Examples, drag and drop to order
-          %a{:href => "#", :rel => "tooltip", :title => "'text' is pre-included by default", :data => {:toggle => "tooltip", :animation => "true"} }
+          Teams that this User is a part of
+          %a{:href => "#", :rel => "tooltip", :title => "Add teams for this user", :data => {:toggle => "tooltip", :animation => "true"} }
             = icon 'question-circle', '', :class => "fa-15x"
         #row-fix.controls
           .row
             #order.col-md-5
           .row
             .col-md-5
-              #list.input-group
-                %input#user_teams{:type => "hidden", :value => @user.teams.all.to_a.collect { |t| [t.name, t.id] }, :name => "user[teams][]"}
+              #list
+                %input#userteam-list{:hidden => true, :value => @user.teams.to_json}
               #add.input-group
+                %input#otherteam-list{:hidden => true, :value => (Team.all - @user.teams).to_json}
                 %select#append.form-control.col-md-2
-                  - (Team.all - @user.teams).each do |t|
-                    %option
-                      = t.name
                 %span.input-group-btn
                   %button#append-button.btn.btn-success{:type => "button"}
                     =icon "plus"
     .form-group
       %label.strong.col-md-7.control-label{for: "submit"}
       .col-md-1
-        %button.btn.btn-default{type: "submit"} Submit
+        %button#team-submit.btn.btn-default{type: "submit"} Submit
 
 %h1 Remove Roles
 

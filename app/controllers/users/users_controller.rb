@@ -49,9 +49,14 @@ class Users::UsersController  < ApplicationController
       end
     end
 
-    if params[:user_team]
-      if params[:user_team][:team_id] > 0
-        user_team = UserTeam.where(user_id: @user.id).where(team_id: params[:user_team][:team_id]).first || UserTeam.new(user_id: @user.id, team_id: params[:user_team][:team_id])
+    if params[:userteams]
+      userteams = UserTeam.teams_with_user_id(params[:id]).all
+      userteams.each do |ut|
+        ut.destroy!
+      end
+
+      params[:userteams].each do |id|
+        user_team = UserTeam.where(user_id: @user.id).where(team_id: id).first || UserTeam.new(user_id: @user.id, team_id: id)
 
         user_team.save!
       end
@@ -64,7 +69,7 @@ class Users::UsersController  < ApplicationController
     @user.save!
 
     get_data
-    render :show
+    redirect_to :action => 'show'
   end
 
 
