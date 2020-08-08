@@ -65,8 +65,18 @@ class LingsController < GroupDataController
       end
       examples << ling_obj
     end
+
+    @ling.storable_keys.each do |key|
+      if key =~ /description/ && @ling.stored_value(key) != ''
+        @description = @ling.stored_value(key).html_safe
+      else
+        @description = "No description provided"
+      end
+    end
+    
     @ling_obj = {
       "ling_name" => @ling.name,
+      "ling_description" => @description,
       "ling_properties" => examples
     }
 
