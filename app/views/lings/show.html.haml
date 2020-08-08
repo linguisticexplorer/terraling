@@ -117,11 +117,10 @@
       .tab-pane#description
         .tabbed-pane
           .text-justify
-            - @ling.storable_keys.each do |key|
-              -if key =~ /description/ && @ling.stored_value(key) != ''
-                %p= @ling.stored_value(key).html_safe
-              - else
-                %h3 No description provided
+            - if @description == "No description provided"
+              %h3= @description
+            - else 
+              %p= @description 
 .row
   #pagination_table.col-md-12
     #pagination_top.apple_pagination.will-paginate
