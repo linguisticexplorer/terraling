@@ -14,6 +14,7 @@ class Property < ApplicationRecord
 
   belongs_to :category
   belongs_to :creator, :class_name => "User"
+  belongs_to :team, :class_name => "Team"
   has_many :lings_properties, :dependent => :destroy
 
   include Concerns::Selects

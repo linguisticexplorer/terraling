@@ -33,6 +33,8 @@ LinguisticExplorer::Application.routes.draw do
   get "/groups/:group_id/lings_properties/exists" => "lings_properties#exists"
   get "/groups/:group_id/lings_properties/sureness" => "lings_properties#sureness"
 
+  resources :teams 
+
   post "/groups/:group_id/maps" => "searches#geomapping"
 
   post "/groups/:group_id/searches/new" => "searches#new"

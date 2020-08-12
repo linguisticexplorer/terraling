@@ -24,6 +24,7 @@ class MembershipsController < GroupDataController
     @contributors, @params = current_group.memberships.
       includes(:member).with_role(:expert, :any).to_a.
       select { |membership| membership.member.present? }.
+      uniq.
       alpha_paginate(params[:letter], pagination_options) do |membership|
           user = membership.member
           user.present? ? user.name : '*'
@@ -119,7 +120,7 @@ class MembershipsController < GroupDataController
 
     attributes, roles = get_attributes_and_roles
 
-    if @membership.update_attributes(membership_params)
+    if @membership.update_attributes(attributes)
       # Set the expertise in all the passed resources
       if roles[:role] && roles[:resources].any?
         @membership.set_expertise_in roles[:resources]

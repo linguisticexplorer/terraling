@@ -48,13 +48,28 @@ class Users::UsersController  < ApplicationController
         Membership.find_by_member_id(@user.id).remove_expertise_in(Ling.find_by_id(id))
       end
     end
+
+    if params[:userteams]
+      userteams = UserTeam.teams_with_user_id(params[:id]).all
+      userteams.each do |ut|
+        ut.destroy!
+      end
+
+      params[:userteams].each do |id|
+        user_team = UserTeam.where(user_id: @user.id).where(team_id: id).first || UserTeam.new(user_id: @user.id, team_id: id)
+
+        user_team.save!
+      end
+    end
+
     @user.name = params[:name] unless params[:name].blank?
     @user.email = params[:email] unless params[:email].blank?
+    @user.website = params[:website] unless params[:website].blank?
     @user.access_level = params[:access_level][:level] unless params[:access_level].blank?
     @user.save!
 
     get_data
-    render :show
+    redirect_to :action => 'show'
   end
 
 

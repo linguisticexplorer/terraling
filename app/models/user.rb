@@ -33,6 +33,8 @@ class User < ApplicationRecord
   has_many :groups, :through => :memberships
   has_many :topics, :dependent => :destroy
   has_many :posts, :dependent => :destroy
+  has_many :user_teams
+  has_many :teams, :through => :user_teams
 
   scope :new_user, -> { where( :access_level => NEW_USER ) }
   scope :not_new_user, -> { where( :access_level => [USER, ADMIN] ) }

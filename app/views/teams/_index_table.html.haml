@@ -1,0 +1,21 @@
+#pagination_top.apple_pagination.will-paginate
+  = alphabetical_paginate paginate_params
+
+%table.show-table.table.table-bordered.table-striped.table-hover
+  %thead
+    %tr
+      %th.col-md-1= "Name"
+      %th.col-md-1= "Website"
+      %th.col-md-1= "Number of Users"
+      %th.col-md-1= "Primary Author"
+  %tbody
+    - @teams.each do |o|
+      %tr
+        %td
+          = link_to o.name, o
+        %td= o.website
+        %td= o.num_users
+        %td= o.primary_author_id ? User.find(o.primary_author_id ).try(:name) : ""
+
+#pagination_top.apple_pagination.will-paginate
+  = alphabetical_paginate paginate_params

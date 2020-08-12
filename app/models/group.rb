@@ -35,7 +35,18 @@ class Group < ApplicationRecord
 
   scope :is_public, -> { where( privacy: PUBLIC ) }
   scope :is_private, -> { where( privacy: PRIVATE ) }
-  scope :viewable_by, -> (user) { where( privacy: PUBLIC ) || where( user.member_of?(self) ) || where( user.group_admin_of?(self) ) }
+  
+  def self.viewable_by(user)
+    groups = []
+
+    Group.all.each do |g|
+      if !g.private? || user.member_of?(g) || user.group_admin_of?(g) || user.is_expert?(g)
+        groups << g
+      end
+    end
+
+    groups
+  end
 
   def ling_name_for_depth(depth)
     if depth > depth_maximum

@@ -1,0 +1,9 @@
+%h1 Teams
+= link_to 'Download CSV list', teams_path(format: :csv)
+- if can? :create, @team # check if can create new
+  .col-md
+    = link_to new_team_path, :class => "btn btn-success pull-right",:rel => "tooltip", :title => "New Team", :data => {:toggle => "tooltip", :animation => "true", :placement => "left"} do
+      = icon "plus"
+#pagination_table
+  = render :partial => "index_table", :locals => {:teams => @team_array, :paginate_params => @params }
+
