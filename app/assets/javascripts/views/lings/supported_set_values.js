@@ -100,41 +100,13 @@
         });
       })
       // Save
-      .on("click", "[id^=sureness_]:not(:disabled)", function (e) {
-        e.preventDefault();
-        var form = $("#value-form");
+      .on("click", "[id^=value_sureness]:not(:disabled)", function (e) {
+        $("#sureness_submit").removeAttr("disabled");
 
-        $.post(form.attr("action"), form.serialize(), onSavedValue, 'json');
-
-        function saveFeedback(success){
-          $('#value-not-saved').parent().addClass('hide');
-          $('#value-saved-'+ (success ? 'success' : 'error')).parent().removeClass('hide');
-        }
-
-        function onSavedValue(data) {
-
-          saveFeedback(data.success);
-
-          if (data.success) {
-            $("#prop-name").data("lp_id", data.id);
-
-            var colSelector = $("#prop-" + getData().prop_id);
-
-            if (colSelector.length > 0) {
-              var needsReview = $("#sureness_revisit, #sureness_need_help").hasClass("active");
-              
-              colSelector.css("color", needsReview ? "orange" : "green");
-              
-            }
-
-            toggleExampleWarning(false);
-
-          } else {
-
-          }
-
-        }
-
+      })
+      .on("keydown", "#new_value", function (e) {
+        toggleSureness();
+        $("#value_value_new").attr('checked', 'checked');
       })
       // Example Modals
       .on("click", "#example-create.enabled, #example-change.enabled", function(e) {

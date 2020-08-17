@@ -3,7 +3,7 @@
 #values-container{:style => "min-height: 290px;"}
   = form_tag(supported_submit_values_group_ling_path(current_group, @ling), :method => "post", id: "value-form") do
     = hidden_field_tag :property_id, @property.id
-    #value-select.form-group
+    #value-select.form-group{:required => true}
       %h4 Select Value
       #values{:style => "max-height:200px; *height:150px; overflow-y: auto;"}
         %div{:style => "margin-left: 25px;"}
@@ -19,23 +19,20 @@
                 %span.input-group-addon
                   = radio_button_tag "value", "value_new"
                 %input#new_value.form-control{:type => "text", :name => "new_value", :placeholder => "or Add a New One"}
-    #value-sureness-box.alert.alert-info
+    #value-sureness.form-group{:name => "value_sureness", :style => "margin-top: 25px; padding-bottom: 10px;"}
       %h4 Please indicate sureness to save:
-      #value-sureness.form-group{:name => "value_sureness", :style => "margin-top: 25px; padding-bottom: 10px;"}
-        .btn-group.btn-group-justified
-          .btn-group
-            %button.btn.btn-default#sureness_certain{ :name => "value_sureness", :value => "certain", :class => "#{'active' if @ling_properties && @ling_properties.select {|lp| lp.sureness == "certain"}.any?}" } Certain
-          .btn-group
-            %button.btn.btn-default#sureness_revisit{ :name => "value_sureness", :value => "revisit", :class => "#{'active' if @ling_properties && @ling_properties.select {|lp| lp.sureness == "revisit"}.any?}" } Revisit
-          .btn-group
-            %button.btn.btn-default#sureness_need_help{ :name => "value_sureness", :value => "need_help", :class => "#{'active' if @ling_properties && @ling_properties.select {|lp| lp.sureness == "need_help"}.any?}" } Need Help
-      .pull-left{:style => "margin-top: -5px; font-size: 20px;"}
-        .red
-          = icon 'exclamation-circle', 'Changes not yet saved!', :id => "value-not-saved"
-        .green.hide.strong
-          = icon 'check', 'Saved', :id => "value-saved-success"
-        .red.hide.strong
-          = icon 'exclamation-circle', 'Error', :id => "value-saved-error"
+      #values{:style => "max-height:200px; *height:150px; overflow-y: auto;"}
+        %div{:style => "margin-left: 25px;"}
+          = label_tag "certain", :class => "radio" do
+            = radio_button_tag "value_sureness", "certain"
+            = "Certain"
+          = label_tag "revisit", :class => "radio" do
+            = radio_button_tag "value_sureness", "revisit"
+            = "Revisit"
+          = label_tag "need_help", :class => "radio" do
+            = radio_button_tag "value_sureness", "need_help"
+            = "Need help"
+        %button.btn.btn-default#sureness_submit{ :name => "submit", :value => "submit", :disabled => true } Submit
   #prop-example.form-group{:style => "margin-top: 15px;"}
     %h4 Examples
     #prop-active-example.content-box
