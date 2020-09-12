@@ -27,7 +27,7 @@ class GroupsController < ApplicationController
 
   def list
     @groups = if user_signed_in?
-      Group.accessible_by(current_ability).uniq
+      Group.accessible_by(current_ability).distinct
     else
       Group.is_public
     end
@@ -87,7 +87,7 @@ class GroupsController < ApplicationController
 
   def user
     @groups = if user_signed_in?
-      Group.accessible_by(current_ability).uniq.order("name").page(params[:page])
+      Group.accessible_by(current_ability).distinct.order("name").page(params[:page])
     else
       Group.is_public.order("name").page(params[:page])
     end
