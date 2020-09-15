@@ -5,7 +5,7 @@
     = @topic.title
     %span.right.controls
       = link_to "Edit", edit_topic_path(@topic) if can? :manage, @topic
-      = link_to "Delete", @topic, :confirm => "Are you sure?", :method => :delete if can? :manage, @topic
+      = link_to "Delete", @topic, :data => { :confirm => 'Are you sure?' }, :method => :delete if can? :manage, @topic
       = link_to @topic.sticky ? "Unstick" : "Sticky", {:controller => 'topics', :action => 'update', :topic => {:sticky => @topic.sticky ? "false" : "true" }}, :method => :put if can? :moderate, @topic
       = link_to @topic.locked ? "Unlock" : "Lock", {:controller => 'topics', :action => 'update', :topic => {:locked => @topic.locked ? "false" : "true" }}, :method => :put if can? :moderate, @topic
   %div
@@ -28,7 +28,7 @@
               = link_to "Reply", new_topic_post_path(@topic) if can? :create, @topic.posts.new
               = link_to "Quote", new_topic_post_path(@topic, :quote => post) if can? :create, @topic.posts.new
               = link_to "Edit", edit_post_path(post) if can? :update, post
-              = link_to "Delete", post, :confirm => "Are you sure?", :method => :delete if can? :destroy, post
+              = link_to "Delete", post, :data => { :confirm => 'Are you sure?' }, :method => :delete if can? :destroy, post
         %tr
           %td.post_body
             = post.body.bbcode_to_html().html_safe
