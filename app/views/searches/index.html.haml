@@ -19,7 +19,7 @@
         %td
           = link_to group_search_path(current_group, search, :format => :csv), :class => "btn btn-default", :rel => "tooltip", :title => "Download", :data => {:toggle => "tooltip", :animation => "true"} do
             = icon 'download'
-          = link_to [current_group, search], :confirm => "Are you sure?", :method => :delete, :class => "btn btn-danger", :rel => "tooltip", :title => "Delete", :data => {:toggle => "tooltip", :animation => "true"} do
+          = link_to [current_group, search], :data => { :confirm => 'Are you sure?' }, :method => :delete, :class => "btn btn-danger", :rel => "tooltip", :title => "Delete", :data => {:toggle => "tooltip", :animation => "true"} do
             = icon "trash-o"
   - else
     %tr.center

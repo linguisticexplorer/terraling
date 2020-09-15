@@ -52,7 +52,7 @@
             = link_to edit_group_ling_path(current_group, ling), :class => 'btn btn-default', :rel => "tooltip", :title => "Edit", :data => {:toggle => "tooltip", :animation => "true"} do
               = icon 'edit'
           - if can_see? :destroy, ling
-            = link_to_delete_ling ling, :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-danger', :rel => "tooltip", :title => "Delete", :data => {:toggle => "tooltip", :animation => "true"} do
+            = link_to_delete_ling ling, :data => { :confirm => 'Are you sure?' }, :method => :delete, :class => 'btn btn-danger', :rel => "tooltip", :title => "Delete", :data => {:toggle => "tooltip", :animation => "true"} do
               = icon 'trash-o'
 #pagination_bottom.apple_pagination
   = alphabetical_paginate paginate_params

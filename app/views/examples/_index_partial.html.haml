@@ -50,7 +50,7 @@
           - if can_see? :manage, example
             = link_to 'Edit', edit_group_example_path(current_group, example), :class => 'btn btn-default btn-sm'
             - if can_see? :destroy, example
-              = link_to 'Destroy', [current_group, example], :class => 'btn btn-danger btn-sm', :confirm => 'Are you sure?', :method => :delete
+              = link_to 'Destroy', [current_group, example], :class => 'btn btn-danger btn-sm', :data => { :confirm => 'Are you sure?' }, :method => :delete
 #pagination_bottom.apple_pagination.will-paginate
   / render page links in the view:
   = will_paginate @examples, renderer: BootstrapPagination::Rails
