@@ -7,7 +7,7 @@
       %span.controls.right.smaller
         = link_to "New Forum", new_forum_path if can? :create, Forum
         = link_to "Edit Group", edit_forum_group_path(group) if can? :manage, group
-        = link_to "Delete Group", forum_group_path(group), :confirm => "Are you sure you want to delete this group?", :method => :delete if can? :manage, group
+        = link_to "Delete Group", forum_group_path(group), :data => { :confirm => "Are you sure you want to delete this group?" }, :method => :delete if can? :manage, group
     - if group.forums.size > 0
       %div
         %table

@@ -16,7 +16,7 @@
       %td.text-left= link_to lings_property.value, [current_group, lings_property]
       - if can_see? :destroy, lings_property
         %td
-          = link_to 'Destroy', [current_group, lings_property], :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-danger'
+          = link_to 'Destroy', [current_group, lings_property], :data => { :confirm => 'Are you sure?' }, :method => :delete, :class => 'btn btn-danger'
 .apple_pagination.will-paginate
   / render page links in the view:
   = will_paginate @lings_properties, renderer: BootstrapPagination::Rails

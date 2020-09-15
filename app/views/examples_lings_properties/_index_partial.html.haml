@@ -13,7 +13,7 @@
       %td= link_to examples_lings_property.lings_property.property_value, [current_group, examples_lings_property.lings_property]
       - if can_see? :destroy, examples_lings_property
         %td
-          = link_to 'Destroy', [current_group, examples_lings_property], :confirm => 'Are you sure?', :method => :delete
+          = link_to 'Destroy', [current_group, examples_lings_property], :data => { :confirm => 'Are you sure?' }, :method => :delete
 .apple_pagination
   / render page links in the view:
   = will_paginate @examples_lings_properties, renderer: BootstrapPagination::Rails
