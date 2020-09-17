@@ -27,6 +27,13 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   validates_presence_of :name, :email, :access_level, :website
+  validate :website_must_be_url
+
+  def website_must_be_url
+    unless !website.present? || website =~ URI::regexp
+      errors.add(:website, "must be a valid URL. Please give the URL address of your university, your department, or of your personal website.")
+    end
+  end
 
   has_many :memberships, :foreign_key => :member_id, :dependent => :destroy
   has_many :searches, :foreign_key=> :creator_id, :dependent => :destroy

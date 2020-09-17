@@ -12,6 +12,9 @@
       = f.text_field :name
   .form-group
     = f.label "Website (departmental or personal)", :class => "control-label"
+    %span
+      %a{:href => "#", :rel => "tooltip", :title => "Please give the URL address of your university, your department, or of your personal website.", :data => {:toggle => "tooltip", :animation => "true"} }
+        = icon 'question-circle', '', :class => "fa-15x"
     .controls
       = f.text_field :website
   .form-group
