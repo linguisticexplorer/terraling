@@ -130,8 +130,11 @@ class ExamplesController < GroupDataController
     is_authorized? :destroy, @example, true
 
     @example.destroy
-
-    redirect_to(group_examples_url(current_group))
+    if params[:ling]
+      redirect_to [current_group, @example.ling]
+    else
+      redirect_to(group_ling_url(current_group))
+    end
   end
 
   def example_params
