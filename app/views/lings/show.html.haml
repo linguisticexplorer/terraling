@@ -165,7 +165,7 @@
               %td{:id => table_actions_id(value.property.name)}
                 = link_to supported_set_values_group_ling_path(current_group, @ling, :prop_id => value.property.id, :commit => "Select", :anchor => "value-select"), :class => "btn btn-default", :rel => "tooltip", :title => "Edit #{current_group.lings_property_name.downcase}", :data => {:toggle => "tooltip", :animation => "true" } do
                   = icon 'edit'
-                = link_to [current_group, value], :data => { :confirm => 'Are you sure?' }, :method => :delete, :class => 'btn btn-danger', :rel => "tooltip", :title => "Delete #{current_group.lings_property_name.downcase}", :data => {:toggle => "tooltip", :animation => "true"} do
+                = link_to [current_group, value], :data => { :confirm => 'Are you sure?', :toggle => "tooltip", :animation => "true" }, :method => :delete, :class => 'btn btn-danger', :rel => "tooltip", :title => "Delete #{current_group.lings_property_name.downcase}" do
                   = icon 'trash-o'
     #pagination_bottom.apple_pagination.will-paginate
       / render page links in the view:
