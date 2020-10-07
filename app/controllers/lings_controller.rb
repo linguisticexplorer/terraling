@@ -123,8 +123,8 @@ class LingsController < GroupDataController
     elsif @preexisting_values.length > 0
       @property = Property.find(@preexisting_values.first.property_id)
       @ling_properties = @preexisting_values.select {|lp| lp.property_id == @property.id}
-    else 
-      @property = Property.find(@properties.first)
+    else
+      @property = @properties.first
       @exists = false
     end
     @examples = []
