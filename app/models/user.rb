@@ -26,7 +26,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates_presence_of :name, :email, :access_level, :website
+  validates_presence_of :name, :email, :access_level
   validate :website_must_be_url
 
   def website_must_be_url
