@@ -30,7 +30,7 @@ class User < ApplicationRecord
   validate :website_must_be_url
 
   def website_must_be_url
-    unless !website.present? || website =~ URI::regexp
+    if (!website.present? || !(website =~ URI::regexp) ) and !id.present?
       errors.add(:website, "must be a valid URL. Please give the URL address of your university, your department, or of your personal website.")
     end
   end
