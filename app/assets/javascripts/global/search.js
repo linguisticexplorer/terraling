@@ -60,6 +60,7 @@
       queryTokenizer: Bloodhound.tokenizers.whitespace,
       prefetch: {
         url: getPrefetchURL(type, group),
+        ttl: 1000,
         filter: dataTransform
         // Later add some stuff in here to show a feedback to the user while waiting an async response
         // ,ajax: {
