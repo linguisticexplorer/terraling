@@ -1,5 +1,6 @@
 class Users::UsersController  < ApplicationController
-  before_action :require_admin
+  before_action :require_admin, only: [:index, :create]
+  before_action :require_admin_or_self, only: [:show, :update]
 
   def index
 
@@ -23,7 +24,7 @@ class Users::UsersController  < ApplicationController
   def update
     @user = User.find(params[:id])
 
-    if params[:resource]
+    if params[:resource] && current_user.admin?
       if params[:resource][:id].blank?
         member = Membership.where(member_id: @user.id).first || Membership.new(member_id: @user.id)
       else
@@ -38,18 +39,19 @@ class Users::UsersController  < ApplicationController
       member.save!
     end
 
-    if params[:remove]
+    if params[:remove] && current_user.admin?
       params[:remove].each do |id|
         Membership.delete(id)
       end
     end
-    if params[:remove_role]
+
+    if params[:remove_role] && current_user.admin?
       params[:remove_role].each do |id|
         Membership.find_by_member_id(@user.id).remove_expertise_in(Ling.find_by_id(id))
       end
     end
 
-    if params[:userteams]
+    if params[:userteams] && current_user.admin?
       userteams = UserTeam.teams_with_user_id(params[:id]).all
       userteams.each do |ut|
         ut.destroy!
@@ -63,9 +65,13 @@ class Users::UsersController  < ApplicationController
     end
 
     @user.name = params[:name] unless params[:name].blank?
-    @user.email = params[:email] unless params[:email].blank?
     @user.website = params[:website] unless params[:website].blank?
-    @user.access_level = params[:access_level][:level] unless params[:access_level].blank?
+
+    if current_user.admin?
+      @user.email = params[:email] unless params[:email].blank?
+      @user.access_level = params[:access_level][:level] unless params[:access_level].blank?
+    end
+
     @user.save!
 
     get_data
@@ -127,5 +133,9 @@ class Users::UsersController  < ApplicationController
 
   def require_admin
     render :unauthorized unless current_user && current_user.admin?
+  end
+
+  def require_admin_or_self
+    render :unauthorized unless (current_user && params[:id].to_i == current_user.id) || current_user.admin?
   end
 end
