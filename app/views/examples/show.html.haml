@@ -16,6 +16,8 @@
       = link_to group_examples_path(current_group), :class => "btn btn-default" do
         %i.glyphicon.glyphicon-arrow-left
         Back
+    - if can_see? :destroy, @example.ling
+      = link_to "Delete #{current_group.example_name}", group_example_path(current_group, @example, :ling => "true"), :class => 'btn btn-danger btn-default pull-right', :data => { :confirm => 'Are you sure?' }, :method => :delete
     - if can_see? :update, @example.ling
       = link_to edit_group_example_path(current_group, @example), :class => "btn btn-default pull-right" do
         = icon 'edit', "Edit #{current_group.example_name}"
