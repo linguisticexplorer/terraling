@@ -74,6 +74,7 @@ class SearchesController < GroupDataController
 
   def create
     
+    params.permit(:search)
     @search = Search.new(params[:search]) do |s|
       s.creator = current_user
       s.group   = current_group
