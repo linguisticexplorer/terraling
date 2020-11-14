@@ -22,7 +22,7 @@ class Property < ApplicationRecord
   include Concerns::Orders
 
   # override
-  scope :at_depth, lambda { |depth| all & Category.at_depth(depth) }
+  scope :at_depth, -> (depth) { joins(:category).where(categories: {depth: depth}) }
 
   def depth
     category.depth

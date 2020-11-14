@@ -13,6 +13,13 @@ class PropertiesController < GroupDataController
       format.js
     end
   end
+ 
+  def by_depth
+    # Look for ids first, then for depth or get depth 0 by default
+    condition = params[:id] ? Property.find(params[:id]).depth : params[:depth] || 0
+    Rails.logger.info "\n\n\n\n\n#{current_group.properties.inspect.to_s}\n\n\n\n\n"
+    render :json => current_group.properties.at_depth(condition).to_json.html_safe
+  end
 
   def list
     @property = Property.new do |p|
@@ -68,9 +75,26 @@ class PropertiesController < GroupDataController
       logger.info @output
     end
 
-    respond_with(@values) do |format|
+    lings = []
+    @values.each do |value|
+      ling = {
+        "name" => value.ling.name,
+        "id" => value.ling.id,
+        "value" => value.value
+      }
+      
+      lings << ling
+    end
+
+    @property_obj = {
+      "property_name" => @property.name,
+      "property_depth" => @property.depth,
+      "property_lings" => lings
+    }
+
+    respond_to do |format|
       format.html
-      format.js
+      format.any(:json) { send_data(JSON.generate(@property_obj).encode('utf-8'), :type => "application/json; charset=utf-8;") }
     end
     
   end

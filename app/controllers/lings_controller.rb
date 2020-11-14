@@ -50,7 +50,7 @@ class LingsController < GroupDataController
     @ordered_values.each do |value|
       next if value.property.nil?
       elps = current_group.examples_lings_properties.where(:lings_property_id => value.id).to_a #find_all_by_lings_property_id(value.id)
-      ling_obj = { "property_name" => value.property.nil? ? "" : value.property.name, "examples" => [] }
+      ling_obj = { "name" => value.property.nil? ? "" : value.property.name, "id" => value.property.nil? ? "" : value.property.id, "value" => value.value, "examples" => [] }
       if elps.any?
         elps.each do |elp|
           example = Example.find(elp.example.id)
@@ -65,8 +65,18 @@ class LingsController < GroupDataController
       end
       examples << ling_obj
     end
+
+    @ling.storable_keys.each do |key|
+      if key =~ /description/ && @ling.stored_value(key) != ''
+        @description = @ling.stored_value(key).html_safe
+      else
+        @description = "No description provided"
+      end
+    end
+    
     @ling_obj = {
       "ling_name" => @ling.name,
+      "ling_description" => @description,
       "ling_properties" => examples
     }
 
