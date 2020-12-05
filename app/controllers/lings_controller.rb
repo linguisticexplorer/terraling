@@ -360,7 +360,8 @@ class LingsController < GroupDataController
   end
 
   def ling_params
-    params.require(:ling).permit(:name, :property, :ling, :value, :group, :ling_id, :property_id, :group_id)
+    params.require(:ling).permit(:name, :property, :ling, :value, :group,
+      :ling_id, :property_id, :group_id, :parent_id)
   end
 
   private
