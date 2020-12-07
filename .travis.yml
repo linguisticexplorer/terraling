@@ -23,4 +23,5 @@ after_success:
 - chmod 600 tmp/.ssh/travis_rsa
 - eval "$(ssh-agent -s)"
 - ssh-add tmp/.ssh/travis_rsa
+- curl ifconfig.co
 - DEPLOY_HOST=$DEPLOY_HOST BRANCH=$BRANCH RAILS_ENV=production bundle exec cap deploy
