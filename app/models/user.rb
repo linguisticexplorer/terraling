@@ -77,7 +77,7 @@ class User < ApplicationRecord
       # is thruthy if is assigned to that resource
       # It is no more necessary to see if there are not experts for that ling
       is_expert = group.membership_for(self).has_role?(:expert, ling)
-      is_expert_of_parent = group.membership_for(self).has_role?(:expert, ling.parent)
+      is_expert_of_parent = ling.respond_to?(:parent) && group.membership_for(self).has_role?(:expert, ling.parent)
 
       return is_expert || is_expert_of_parent
     end
@@ -96,7 +96,7 @@ class User < ApplicationRecord
     else
       if ling && member_of?(group) && is_expert?(group)
         is_expert = group.membership_for(self).has_role?(:expert, ling)
-        is_expert_of_parent = group.membership_for(self).has_role?(:expert, ling.parent)
+        is_expert_of_parent = ling.respond_to?(:parent) && group.membership_for(self).has_role?(:expert, ling.parent)
         # if the user is an expert member, he can see the create ling action icon also if he has not been assigned to that ling
         is_expert || is_expert_of_parent || action == :create
       else
