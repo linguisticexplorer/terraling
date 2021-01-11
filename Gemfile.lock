@@ -312,7 +312,7 @@ GEM
     recaptcha (4.9.0)
       json
     redcard (1.1.0)
-    redcarpet (3.5.0)
+    redcarpet (3.5.1)
     reek (6.0.1)
       kwalify (~> 0.7.0)
       parser (>= 2.5.0.0, < 2.8, != 2.5.1.1)
