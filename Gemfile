@@ -119,6 +119,7 @@ group :test, :development do
   gem "thin", "~>1.6.2"
   # Puma time
   gem "puma"
+  gem "puma-status"
 
   # Disable for the moment
   # gem "spork-rails"
