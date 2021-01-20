@@ -1,2 +1,2 @@
 #!/bin/sh
-bundle exec pumactl -P ./.pids/puma.pid restart
+bundle exec pumactl -P tmp/pids/puma.pid restart
