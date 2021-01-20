@@ -58,7 +58,7 @@ namespace :deploy do
   task :start do
     # run "bundle install --with development"
     # run "passenger start"
-    run "#{try_sudo} ./#{File.join(current_path,'start.sh')}"
+    run "#{try_sudo} #{File.join(current_path,'start.sh')}"
   end
   task :stop do ; end
   task :restart, :roles => :app, :except => { :no_release => true } do
@@ -68,7 +68,7 @@ namespace :deploy do
     # Note: Remember to backup before deploying...
     # run "/usr/bin/env bundle exec rake db:migrate"
     # Restart
-    run "#{try_sudo} ./#{File.join(current_path,'restart.sh')}"
+    run "#{try_sudo} /#{File.join(current_path,'restart.sh')}"
   end
   task :migrate do ; end
 end
