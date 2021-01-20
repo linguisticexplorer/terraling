@@ -117,6 +117,8 @@ group :test, :development do
 
   # Use Thin as web server
   gem "thin", "~>1.6.2"
+  # Puma time
+  gem "puma"
 
   # Disable for the moment
   # gem "spork-rails"
