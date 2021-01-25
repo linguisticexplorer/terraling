@@ -313,7 +313,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.19.0, < 2.0)
     rainbow (3.0.0)
-    rake (11.3.0)
+    rake (13.0.3)
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
@@ -484,7 +484,7 @@ DEPENDENCIES
   rails (= 5.2.4.3)
   rails-controller-testing
   rails_best_practices (~> 1.20.0)
-  rake (= 11.3.0)
+  rake (= 13.0.3)
   recaptcha (~> 4.9.0)
   redcarpet
   rolify (~> 5.1.0)
