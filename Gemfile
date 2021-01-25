@@ -8,7 +8,7 @@ gem 'passenger', "~>6.0.6"
 gem "puma"
 gem "puma-status"
 # # It forces to use a specific version of Rake
-gem "rake", "= 11.3.0"
+gem "rake", "13.0.3"
 gem "nokogiri", ">= 1.5.6"
 # # Nice CLI progress bar for ruby
 gem "progressbar", "~>0.21.0"
