@@ -94,6 +94,9 @@ class User < ApplicationRecord
     if admin? || self.group_admin_of?(group)
       can_user_perform_the_action
     else
+      if action.eql?(:destroy)
+        return false
+      end
       if ling && member_of?(group) && is_expert?(group)
         is_expert = group.membership_for(self).has_role?(:expert, ling)
         is_expert_of_parent = ling.respond_to?(:parent) && group.membership_for(self).has_role?(:expert, ling.parent)
