@@ -123,7 +123,7 @@ class Users::UsersController  < ApplicationController
     end
     group_id_member = group_id_member.compact
 
-    @role_resources = [['','']] + (group_id_member.collect { |group| group.lings.collect {|d| {d.name => d.id}} }.flatten.collect{|s| s.to_a.flatten})
+    @role_resources = [['','']] + (group_id_member.collect { |group| group.lings.select{|x| x.depth < 1}.collect {|d| {d.name => d.id}} }.flatten.collect{|s| s.to_a.flatten})
 
     @membership_levels = [Membership::ACCESS_LEVELS].flatten
     @role_levels = [Membership::ROLES].flatten
