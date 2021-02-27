@@ -45,6 +45,7 @@
               %div{:class => "thumbnail dashboard-box #{number_to_text_class(percentage)}-bg" }
                 #ling_settings.pull-right
                   - new_ling = Ling.new{|l| l.group = current_group}
+                  - new_ling.depth = depth
                   - if can_see? :create, new_ling
                     = link_to_new_group_ling new_ling, depth, :class => "btn btn-success", :rel => "tooltip", :title => "New #{@group.ling_name_for_depth(depth)}", :data => {:toggle => "tooltip", :animation => "true", :placement => "right"} do
                       = icon "plus"
