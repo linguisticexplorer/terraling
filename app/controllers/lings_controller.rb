@@ -32,7 +32,7 @@ class LingsController < GroupDataController
       current_group.lings.at_depth(depth).
         alpha_paginate(params[:letter], pagination_options)
     end
-    return load_stats(@lings_by_depth, params[:plain], 1)
+    return load_stats([@lings_by_depth.first.first, @lings_by_depth.last.first].flatten, params[:plain], 1)
   end
 
   def show
