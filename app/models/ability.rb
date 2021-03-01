@@ -36,6 +36,10 @@ class Ability
       can     :update, group_expert_data,       :group_id => user.is_expert_for_groups
       can     :create, Example,                 :group_id => user.is_expert_for_groups
       can     :create, ExamplesLingsProperty,       :group_id => user.is_expert_for_groups
+      # The expert can create ling at depth=1 for the ling they are expert for
+      can     :create, Ling do |ling|
+        (user.is_expert_for_groups.include?(:group_id) || user.is_expert_for_groups.include?(ling.group_id)) && ling.depth == 1
+      end
       # turn on all searches advanced features
       can :search, Search,        :group => { :privacy => Group::PUBLIC }
       
