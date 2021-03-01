@@ -32,7 +32,12 @@ class LingsController < GroupDataController
       current_group.lings.at_depth(depth).
         alpha_paginate(params[:letter], pagination_options)
     end
-    return load_stats([@lings_by_depth.first.first, @lings_by_depth.last.first].flatten, params[:plain], 1)
+    if current_group.depths.size > 1
+      ling_stats = [@lings_by_depth.first.first, @lings_by_depth.last.first].flatten
+    else
+      ling_stats = @lings_by_depth.first.first
+    end
+    return load_stats(ling_stats, params[:plain], 0)
   end
 
   def show
