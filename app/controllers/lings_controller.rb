@@ -377,7 +377,7 @@ class LingsController < GroupDataController
       ling_property_count = LingsProperty.in_group(current_group).where(ling_id: ling_ids).group(:ling_id).count
       category = Category.in_group(current_group).at_depth(depth)
       props_total = Property.in_group(current_group).where(:category_id => category).count(:id)
-      ling_collection.each { |ling| ling.info = (ling_property_count[ling.id] || 0) * 100 / props_total }
+      ling_collection.each { |ling| ling.info = props_total == 0 ? 0 : ((ling_property_count[ling.id] || 0) * 100 / props_total) }
       ling_collection.map  { |ling| ling.get_infos }
 
       @stored_kv = {}
