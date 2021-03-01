@@ -288,7 +288,7 @@ class LingsController < GroupDataController
       l.group = current_group
     end
 
-    is_authorized? :create, @ling, true
+    is_authorized? :create, @ling
   end
 
   def edit
