@@ -6,7 +6,7 @@
     - if @group.description.present?
       %p= @group.description
     %p
-      = link_to current_group, :class => "btn btn-default" do
+      = link_to 'javascript:history.back()', :class => "btn btn-default" do
         %i.glyphicon.glyphicon-arrow-left
         Back
       - if can_see? :update, @group
@@ -24,7 +24,7 @@
               %td= @group.send(attr_name)
     %br/
     %p
-      = link_to current_group, :class => "btn btn-default" do
+      = link_to 'javascript:history.back()', :class => "btn btn-default" do
         %i.glyphicon.glyphicon-arrow-left
         Back
       - if can_see? :update, @group

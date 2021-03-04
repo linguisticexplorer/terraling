@@ -9,11 +9,11 @@
 .row
   .col-md-12
     - if @example.ling
-      = link_to [current_group, @example.ling], :class => "btn btn-default" do
+      = link_to 'javascript:history.back()', :class => "btn btn-default" do
         %i.glyphicon.glyphicon-arrow-left
         Back
     - else
-      = link_to group_examples_path(current_group), :class => "btn btn-default" do
+      = link_to 'javascript:history.back()', :class => "btn btn-default" do
         %i.glyphicon.glyphicon-arrow-left
         Back
     - if can_see? :destroy, @example.ling
