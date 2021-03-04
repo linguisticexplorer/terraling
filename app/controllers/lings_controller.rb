@@ -13,7 +13,7 @@ class LingsController < GroupDataController
     
     @lings, @params = @all_lings.alpha_paginate(params[:letter], pagination_options)
 
-    return load_stats(@lings, params[:plain], 0)
+    return load_stats(@lings, params[:plain], @depth)
   end
  
   def by_depth
@@ -32,7 +32,12 @@ class LingsController < GroupDataController
       current_group.lings.at_depth(depth).
         alpha_paginate(params[:letter], pagination_options)
     end
-    return load_stats(@lings_by_depth, params[:plain], 1)
+    if current_group.depths.size > 1
+      ling_stats = [@lings_by_depth.first.first, @lings_by_depth.last.first].flatten
+    else
+      ling_stats = @lings_by_depth.first.first
+    end
+    return load_stats(ling_stats, params[:plain], 0)
   end
 
   def show
@@ -288,7 +293,7 @@ class LingsController < GroupDataController
       l.group = current_group
     end
 
-    is_authorized? :create, @ling, true
+    is_authorized? :create, @ling
   end
 
   def edit
@@ -366,21 +371,20 @@ class LingsController < GroupDataController
 
   private
 
-  def load_stats(lings, plain, depth)
+  def load_stats(ling_collection, plain, depth)
     unless plain
-      ling_collection = depth > 0 ? lings.first.first : lings
       ling_ids = ling_collection.collect{|s| s.id}
       ling_property_count = LingsProperty.in_group(current_group).where(ling_id: ling_ids).group(:ling_id).count
-      category = Category.in_group(current_group).at_depth(ling_collection.first.depth)
+      category = Category.in_group(current_group).at_depth(depth)
       props_total = Property.in_group(current_group).where(:category_id => category).count(:id)
-      ling_collection.each { |ling| ling.info = (ling_property_count[ling.id] || 0) * 100 / props_total }
+      ling_collection.each { |ling| ling.info = props_total == 0 ? 0 : ((ling_property_count[ling.id] || 0) * 100 / props_total) }
       ling_collection.map  { |ling| ling.get_infos }
 
       @stored_kv = {}
       stored_kvs = StoredValue.where(storable_type: "Ling").where(storable_id: ling_ids).where(key: current_group.ling_storable_keys)
       stored_kvs.each {|sv| @stored_kv[sv.storable_id] = {sv.key => sv.value}.merge(@stored_kv[sv.storable_id] || {}) }
     end
-    lings
+    ling_collection
   end
 
   def load_infos(ling)

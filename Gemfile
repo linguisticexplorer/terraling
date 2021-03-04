@@ -4,8 +4,11 @@ source 'https://rubygems.org'
 gem 'rails', '5.2.4.3'
 # # Use passenger as the web server
 gem 'passenger', "~>6.0.6"
+# Puma time
+gem "puma"
+gem "puma-status"
 # # It forces to use a specific version of Rake
-gem "rake", "= 11.3.0"
+gem "rake", "13.0.3"
 gem "nokogiri", ">= 1.5.6"
 # # Nice CLI progress bar for ruby
 gem "progressbar", "~>0.21.0"
@@ -117,9 +120,6 @@ group :test, :development do
 
   # Use Thin as web server
   gem "thin", "~>1.6.2"
-  # Puma time
-  gem "puma"
-  gem "puma-status"
 
   # Disable for the moment
   # gem "spork-rails"
