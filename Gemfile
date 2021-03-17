@@ -8,7 +8,7 @@ gem 'passenger', "~>6.0.6"
 gem "puma"
 gem "puma-status"
 # # It forces to use a specific version of Rake
-gem "rake", "= 11.3.0"
+gem "rake", "13.0.3"
 gem "nokogiri", ">= 1.5.6"
 # # Nice CLI progress bar for ruby
 gem "progressbar", "~>0.21.0"
@@ -28,7 +28,7 @@ gem 'mysql2', '~>0.4.4'
 gem 'rack-cors', "~>1.1.1"
 
 # # for Users and authentication
-gem 'devise',    "~>4.4.0"
+gem 'devise',    "~>4.7.3"
 gem 'humanizer', "~>2.6.3"
 gem 'cancancan', "~>3.1.0"
 gem 'rolify',    "~>5.1.0"
@@ -48,7 +48,7 @@ gem "alphabetical_paginate", :git => "git://github.com/dej611/alphabetical_pagin
 gem 'iconv', "~>1.0.4"
 # # Bootstrap gem
 gem "autoprefixer-rails", "~>6.4.0"
-gem 'bootstrap-sass', "~> 3.2.0"
+gem 'bootstrap-sass', "~> 3.4.1"
 # # Some more icons
 gem 'font-awesome-sass', "~> 4.2.0"
 # # sass support: it should be out of the assets group!
