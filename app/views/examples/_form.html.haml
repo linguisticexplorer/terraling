@@ -41,7 +41,7 @@
           %h3 Related to:
       .row
         .col-md-12
-          = label_tag "ling-search-field", current_group.ling0_name, :class => "control-label"
+          = label_tag "ling-search-field", "#{@ling.depth == 0 ? current_group.ling0_name : current_group.ling0_name }", :class => "control-label"
           .controls
             = text_field_tag "ling_name", "#{@ling ? @ling.name : "" }", :id => "ling-search-field", :placeholder => "Loading...", :class => "form-control", :autocomplete => "off", :disabled => true
             = hidden_field_tag "ling_id", (@ling && @ling.id) || ""
