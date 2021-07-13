@@ -4,6 +4,10 @@ module ApplicationHelper
     "support@terraling.com".html_safe
   end
 
+  def support_email_link
+    "<a href=\"mailto:#{support_email}\">support#{icon('at')}terraling.com</a>".html_safe
+  end
+
   def link_to_google_web_font(font)
     "<link href='https://fonts.googleapis.com/css?family=#{u(font)}' rel='stylesheet' type='text/css'>".html_safe
   end
