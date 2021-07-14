@@ -75,6 +75,9 @@ LinguisticExplorer::Application.routes.draw do
     resources :properties, :examples, :categories, :memberships
   end
 
+  # Citation guide.
+  get '/cite', to: 'cite#index'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
