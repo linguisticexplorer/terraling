@@ -1,0 +1,273 @@
+- page_heading 'Citation guidelines'
+
+.row
+  .col-md-4.col-md-push-8
+    %h2 Contents
+    %ol.toc
+      %li
+        = link_to 'Citing TerraLing in publications', '#publications'
+        %ol
+          %li= link_to 'Citing the database as a whole', '#general'
+          %li= link_to 'Citing an individual dataset', '#db'
+          %li= link_to 'Citing property definitions or glossary entries',
+            '#properties'
+          %li= link_to 'Citing examples and acknowledging language experts',
+            '#examples'
+      %li= link_to 'Recording your contributions on your CV', '#cv'
+
+  .col-md-8.col-md-pull-4
+    %h1 Citation Guidelines
+
+    %p
+      Here is a set of guidelines for citing TerraLing contributions. Any
+      comments or suggestions for improvement are welcome; please contact us at
+      = succeed '.' do
+        = support_email_link
+
+    %h2#publications Citing TerraLing in publications
+
+    %h3#general Citing the database as a whole
+    %blockquote.citation
+      Koopman, Hilda, Dennis Shasha, Hannan Butt and Shailesh Apas Vasandani
+      (eds.), TerraLing, 2017&ndash;,
+      = succeed '.' do
+        = link_to nil, 'https://terraling.com/'
+      Accessed on [DATE].
+
+    %h3#db Citing an individual dataset
+    %blockquote.citation
+      [TEAM LEADER/EDITORS] (eds.) ([DATE STARTED&ndash;]), [NAME OF DATABASE],
+      [URL]. Accessed on [DATE].
+
+    %p Examples:
+    %blockquote.citation
+      Koopman, Hilda (ed.) (2012&ndash;), SSWL,
+      = succeed '.' do
+        = link_to nil, 'https://terraling.com/groups/7'
+      Accessed on [DATE].
+    %blockquote.citation
+      Schmitt, Viola, Enrico Flor, Nina Haslinger, Eva Rosina, Magdalena
+      Roszkowski and Valerie Wurm (eds.) (2017&ndash;), Conjunction and
+      Disjunction,
+      = succeed '.' do
+        = link_to nil, 'https://terraling.com/groups/8'
+      Accessed on [DATE].
+
+    %p
+      We are currently working on making detailed citation information
+      available on each group page. This will include the year the project
+      started as well as the list of editors and the order in which the editors
+      should be cited.
+
+    %h3#properties Citing property definitions or glossary entries
+    %p
+      Property authors develop schemas of variation and write property
+      definitions and glossary entries. This requires a considerable amount of
+      research. Property authors must therefore be cited when you use their
+      definitions and schemas of variation.
+
+    %p
+      The page for a property definition lists the author(s) of the property
+      definition as &ldquo;Contributed by/Set by [AUTHOR/TEAM]&rdquo;:
+    %figure.screenshot
+      = image_tag 'cite-1.png', class: 'img-responsive'
+      %figcaption
+        Figure 1: Authors of a property definition are credited on the
+        respective property page.
+
+    %p
+      If a property is authored by a team, you can find the team members by
+      clicking on the in the Team column of the Properties page for the dataset
+      in question:
+    %figure.screenshot
+      = image_tag 'cite-2.png', class: 'img-responsive'
+      %figcaption
+        Figure 2: The list of properties in a dataset links to the teams that
+        developed the individual properties.
+
+    %p
+      You will then be taken to a page listing the team members and possibly
+      a &ldquo;primary author&rdquo; who should be cited first.
+    %p
+      When you cite a property definition or glossary entry,
+      = succeed '.' do
+        %em.italic<
+          all the members of the respective team should be listed as authors
+
+    %h4 Citing a single property definition
+    %blockquote.citation
+      Collins, Chris, Andrea Cattaneo and Jim Wood (2011): Predicative
+      Agreement.  In: SSWL,
+      = succeed '.' do
+        = link_to nil, 'https://terraling.com/groups/7/properties/407'
+      Accessed on [DATE].
+
+    %h4 Citing a subgroup of properties
+    %blockquote.citation
+      Guardiano, Cristina et al. (2015&ndash;), 33 Article properties for
+      objects, from
+      = link_to nil, 'https://terraling.com/groups/7/properties/467'
+      to
+      = succeed '.' do
+        = link_to nil, 'https://terraling.com/groups/7/properties/500'
+      In: SSWL. Accessed on [DATE].
+
+    %h4 Citing a glossary entry hosted on an external site
+    %p
+      When citing a downloadable document or external glossary page linked to
+      in the property definition, the members of the team behind the property
+      definition should be credited. For instance, the property definition for
+      = link_to 'Coordination of Proper Names',
+        'https://terraling.com/groups/8/properties/536'
+      links to an externally hosted
+      = succeed '.' do
+        = link_to 'glossary entry',
+          'https://github.com/terraling-glossary/glossary/wiki/Coordination'
+
+    %blockquote.citation
+      Schmitt, Viola, Enrico Flor, Nina Haslinger, Eva Rosina, Magdalena
+      Roszkowski and Valerie Wurm (2017&ndash;), Coordination. TerraLing
+      glossary entry,
+      = succeed '.' do
+        = link_to nil,
+          'https://github.com/terraling-glossary/glossary/wiki/Coordination'
+      Accessed on [DATE].
+
+    %h3#examples Citing examples and acknowledging language experts
+    %p
+      We recommend that if you use datasets in presentations or written work,
+      you minimally use footnotes to acknowledge all the language experts who
+      contributed the data in the datasets.
+    %p
+      We encourage generous and inclusive citations for language data, and
+      sending a contributor a note to this effect. If language data ultimately
+      comes from some source other than TerraLing (e.g., theses, published
+      paper, monographs, website, etc.), then that source should be cited.
+    %p
+      As for citing examples, we suggest two options&mdash;either acknowledging
+      the language expert in the text and adding a footnote with a link to the
+      example, or alternatively providing the language expert&lsquo;s name and
+      the link in a footnote added to the language name.
+
+    %h4 Option 1
+    %p
+      In the text: [EXAMPLE] [LANGUAGE NAME], [CONTRIBUTOR]
+    %p
+      Footnote: TerraLing group [GROUP TITLE], [LINK TO EXAMPLE PAGE]. Accessed
+      on [DATE].
+
+    %h5 Example
+    %p In the text:
+    %pre
+      ma.laŋ   má   yé      ma-kɛ́ŋí
+      6.onions 6.SM BE.PRES 6-big
+      &lsquo;The onions are big.&rsquo; (Basaá, Paul Roger Bassong
+      %sup> 1
+      )
+
+    %p
+      Footnote:
+      = succeed 'TerraLing group' do
+        %sup 1
+      = succeed ',' do
+        %cite.dataset-name SSWL
+      = succeed '.' do
+        = link_to 'Example 1480',
+          'https://terraling.com/groups/7/examples/12944'
+      Accessed on [DATE].
+
+    %h4 Option 2
+    %p In the text: [EXAMPLE] [LANGUAGE NAME]
+    %p
+      Footnote: [CONTRIBUTOR], TerraLing group [GROUP TITLE], [LINK TO EXAMPLE
+      PAGE]. Accessed on [DATE].
+
+    %h4 Example
+    %p In the text:
+    %pre
+      ma.laŋ   má   yé      ma-kɛ́ŋí
+      6.onions 6.SM BE.PRES 6-big
+      &lsquo;The onions are big.&rsquo; (Basaá
+      %sup> 2
+      )
+    %p
+      Footnote:
+      = succeed 'Paul Roger Bassong' do
+        %sup 2
+      TerraLing group
+      = succeed ',' do
+        %cite.dataset-name SSWL
+      = succeed '.' do
+        = link_to 'Example 1480',
+          'https://terraling.com/groups/7/examples/12944'
+      Accessed on [DATE].
+
+    %p
+      As for in-text references, we suggest something along the following
+      lines:
+    %blockquote.citation
+      As shown by Paul Roger Bassong for Basaá (TerraLing group
+      = succeed ':' do
+        %cite.dataset-name SSWL
+      = succeed '),' do
+        = link_to 'Example 1480',
+          'https://terraling.com/groups/7/examples/12944'
+      &#8230;
+
+    %h2#cv Recording your contributions on your CV
+
+    %p
+      Contributors should record the details of their contributions on their
+      CV, personal or project website, and Research Statement.
+
+    %h3 Property authors
+    %p
+      Property authors should link to their property definitions and glossary
+      entries on their CV, personal website, and/or project website. This could
+      be done for example under a heading
+      = succeed ',' do
+        %em.italic Web publications
+      or under some other suitable heading. These should also be listed in
+      research statements and dossiers for the purposes of hiring or
+      promotions, stating the nature of the work involved.
+
+    %h3 Language experts
+    %p
+      We recommend Language Experts list their contributions on their CV. This
+      could be done for example under a suitable heading like
+      = succeed '.' do
+        %em.italic Web publications
+      In addition, language experts can download their datasets and make a PDF
+      of the data available on their personal webpage.
+
+    %p Here are some examples of different ways this could be recorded:
+    %blockquote.citation
+      Paul Roger Bassong (2014&ndash;), Language expert for Basaá for the
+      TerraLing groups
+      %cite.dataset-name SSWL
+      = surround '(', ')' do
+        = link_to nil, 'http://test.terraling.com/groups/7'
+      and
+      %cite.dataset-name Conjunction and Disjunction
+      = surround '(', ').' do
+        = link_to nil, 'http://test.terraling.com/groups/8'
+    %blockquote.citation
+      Contributions to TerraLing:
+      %br/
+      %span.hanging-indent
+        Paul Roger Bassong (2014&ndash;), Basaá. Dataset, examples, and
+        comments for TerraLing group
+        %cite.dataset-name SSWL
+        (property values: 150, examples: 151, as of August 18, 2020).
+      %br/
+      %span.hanging-indent
+        Paul Roger Bassong (2017&ndash;), Basaá. Dataset, examples, and
+        comments for TerraLing group
+        %cite.dataset-name Conjunction and Disjunction
+        (property values: 40, examples: 46, as of August 18, 2020).
+
+    %h3 Administrators
+    %p
+      List your administrative functions under Service to the Field or
+      Reviewing/Editing: [DATE], Administrator of TerraLing group [NAME OF
+      DATASET].
