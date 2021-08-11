@@ -768,3 +768,38 @@ body {
 .leaflet-control-zoom-fit {
   font-size: 18px;
 }
+
+// Table-of-contents on static pages.
+ol.toc {
+    list-style-type: upper-roman;
+    margin-left: 1em;
+}
+ol.toc > li > ol {
+    list-style-type: lower-alpha;
+    margin-left: 1.25em;
+}
+
+// Screenshots.
+figure.screenshot {
+    border: 5px solid #eeeeee;
+    margin: 2em auto;
+    padding: 1em;
+    width: 85%;
+}
+figure.screenshot figcaption {
+    font-style: italic;
+    margin-top: 0.5em;
+}
+
+// Citation styles.
+blockquote.citation {
+    font-size: 1em;
+}
+cite.dataset-name, cite.terraling {
+    font-style: italic;
+}
+span.hanging-indent {
+    display: inline-block;
+    padding-left: 1em;
+    text-indent: -1em;
+}
