@@ -89,7 +89,8 @@ class PropertiesController < GroupDataController
     @property_obj = {
       "property_name" => @property.name,
       "property_depth" => @property.depth,
-      "property_lings" => lings
+      "property_lings" => lings,
+      "property_description" => @output,
     }
 
     respond_to do |format|
