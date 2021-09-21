@@ -78,6 +78,9 @@ LinguisticExplorer::Application.routes.draw do
   # Citation guide.
   get '/cite', to: 'cite#index'
 
+  # Workshop pages.
+  get '/workshops/2021', to: 'workshops#year_2021'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
