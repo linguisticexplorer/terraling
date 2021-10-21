@@ -127,6 +127,23 @@ class GroupsController < ApplicationController
   end
 
   def group_params
-    params.require(:group).permit(:name, :group, :examples_lings_properties, :ling0_name, :ling1_name, :depth_maximum, :privacy)
+    params.require(:group).permit(
+      :name, 
+      :group, 
+      :examples_lings_properties, 
+      :ling0_name, 
+      :ling1_name, 
+      :depth_maximum, 
+      :privacy,
+      :example_fields,
+      :depth_maximum,
+      :ling_fields,
+      :category_name,
+      :property_name,
+      :lings_property_name,
+      :example_name,
+      :examples_lings_property_name,
+      :display_style
+    )
   end
 end
