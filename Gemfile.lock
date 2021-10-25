@@ -197,6 +197,7 @@ GEM
     launchy (2.5.0)
       addressable (~> 2.7)
     leaflet-rails (0.7.7)
+    libv8-node (15.14.0.1-x86_64-linux)
     loofah (2.9.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -234,6 +235,8 @@ GEM
       rake
     mini_mime (1.0.2)
     mini_portile2 (2.5.0)
+    mini_racer (0.4.0)
+      libv8-node (~> 15.14.0.0)
     minitest (5.14.3)
     modernizr-rails (2.7.1)
     multi_json (1.15.0)
@@ -491,6 +494,7 @@ DEPENDENCIES
   leaflet-rails (~> 0.7.3)
   meta_request
   metric_fu (~> 4.13.0)
+  mini_racer
   modernizr-rails (~> 2.7.1)
   mysql2 (~> 0.4.4)
   net-scp (~> 2.0.0)
