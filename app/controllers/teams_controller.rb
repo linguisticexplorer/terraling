@@ -63,7 +63,7 @@ class TeamsController < ApplicationController
         if @team.save
             redirect_to(@team, :notice => 'Team was successfully created.')
         else
-            ender :action => "new"
+            render :action => "new"
         end
     end
 
