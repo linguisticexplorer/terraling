@@ -106,6 +106,7 @@ GEM
     coderay (1.1.3)
     colorize (0.8.1)
     concurrent-ruby (1.1.8)
+    connection_pool (2.2.5)
     crass (1.0.6)
     cucumber (1.1.9)
       builder (>= 2.1.2)
@@ -196,6 +197,7 @@ GEM
     launchy (2.5.0)
       addressable (~> 2.7)
     leaflet-rails (0.7.7)
+    libv8-node (15.14.0.1-x86_64-linux)
     loofah (2.9.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -228,9 +230,13 @@ GEM
       reek (>= 5.4.0)
       roodi (~> 5.0.0)
     metric_fu-Saikuro (1.1.3)
-    mimemagic (0.3.8)
+    mimemagic (0.3.10)
+      nokogiri (~> 1)
+      rake
     mini_mime (1.0.2)
     mini_portile2 (2.5.0)
+    mini_racer (0.4.0)
+      libv8-node (~> 15.14.0.0)
     minitest (5.14.3)
     modernizr-rails (2.7.1)
     multi_json (1.15.0)
@@ -277,6 +283,8 @@ GEM
       rack (~> 2.0)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
+    rack-proxy (0.7.0)
+      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.2.4.3)
@@ -320,6 +328,13 @@ GEM
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    react_on_rails (12.0.4)
+      addressable
+      connection_pool
+      execjs (~> 2.5)
+      rails (>= 3.2)
+      rainbow (~> 3.0)
+      webpacker (>= 4.0)
     recaptcha (4.9.0)
       json
     redcard (1.1.0)
@@ -386,6 +401,7 @@ GEM
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
       websocket (~> 1.0)
+    semantic_range (3.0.0)
     sexp_processor (4.15.0)
     shoulda-matchers (4.3.0)
       activesupport (>= 4.2.0)
@@ -426,6 +442,11 @@ GEM
       json (>= 1.8.0)
     warden (1.2.9)
       rack (>= 2.0.9)
+    webpacker (5.4.3)
+      activesupport (>= 5.2)
+      rack-proxy (>= 0.6.1)
+      railties (>= 5.2)
+      semantic_range (>= 2.3.0)
     websocket (1.2.8)
     websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
@@ -473,6 +494,7 @@ DEPENDENCIES
   leaflet-rails (~> 0.7.3)
   meta_request
   metric_fu (~> 4.13.0)
+  mini_racer
   modernizr-rails (~> 2.7.1)
   mysql2 (~> 0.4.4)
   net-scp (~> 2.0.0)
@@ -490,6 +512,7 @@ DEPENDENCIES
   rails-controller-testing
   rails_best_practices (~> 1.20.0)
   rake (= 13.0.3)
+  react_on_rails (= 12.0.4)
   recaptcha (~> 4.9.0)
   redcarpet
   rolify (~> 5.1.0)
@@ -508,8 +531,9 @@ DEPENDENCIES
   tinymce-rails (~> 4.3.8)
   twitter-typeahead-rails (~> 0.10.5)
   uglifier (~> 2.5.3)
+  webpacker (~> 5.4)
   will_paginate (~> 3.3.0)
   will_paginate-bootstrap (~> 1.0.2)
 
 BUNDLED WITH
-   2.1.4
+   2.2.6
