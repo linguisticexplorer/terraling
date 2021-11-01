@@ -81,7 +81,7 @@ class TeamsController < ApplicationController
         is_authorized? :update, @team
     
         if @team.update_attributes(team_params)
-          redirect_to(@team, :notice => 'Group was successfully updated.')
+          redirect_to(@team, :notice => 'Group was successfully updated!')
         else
           render :action => "edit"
         end
