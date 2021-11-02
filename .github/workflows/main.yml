@@ -37,6 +37,7 @@ jobs:
       - name: Run a multi-line script
         env: # Or as an environment variable
           ENC_PASS: ${{ secrets.ENC_PASS }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
         run: |
           mkdir -p tmp/.ssh
           openssl version
@@ -46,6 +47,6 @@ jobs:
           chmod 600 tmp/.ssh/travis_rsa
           eval "$(ssh-agent -s)"
           ssh-add tmp/.ssh/travis_rsa
-          DEPLOY_HOST=$DEPLOY_HOST BRANCH=$BRANCH RAILS_ENV=production bundle exec cap deploy
+          DEPLOY_HOST=$DEPLOY_HOST BRANCH=sprint RAILS_ENV=production bundle exec cap deploy
           
       
