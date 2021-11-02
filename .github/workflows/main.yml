@@ -41,6 +41,7 @@ jobs:
         run: |
           mkdir -p tmp/.ssh
           openssl version
+          echo $ENC_PASS
           openssl enc -aes-256-cbc -d -md sha512 -pbkdf2 -iter 100000 -salt -in $PRIVATE_KEY_NAME -out tmp/.ssh/travis_rsa -k $ENC_PASS
           chmod 700 tmp/.ssh/
           chmod 600 tmp/.ssh/travis_rsa
