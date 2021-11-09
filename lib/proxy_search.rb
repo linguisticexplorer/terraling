@@ -18,7 +18,7 @@ class ProxySearch < Rack::Proxy
     request = Rack::Request.new(env)
 
     if request.path =~ %r{/searches/new|/searches/results|/static|/icons}
-      env["HTTP_HOST"] = (ENV["NEW_SEARCH_HOST"] || "localhost") + ":" + (ENV["NEW_SEARCH_PORT"] || 3000)
+      env["HTTP_HOST"] = (ENV["NEW_SEARCH_HOST"] || "localhost") + ":" + (ENV["NEW_SEARCH_PORT"] || "3000")
     end
   end
 end
