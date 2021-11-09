@@ -41,9 +41,3 @@ coverage/*
 
 # Compile the assets on the production server
 public/assets
-/public/packs
-/public/packs-test
-/node_modules
-/yarn-error.log
-yarn-debug.log*
-.yarn-integrity
