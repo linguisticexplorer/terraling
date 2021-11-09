@@ -279,6 +279,8 @@ GEM
       rack (~> 2.0)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
+    rack-proxy (0.7.0)
+      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.2.4.3)
@@ -488,6 +490,7 @@ DEPENDENCIES
   puma
   puma-status
   rack-cors (~> 1.1.1)
+  rack-proxy (~> 0.7.0)
   rails (= 5.2.4.3)
   rails-controller-testing
   rails_best_practices (~> 1.20.0)
@@ -514,4 +517,4 @@ DEPENDENCIES
   will_paginate-bootstrap (~> 1.0.2)
 
 BUNDLED WITH
-   2.1.4
+   2.2.6
