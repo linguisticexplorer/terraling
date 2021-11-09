@@ -17,7 +17,7 @@ class ProxySearch < Rack::Proxy
   def rewrite_env(env)
     request = Rack::Request.new(env)
 
-    if request.path =~ %r{/searches|/static|/icons}
+    if request.path =~ %r{/searches/new|/searches/results|/static|/icons}
       env["HTTP_HOST"] = (ENV["NEW_SEARCH_HOST"] || "localhost") + ":" + (ENV["NEW_SEARCH_PORT"] || 5000)
     end
   end
