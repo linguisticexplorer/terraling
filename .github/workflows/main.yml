@@ -39,6 +39,7 @@ jobs:
           ENC_PASS: ${{ secrets.ENC_PASS }}
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
         run: |
+          curl ifconfig.co
           mkdir -p tmp/.ssh
           openssl version
           echo $ENC_PASS
