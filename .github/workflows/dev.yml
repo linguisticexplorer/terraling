@@ -57,7 +57,7 @@ jobs:
           
       - name: Deploy with Capistrano
         env:
-          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_HOST: ${{ secrets.DEV_DEPLOY_HOST }}
         run: |
           DEPLOY_HOST=$DEPLOY_HOST BRANCH=dev RAILS_ENV=production bundle exec cap deploy
           
