@@ -6,8 +6,6 @@ on:
   # Triggers the workflow on push or pull request events but only for the sprint branch
   push:
     branches: [ sprint ]
-  pull_request:
-    branches: [ sprint ]
 
   workflow_dispatch:
 
