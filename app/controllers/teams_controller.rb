@@ -63,7 +63,7 @@ class TeamsController < ApplicationController
         if @team.save
             redirect_to(@team, :notice => 'Team was successfully created.')
         else
-            ender :action => "new"
+            render :action => "new"
         end
     end
 
@@ -81,7 +81,7 @@ class TeamsController < ApplicationController
         is_authorized? :update, @team
     
         if @team.update_attributes(team_params)
-          redirect_to(@team, :notice => 'Group was successfully updated.')
+          redirect_to(@team, :notice => 'Group was successfully updated!')
         else
           render :action => "edit"
         end

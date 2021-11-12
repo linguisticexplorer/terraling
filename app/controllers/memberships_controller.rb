@@ -63,7 +63,7 @@ class MembershipsController < GroupDataController
 
     resource_ids = @membership.roles.map(&:resource_id)
 
-    @lings = current_group.lings.find(resource_ids)
+    @lings = current_group.lings.where(:id => resource_ids)
 
     if @membership.is_expert?
       # Just Lings for the moment
