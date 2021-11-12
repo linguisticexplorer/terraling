@@ -44,7 +44,7 @@ jobs:
         env:
           AWS_SECURITY_GROUP: ${{ secrets.AWS_SECURITY_GROUP }}
         run: |
-          aws ec2 authorize-security-group-ingress --group-id $AWS_SECURITY_GROUP --protocol tcp --port 22 --cidr $(curl https://checkip.amazonaws.com)
+          aws ec2 authorize-security-group-ingress --group-id $AWS_SECURITY_GROUP --protocol tcp --port 22 --cidr $(curl https://checkip.amazonaws.com)/32
           
       - name: Prepare SSH key
         env:
