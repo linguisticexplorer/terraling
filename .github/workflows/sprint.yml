@@ -1,0 +1,64 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Production CI
+
+on:
+  # Triggers the workflow on push or pull request events but only for the sprint branch
+  push:
+    branches: [ sprint ]
+  pull_request:
+    branches: [ sprint ]
+
+  workflow_dispatch:
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: Set up Ruby
+      # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
+      # change this to (see https://github.com/ruby/setup-ruby#versioning):
+      # uses: ruby/setup-ruby@v1
+        uses: ruby/setup-ruby@473e4d8fe5dd94ee328fdfca9f8c9c7afc9dae5e
+        with:
+          ruby-version: 2.6.5
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+          
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+          role-duration-seconds: 1200
+          role-session-name: CapistranoDeploySession
+          
+      - name: Add IP to AWS Security Group
+        env:
+          AWS_SECURITY_GROUP: ${{ secrets.AWS_SECURITY_GROUP }}
+        run: |
+          aws ec2 authorize-security-group-ingress --group-id $AWS_SECURITY_GROUP --protocol tcp --port 22 --cidr $(curl https://checkip.amazonaws.com)/32
+          
+      - name: Prepare SSH key
+        env:
+          ENC_PASS: ${{ secrets.ENC_PASS }}
+        run: |
+          mkdir -p tmp/.ssh
+          openssl version
+          echo $ENC_PASS
+          openssl enc -aes-256-cbc -d -md sha512 -pbkdf2 -iter 100000 -salt -in deploy_rsa.enc -out tmp/.ssh/travis_rsa -k $ENC_PASS
+          chmod 700 tmp/.ssh/
+          chmod 600 tmp/.ssh/travis_rsa
+          eval "$(ssh-agent -s)"
+          ssh-add tmp/.ssh/travis_rsa
+          
+      - name: Deploy with Capistrano
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+        run: |
+          DEPLOY_HOST=$DEPLOY_HOST BRANCH=sprint RAILS_ENV=production bundle exec cap deploy
+          
+      
