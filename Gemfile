@@ -26,6 +26,7 @@ gem 'mysql2', '~>0.4.4'
 
 # # Middleware
 gem 'rack-cors', "~>1.1.1"
+gem 'rack-proxy', "~>0.7.0"
 
 # # for Users and authentication
 gem 'devise',    "~>4.7.3"
