@@ -21,6 +21,10 @@ class ProxySearch < Rack::Proxy
       env["HTTP_HOST"] = (ENV["NEW_SEARCH_HOST"] || "localhost") + ":" + (ENV["NEW_SEARCH_PORT"] || "3000")
       env["HTTP_X_FORWARDED_PROTO"] = "http"
       env["rack.url_scheme"] = "http"
+    elsif request.path =~ %r{/api/search}
+      env["HTTP_HOST"] = (ENV["NEW_SEARCH_BACKEND_HOST"] || "localhost") + ":" + (ENV["NEW_SEARCH_BACKEND_PORT"] || "7107")
+      env["HTTP_X_FORWARDED_PROTO"] = "http"
+      env["rack.url_scheme"] = "http"
     end
   end
 end
