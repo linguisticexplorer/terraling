@@ -23,7 +23,7 @@ set :keep_releases, 3
 # source control
 set :scm          , :git
 set :scm_verbose  , true
-set :repository   , "git://github.com/linguisticexplorer/terraling.git"
+set :repository   , "https://github.com/linguisticexplorer/terraling.git"
 set :branch       , ENV["BRANCH"].downcase
 set :copy_exclude , ['.git']
 
