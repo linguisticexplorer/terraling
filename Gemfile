@@ -44,7 +44,7 @@ gem 'will_paginate-bootstrap', "~>1.0.2"
 # # for easy pagination
 gem 'will_paginate', "~>3.3.0"
 # # experimental
-gem "alphabetical_paginate", :git => "git://github.com/dej611/alphabetical_paginate.git"
+gem "alphabetical_paginate"
 # # iconv for utf-8 to latin1 conversion
 gem 'iconv', "~>1.0.4"
 # # Bootstrap gem
