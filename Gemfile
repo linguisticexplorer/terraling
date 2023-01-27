@@ -61,7 +61,7 @@ gem 'twitter-typeahead-rails', "~>0.10.5"
 # # jQuery
 gem 'jquery-rails', "~>4.4.0"
 # # jQuery UI
-gem 'jquery-ui-rails', "~>5.0.0"
+gem 'jquery-ui-rails', "~>6.0.0"
 # # Add Modernizr to dynamically run HTML5 checks and load JS polyfills conditionally
 gem 'modernizr-rails', "~>2.7.1"
 # d3js gem -> takes care about updating the JS file
